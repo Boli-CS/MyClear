@@ -9,11 +9,18 @@
 /* Begin PBXBuildFile section */
 		E8F7897B1A6CDCC400E7FBE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7897A1A6CDCC400E7FBE0 /* AppDelegate.swift */; };
 		E8F7897E1A6CDCC400E7FBE0 /* MyClear.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E8F7897C1A6CDCC400E7FBE0 /* MyClear.xcdatamodeld */; };
-		E8F789801A6CDCC400E7FBE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7897F1A6CDCC400E7FBE0 /* ViewController.swift */; };
+		E8F789801A6CDCC400E7FBE0 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7897F1A6CDCC400E7FBE0 /* HomePage.swift */; };
 		E8F789831A6CDCC400E7FBE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8F789811A6CDCC400E7FBE0 /* Main.storyboard */; };
 		E8F789851A6CDCC400E7FBE0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8F789841A6CDCC400E7FBE0 /* Images.xcassets */; };
 		E8F789881A6CDCC400E7FBE0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8F789861A6CDCC400E7FBE0 /* LaunchScreen.xib */; };
 		E8F789941A6CDCC400E7FBE0 /* MyClearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789931A6CDCC400E7FBE0 /* MyClearTests.swift */; };
+		E8F789A01A6D00E300E7FBE0 /* MyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7899F1A6D00E300E7FBE0 /* MyListCell.swift */; };
+		E8F789A21A6E779500E7FBE0 /* SettingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789A11A6E779500E7FBE0 /* SettingPage.swift */; };
+		E8F789A61A6E815800E7FBE0 /* SoundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789A51A6E815800E7FBE0 /* SoundCell.swift */; };
+		E8F789A81A6E81FB00E7FBE0 /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789A71A6E81FB00E7FBE0 /* ThemeCell.swift */; };
+		E8F789AA1A6E823A00E7FBE0 /* TipTrickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789A91A6E823A00E7FBE0 /* TipTrickCell.swift */; };
+		E8F789AC1A6E825900E7FBE0 /* NewsLetterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789AB1A6E825900E7FBE0 /* NewsLetterCell.swift */; };
+		E8F789AE1A6E827C00E7FBE0 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789AD1A6E827C00E7FBE0 /* SettingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,13 +38,20 @@
 		E8F789791A6CDCC400E7FBE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8F7897A1A6CDCC400E7FBE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8F7897D1A6CDCC400E7FBE0 /* MyClear.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyClear.xcdatamodel; sourceTree = "<group>"; };
-		E8F7897F1A6CDCC400E7FBE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E8F7897F1A6CDCC400E7FBE0 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		E8F789821A6CDCC400E7FBE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E8F789841A6CDCC400E7FBE0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E8F789871A6CDCC400E7FBE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		E8F7898D1A6CDCC400E7FBE0 /* MyClearTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyClearTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8F789921A6CDCC400E7FBE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8F789931A6CDCC400E7FBE0 /* MyClearTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClearTests.swift; sourceTree = "<group>"; };
+		E8F7899F1A6D00E300E7FBE0 /* MyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyListCell.swift; sourceTree = "<group>"; };
+		E8F789A11A6E779500E7FBE0 /* SettingPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingPage.swift; sourceTree = "<group>"; };
+		E8F789A51A6E815800E7FBE0 /* SoundCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundCell.swift; sourceTree = "<group>"; };
+		E8F789A71A6E81FB00E7FBE0 /* ThemeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
+		E8F789A91A6E823A00E7FBE0 /* TipTrickCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipTrickCell.swift; sourceTree = "<group>"; };
+		E8F789AB1A6E825900E7FBE0 /* NewsLetterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsLetterCell.swift; sourceTree = "<group>"; };
+		E8F789AD1A6E827C00E7FBE0 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,8 +93,10 @@
 		E8F789771A6CDCC400E7FBE0 /* MyClear */ = {
 			isa = PBXGroup;
 			children = (
+				E8F789A41A6E7EA700E7FBE0 /* homePageCells */,
 				E8F7897A1A6CDCC400E7FBE0 /* AppDelegate.swift */,
-				E8F7897F1A6CDCC400E7FBE0 /* ViewController.swift */,
+				E8F7897F1A6CDCC400E7FBE0 /* HomePage.swift */,
+				E8F789A11A6E779500E7FBE0 /* SettingPage.swift */,
 				E8F789811A6CDCC400E7FBE0 /* Main.storyboard */,
 				E8F789841A6CDCC400E7FBE0 /* Images.xcassets */,
 				E8F789861A6CDCC400E7FBE0 /* LaunchScreen.xib */,
@@ -113,6 +129,19 @@
 				E8F789921A6CDCC400E7FBE0 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E8F789A41A6E7EA700E7FBE0 /* homePageCells */ = {
+			isa = PBXGroup;
+			children = (
+				E8F7899F1A6D00E300E7FBE0 /* MyListCell.swift */,
+				E8F789A51A6E815800E7FBE0 /* SoundCell.swift */,
+				E8F789A71A6E81FB00E7FBE0 /* ThemeCell.swift */,
+				E8F789A91A6E823A00E7FBE0 /* TipTrickCell.swift */,
+				E8F789AB1A6E825900E7FBE0 /* NewsLetterCell.swift */,
+				E8F789AD1A6E827C00E7FBE0 /* SettingCell.swift */,
+			);
+			name = homePageCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,9 +244,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8F789801A6CDCC400E7FBE0 /* ViewController.swift in Sources */,
+				E8F789801A6CDCC400E7FBE0 /* HomePage.swift in Sources */,
+				E8F789A21A6E779500E7FBE0 /* SettingPage.swift in Sources */,
 				E8F7897B1A6CDCC400E7FBE0 /* AppDelegate.swift in Sources */,
+				E8F789A61A6E815800E7FBE0 /* SoundCell.swift in Sources */,
+				E8F789AC1A6E825900E7FBE0 /* NewsLetterCell.swift in Sources */,
 				E8F7897E1A6CDCC400E7FBE0 /* MyClear.xcdatamodeld in Sources */,
+				E8F789A01A6D00E300E7FBE0 /* MyListCell.swift in Sources */,
+				E8F789A81A6E81FB00E7FBE0 /* ThemeCell.swift in Sources */,
+				E8F789AE1A6E827C00E7FBE0 /* SettingCell.swift in Sources */,
+				E8F789AA1A6E823A00E7FBE0 /* TipTrickCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +445,7 @@
 				E8F789991A6CDCC400E7FBE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E8F7899A1A6CDCC400E7FBE0 /* Build configuration list for PBXNativeTarget "MyClearTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +454,7 @@
 				E8F7899C1A6CDCC400E7FBE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
