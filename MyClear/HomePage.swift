@@ -8,9 +8,11 @@
 
 import UIKit
 
-class HomePage: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HomePage: UITableViewController {
     
     @IBOutlet weak var homePageTableView: UITableView!
+    
+    let homePageCell_textField = ["My Lists", "Sounds", "Theme", "Tips & Tricks", "NewsLetter", "Settings"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +28,9 @@ class HomePage: UIViewController, UITableViewDataSource, UITableViewDelegate {
 //        var tblView =  UIView(frame: CGRect(x: 0,y: 0,width: 0,height: 0))
 //        tblView.backgroundColor = UIColor.clearColor()
 //        homePageTableView.tableFooterView = tblView
-        
         var nipName=UINib(nibName: "CustomCell", bundle:nil)
-        self.homePageTableView.registerNib(nipName, forCellReuseIdentifier: "CustomCell")
+        self.homePageTableView.registerNib(nipName, forCellReuseIdentifier: "Custo)mCell")
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,60 +39,51 @@ class HomePage: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return homePageCell_textField.count
 
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = self.homePageTableView.dequeueReusableCellWithIdentifier("homepagecell") as HomePageCell
+        cell.homePageCell_textFied.text = self.homePageCell_textField[indexPath.item]
+        if indexPath.item == 0 {
+            cell.homePageCell_todoNum_label.text = "1"
+        }
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         switch indexPath.item {
         case 0:
-            let cell = self.homePageTableView.dequeueReusableCellWithIdentifier("mylistcell") as MyListCell
-            cell.myListCell_todoNum_label.text = "1"
-            return cell
+            let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("mylist") as UIViewController
+            self.presentViewController(vc, animated: true, completion: nil)
             break;
         case 1:
-            let cell = self.homePageTableView.dequeueReusableCellWithIdentifier("soundcell") as SoundCell
-            return cell
+            let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("sound") as UIViewController
+            self.presentViewController(vc, animated: true, completion: nil)
             break;
         case 2:
-            let cell = self.homePageTableView.dequeueReusableCellWithIdentifier("themecell") as ThemeCell
-            return cell
+            let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("theme") as UIViewController
+            self.presentViewController(vc, animated: true, completion: nil)
             break;
         case 3:
-            let cell = self.homePageTableView.dequeueReusableCellWithIdentifier("tipandtrickcell") as TipTrickCell
-            return cell
+            let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("tiptrick") as UIViewController
+            self.presentViewController(vc, animated: true, completion: nil)
             break;
         case 4:
-            let cell = self.homePageTableView.dequeueReusableCellWithIdentifier("newslettercell") as NewsLetterCell
-            return cell
+            let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("newletter") as UIViewController
+            self.presentViewController(vc, animated: true, completion: nil)
             break;
         case 5:
-            let cell = self.homePageTableView.dequeueReusableCellWithIdentifier("settingcell") as SettingCell
-            return cell
+            let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("setting") as UIViewController
+            self.presentViewController(vc, animated: true, completion: nil)
             break;
         default:
-            let cell = self.homePageTableView.dequeueReusableCellWithIdentifier("soundcell") as SoundCell
-            return cell
-            break
+            break;
         }
-    }
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {    }
-    
-    override func setEditing(editing: Bool, animated: Bool) {
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "setting" {
-            var vc = segue.destinationViewController as SettingPage
-            // var indexPath = tableView.indexPathForCell(sender as UITableViewCell)
-            }
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print(indexPath.item)
+        
     }
 
 }

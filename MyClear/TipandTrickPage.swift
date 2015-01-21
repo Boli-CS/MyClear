@@ -1,15 +1,16 @@
 //
-//  SettingPage.swift
+//  TipandTrick.swift
 //  MyClear
 //
-//  Created by boli on 1/20/15.
+//  Created by boli on 1/21/15.
 //  Copyright (c) 2015 boli. All rights reserved.
 //
 
+
 import UIKit
 
-class SettingPage: UIViewController {
-
+class TipandTrickPage: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -19,4 +20,5 @@ class SettingPage: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 }

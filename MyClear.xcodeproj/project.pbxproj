@@ -14,13 +14,13 @@
 		E8F789851A6CDCC400E7FBE0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8F789841A6CDCC400E7FBE0 /* Images.xcassets */; };
 		E8F789881A6CDCC400E7FBE0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8F789861A6CDCC400E7FBE0 /* LaunchScreen.xib */; };
 		E8F789941A6CDCC400E7FBE0 /* MyClearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789931A6CDCC400E7FBE0 /* MyClearTests.swift */; };
-		E8F789A01A6D00E300E7FBE0 /* MyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7899F1A6D00E300E7FBE0 /* MyListCell.swift */; };
+		E8F789A01A6D00E300E7FBE0 /* HomePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7899F1A6D00E300E7FBE0 /* HomePageCell.swift */; };
 		E8F789A21A6E779500E7FBE0 /* SettingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789A11A6E779500E7FBE0 /* SettingPage.swift */; };
-		E8F789A61A6E815800E7FBE0 /* SoundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789A51A6E815800E7FBE0 /* SoundCell.swift */; };
-		E8F789A81A6E81FB00E7FBE0 /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789A71A6E81FB00E7FBE0 /* ThemeCell.swift */; };
-		E8F789AA1A6E823A00E7FBE0 /* TipTrickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789A91A6E823A00E7FBE0 /* TipTrickCell.swift */; };
-		E8F789AC1A6E825900E7FBE0 /* NewsLetterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789AB1A6E825900E7FBE0 /* NewsLetterCell.swift */; };
-		E8F789AE1A6E827C00E7FBE0 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789AD1A6E827C00E7FBE0 /* SettingCell.swift */; };
+		E8F789BB1A6F962E00E7FBE0 /* MyListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789BA1A6F962E00E7FBE0 /* MyListPage.swift */; };
+		E8F789BD1A6F965F00E7FBE0 /* SoundPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789BC1A6F965F00E7FBE0 /* SoundPage.swift */; };
+		E8F789BF1A6F968300E7FBE0 /* ThemePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789BE1A6F968300E7FBE0 /* ThemePage.swift */; };
+		E8F789C11A6F96A500E7FBE0 /* TipandTrickPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789C01A6F96A500E7FBE0 /* TipandTrickPage.swift */; };
+		E8F789C31A6F96D900E7FBE0 /* NewsLetterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789C21A6F96D900E7FBE0 /* NewsLetterPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,13 +45,13 @@
 		E8F7898D1A6CDCC400E7FBE0 /* MyClearTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyClearTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8F789921A6CDCC400E7FBE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8F789931A6CDCC400E7FBE0 /* MyClearTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClearTests.swift; sourceTree = "<group>"; };
-		E8F7899F1A6D00E300E7FBE0 /* MyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyListCell.swift; sourceTree = "<group>"; };
+		E8F7899F1A6D00E300E7FBE0 /* HomePageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageCell.swift; sourceTree = "<group>"; };
 		E8F789A11A6E779500E7FBE0 /* SettingPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingPage.swift; sourceTree = "<group>"; };
-		E8F789A51A6E815800E7FBE0 /* SoundCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundCell.swift; sourceTree = "<group>"; };
-		E8F789A71A6E81FB00E7FBE0 /* ThemeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
-		E8F789A91A6E823A00E7FBE0 /* TipTrickCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipTrickCell.swift; sourceTree = "<group>"; };
-		E8F789AB1A6E825900E7FBE0 /* NewsLetterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsLetterCell.swift; sourceTree = "<group>"; };
-		E8F789AD1A6E827C00E7FBE0 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		E8F789BA1A6F962E00E7FBE0 /* MyListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyListPage.swift; sourceTree = "<group>"; };
+		E8F789BC1A6F965F00E7FBE0 /* SoundPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPage.swift; sourceTree = "<group>"; };
+		E8F789BE1A6F968300E7FBE0 /* ThemePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemePage.swift; sourceTree = "<group>"; };
+		E8F789C01A6F96A500E7FBE0 /* TipandTrickPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipandTrickPage.swift; sourceTree = "<group>"; };
+		E8F789C21A6F96D900E7FBE0 /* NewsLetterPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsLetterPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,10 +93,10 @@
 		E8F789771A6CDCC400E7FBE0 /* MyClear */ = {
 			isa = PBXGroup;
 			children = (
-				E8F789A41A6E7EA700E7FBE0 /* homePageCells */,
+				E8F789B91A6F95FC00E7FBE0 /* secondaryPages */,
 				E8F7897A1A6CDCC400E7FBE0 /* AppDelegate.swift */,
+				E8F7899F1A6D00E300E7FBE0 /* HomePageCell.swift */,
 				E8F7897F1A6CDCC400E7FBE0 /* HomePage.swift */,
-				E8F789A11A6E779500E7FBE0 /* SettingPage.swift */,
 				E8F789811A6CDCC400E7FBE0 /* Main.storyboard */,
 				E8F789841A6CDCC400E7FBE0 /* Images.xcassets */,
 				E8F789861A6CDCC400E7FBE0 /* LaunchScreen.xib */,
@@ -131,17 +131,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E8F789A41A6E7EA700E7FBE0 /* homePageCells */ = {
+		E8F789B91A6F95FC00E7FBE0 /* secondaryPages */ = {
 			isa = PBXGroup;
 			children = (
-				E8F7899F1A6D00E300E7FBE0 /* MyListCell.swift */,
-				E8F789A51A6E815800E7FBE0 /* SoundCell.swift */,
-				E8F789A71A6E81FB00E7FBE0 /* ThemeCell.swift */,
-				E8F789A91A6E823A00E7FBE0 /* TipTrickCell.swift */,
-				E8F789AB1A6E825900E7FBE0 /* NewsLetterCell.swift */,
-				E8F789AD1A6E827C00E7FBE0 /* SettingCell.swift */,
+				E8F789BA1A6F962E00E7FBE0 /* MyListPage.swift */,
+				E8F789BC1A6F965F00E7FBE0 /* SoundPage.swift */,
+				E8F789BE1A6F968300E7FBE0 /* ThemePage.swift */,
+				E8F789C01A6F96A500E7FBE0 /* TipandTrickPage.swift */,
+				E8F789C21A6F96D900E7FBE0 /* NewsLetterPage.swift */,
+				E8F789A11A6E779500E7FBE0 /* SettingPage.swift */,
 			);
-			name = homePageCells;
+			name = secondaryPages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,16 +244,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8F789BD1A6F965F00E7FBE0 /* SoundPage.swift in Sources */,
+				E8F789BB1A6F962E00E7FBE0 /* MyListPage.swift in Sources */,
 				E8F789801A6CDCC400E7FBE0 /* HomePage.swift in Sources */,
 				E8F789A21A6E779500E7FBE0 /* SettingPage.swift in Sources */,
 				E8F7897B1A6CDCC400E7FBE0 /* AppDelegate.swift in Sources */,
-				E8F789A61A6E815800E7FBE0 /* SoundCell.swift in Sources */,
-				E8F789AC1A6E825900E7FBE0 /* NewsLetterCell.swift in Sources */,
+				E8F789C11A6F96A500E7FBE0 /* TipandTrickPage.swift in Sources */,
 				E8F7897E1A6CDCC400E7FBE0 /* MyClear.xcdatamodeld in Sources */,
-				E8F789A01A6D00E300E7FBE0 /* MyListCell.swift in Sources */,
-				E8F789A81A6E81FB00E7FBE0 /* ThemeCell.swift in Sources */,
-				E8F789AE1A6E827C00E7FBE0 /* SettingCell.swift in Sources */,
-				E8F789AA1A6E823A00E7FBE0 /* TipTrickCell.swift in Sources */,
+				E8F789C31A6F96D900E7FBE0 /* NewsLetterPage.swift in Sources */,
+				E8F789A01A6D00E300E7FBE0 /* HomePageCell.swift in Sources */,
+				E8F789BF1A6F968300E7FBE0 /* ThemePage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

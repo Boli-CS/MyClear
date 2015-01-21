@@ -8,10 +8,10 @@
 
 import UIKit
 
-class MyListCell: UITableViewCell {
+class HomePageCell: UITableViewCell {
     
-    @IBOutlet weak var myListCell_textFied: UITextField!
+    @IBOutlet weak var homePageCell_textFied: UITextField!
     
     
-    @IBOutlet weak var myListCell_todoNum_label: UILabel!
+    @IBOutlet weak var homePageCell_todoNum_label: UILabel!
 }
