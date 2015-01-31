@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E806A2121A7C7E0A00BB4E0E /* TodoThingDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E806A2111A7C7E0A00BB4E0E /* TodoThingDomain.swift */; };
+		E8406A9B1A6FF2E100CBDEFD /* MyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406A9A1A6FF2E100CBDEFD /* MyListCell.swift */; };
+		E8406AA01A70E56900CBDEFD /* ListName.m in Sources */ = {isa = PBXBuildFile; fileRef = E8406A9F1A70E56900CBDEFD /* ListName.m */; };
+		E8406AA31A70E56900CBDEFD /* TodoThing.m in Sources */ = {isa = PBXBuildFile; fileRef = E8406AA21A70E56900CBDEFD /* TodoThing.m */; };
+		E8406AB31A7118CF00CBDEFD /* Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406AAD1A7118CF00CBDEFD /* Refresh.swift */; };
+		E8406AB41A7118CF00CBDEFD /* RefreshBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406AAE1A7118CF00CBDEFD /* RefreshBaseView.swift */; };
+		E8406AB51A7118CF00CBDEFD /* RefreshConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406AAF1A7118CF00CBDEFD /* RefreshConst.swift */; };
+		E8406AB71A7118CF00CBDEFD /* RefreshHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406AB11A7118CF00CBDEFD /* RefreshHeaderView.swift */; };
+		E8406AB81A7118CF00CBDEFD /* UIScrollView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406AB21A7118CF00CBDEFD /* UIScrollView+Refresh.swift */; };
+		E8406ABD1A7BC0DB00CBDEFD /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406ABC1A7BC0DB00CBDEFD /* List.swift */; };
+		E8406ABF1A7BC11600CBDEFD /* TodoThing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406ABE1A7BC11600CBDEFD /* TodoThing.swift */; };
+		E8406AC21A7BDC5700CBDEFD /* ListDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406AC11A7BDC5700CBDEFD /* ListDomain.swift */; };
 		E8F7897B1A6CDCC400E7FBE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7897A1A6CDCC400E7FBE0 /* AppDelegate.swift */; };
 		E8F7897E1A6CDCC400E7FBE0 /* MyClear.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E8F7897C1A6CDCC400E7FBE0 /* MyClear.xcdatamodeld */; };
 		E8F789801A6CDCC400E7FBE0 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7897F1A6CDCC400E7FBE0 /* HomePage.swift */; };
@@ -34,6 +46,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E806A2111A7C7E0A00BB4E0E /* TodoThingDomain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoThingDomain.swift; sourceTree = "<group>"; };
+		E8406A9A1A6FF2E100CBDEFD /* MyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyListCell.swift; sourceTree = "<group>"; };
+		E8406A9D1A70E56800CBDEFD /* MyClear-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyClear-Bridging-Header.h"; sourceTree = "<group>"; };
+		E8406A9E1A70E56900CBDEFD /* ListName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListName.h; sourceTree = "<group>"; };
+		E8406A9F1A70E56900CBDEFD /* ListName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListName.m; sourceTree = "<group>"; };
+		E8406AA11A70E56900CBDEFD /* TodoThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoThing.h; sourceTree = "<group>"; };
+		E8406AA21A70E56900CBDEFD /* TodoThing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoThing.m; sourceTree = "<group>"; };
+		E8406AAD1A7118CF00CBDEFD /* Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Refresh.swift; sourceTree = "<group>"; };
+		E8406AAE1A7118CF00CBDEFD /* RefreshBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshBaseView.swift; sourceTree = "<group>"; };
+		E8406AAF1A7118CF00CBDEFD /* RefreshConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshConst.swift; sourceTree = "<group>"; };
+		E8406AB11A7118CF00CBDEFD /* RefreshHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshHeaderView.swift; sourceTree = "<group>"; };
+		E8406AB21A7118CF00CBDEFD /* UIScrollView+Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Refresh.swift"; sourceTree = "<group>"; };
+		E8406ABC1A7BC0DB00CBDEFD /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		E8406ABE1A7BC11600CBDEFD /* TodoThing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoThing.swift; sourceTree = "<group>"; };
+		E8406AC11A7BDC5700CBDEFD /* ListDomain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDomain.swift; sourceTree = "<group>"; };
 		E8F789751A6CDCC400E7FBE0 /* MyClear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyClear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8F789791A6CDCC400E7FBE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8F7897A1A6CDCC400E7FBE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,9 +99,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E8406A991A6FF2C800CBDEFD /* Mylist */ = {
+			isa = PBXGroup;
+			children = (
+				E8F789BA1A6F962E00E7FBE0 /* MyListPage.swift */,
+				E8406A9A1A6FF2E100CBDEFD /* MyListCell.swift */,
+			);
+			name = Mylist;
+			sourceTree = "<group>";
+		};
+		E8406A9C1A70E50C00CBDEFD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E8406AA11A70E56900CBDEFD /* TodoThing.h */,
+				E8406AA21A70E56900CBDEFD /* TodoThing.m */,
+				E8406A9E1A70E56900CBDEFD /* ListName.h */,
+				E8406A9F1A70E56900CBDEFD /* ListName.m */,
+				E8406A9D1A70E56800CBDEFD /* MyClear-Bridging-Header.h */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		E8406AA61A70E70900CBDEFD /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		E8406AAC1A71186500CBDEFD /* refresh */ = {
+			isa = PBXGroup;
+			children = (
+				E8406AAD1A7118CF00CBDEFD /* Refresh.swift */,
+				E8406AAE1A7118CF00CBDEFD /* RefreshBaseView.swift */,
+				E8406AAF1A7118CF00CBDEFD /* RefreshConst.swift */,
+				E8406AB11A7118CF00CBDEFD /* RefreshHeaderView.swift */,
+				E8406AB21A7118CF00CBDEFD /* UIScrollView+Refresh.swift */,
+			);
+			name = refresh;
+			sourceTree = "<group>";
+		};
+		E8406ABB1A7BC06800CBDEFD /* model */ = {
+			isa = PBXGroup;
+			children = (
+				E8406ABC1A7BC0DB00CBDEFD /* List.swift */,
+				E8406ABE1A7BC11600CBDEFD /* TodoThing.swift */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		E8406AC01A7BDC2200CBDEFD /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E8406AC11A7BDC5700CBDEFD /* ListDomain.swift */,
+				E806A2111A7C7E0A00BB4E0E /* TodoThingDomain.swift */,
+			);
+			name = Domain;
+			sourceTree = "<group>";
+		};
 		E8F7896C1A6CDCC400E7FBE0 = {
 			isa = PBXGroup;
 			children = (
+				E8406A9C1A70E50C00CBDEFD /* Models */,
 				E8F789771A6CDCC400E7FBE0 /* MyClear */,
 				E8F789901A6CDCC400E7FBE0 /* MyClearTests */,
 				E8F789761A6CDCC400E7FBE0 /* Products */,
@@ -93,6 +179,11 @@
 		E8F789771A6CDCC400E7FBE0 /* MyClear */ = {
 			isa = PBXGroup;
 			children = (
+				E8406AC01A7BDC2200CBDEFD /* Domain */,
+				E8406ABB1A7BC06800CBDEFD /* model */,
+				E8406AAC1A71186500CBDEFD /* refresh */,
+				E8406AA61A70E70900CBDEFD /* CoreData */,
+				E8406A991A6FF2C800CBDEFD /* Mylist */,
 				E8F789B91A6F95FC00E7FBE0 /* secondaryPages */,
 				E8F7897A1A6CDCC400E7FBE0 /* AppDelegate.swift */,
 				E8F7899F1A6D00E300E7FBE0 /* HomePageCell.swift */,
@@ -134,7 +225,6 @@
 		E8F789B91A6F95FC00E7FBE0 /* secondaryPages */ = {
 			isa = PBXGroup;
 			children = (
-				E8F789BA1A6F962E00E7FBE0 /* MyListPage.swift */,
 				E8F789BC1A6F965F00E7FBE0 /* SoundPage.swift */,
 				E8F789BE1A6F968300E7FBE0 /* ThemePage.swift */,
 				E8F789C01A6F96A500E7FBE0 /* TipandTrickPage.swift */,
@@ -244,16 +334,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8406A9B1A6FF2E100CBDEFD /* MyListCell.swift in Sources */,
 				E8F789BD1A6F965F00E7FBE0 /* SoundPage.swift in Sources */,
 				E8F789BB1A6F962E00E7FBE0 /* MyListPage.swift in Sources */,
+				E8406AB51A7118CF00CBDEFD /* RefreshConst.swift in Sources */,
 				E8F789801A6CDCC400E7FBE0 /* HomePage.swift in Sources */,
+				E8406AB71A7118CF00CBDEFD /* RefreshHeaderView.swift in Sources */,
+				E8406ABF1A7BC11600CBDEFD /* TodoThing.swift in Sources */,
 				E8F789A21A6E779500E7FBE0 /* SettingPage.swift in Sources */,
+				E806A2121A7C7E0A00BB4E0E /* TodoThingDomain.swift in Sources */,
 				E8F7897B1A6CDCC400E7FBE0 /* AppDelegate.swift in Sources */,
+				E8406AA01A70E56900CBDEFD /* ListName.m in Sources */,
 				E8F789C11A6F96A500E7FBE0 /* TipandTrickPage.swift in Sources */,
+				E8406AB41A7118CF00CBDEFD /* RefreshBaseView.swift in Sources */,
 				E8F7897E1A6CDCC400E7FBE0 /* MyClear.xcdatamodeld in Sources */,
 				E8F789C31A6F96D900E7FBE0 /* NewsLetterPage.swift in Sources */,
+				E8406AA31A70E56900CBDEFD /* TodoThing.m in Sources */,
+				E8406AB81A7118CF00CBDEFD /* UIScrollView+Refresh.swift in Sources */,
 				E8F789A01A6D00E300E7FBE0 /* HomePageCell.swift in Sources */,
+				E8406AC21A7BDC5700CBDEFD /* ListDomain.swift in Sources */,
 				E8F789BF1A6F968300E7FBE0 /* ThemePage.swift in Sources */,
+				E8406ABD1A7BC0DB00CBDEFD /* List.swift in Sources */,
+				E8406AB31A7118CF00CBDEFD /* Refresh.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,9 +478,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = MyClear/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MyClear-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -386,9 +491,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = MyClear/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MyClear-Bridging-Header.h";
 			};
 			name = Release;
 		};

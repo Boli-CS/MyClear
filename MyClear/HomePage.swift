@@ -31,6 +31,9 @@ class HomePage: UITableViewController {
         var nipName=UINib(nibName: "CustomCell", bundle:nil)
         self.homePageTableView.registerNib(nipName, forCellReuseIdentifier: "Custo)mCell")
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        //保存一份数据
+//        saveData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,36 +58,66 @@ class HomePage: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        var vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("mylist") as UIViewController;
         switch indexPath.item {
         case 0:
-            let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("mylist") as UIViewController
-            self.presentViewController(vc, animated: true, completion: nil)
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("mylist") as UIViewController
             break;
         case 1:
-            let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("sound") as UIViewController
-            self.presentViewController(vc, animated: true, completion: nil)
+            vc  = mainStoryboard.instantiateViewControllerWithIdentifier("sound") as UIViewController
             break;
         case 2:
-            let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("theme") as UIViewController
-            self.presentViewController(vc, animated: true, completion: nil)
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("theme") as UIViewController
             break;
         case 3:
-            let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("tiptrick") as UIViewController
-            self.presentViewController(vc, animated: true, completion: nil)
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("tiptrick") as UIViewController
             break;
         case 4:
-            let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("newletter") as UIViewController
-            self.presentViewController(vc, animated: true, completion: nil)
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("newletter") as UIViewController
             break;
         case 5:
-            let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("setting") as UIViewController
-            self.presentViewController(vc, animated: true, completion: nil)
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("setting") as UIViewController
             break;
         default:
             break;
         }
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    func saveData() {
+        //List
+        var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+        var firstrow : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: context!)
+        firstrow.setValue(1, forKey: "id")
+        firstrow.setValue("firstList", forKey: "listname")
+        context?.save(nil)
+       
+        var secondrow : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: context!)
+        secondrow.setValue(2, forKey: "id")
+        secondrow.setValue("secondList", forKey: "listname")
+        context?.save(nil)
+        
+        var firstThing : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("TodoThing", inManagedObjectContext: context!)
+        firstThing.setValue(NSDate(), forKey: "deadline")
+        firstThing.setValue(1, forKey: "id")
+        firstThing.setValue(1, forKey: "listid")
+        firstThing.setValue("firstThing", forKey: "thing")
+        context?.save(nil)
+
+        var secondThing : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("TodoThing", inManagedObjectContext: context!)
+        secondThing.setValue(NSDate(), forKey: "deadline")
+        secondThing.setValue(2, forKey: "id")
+        secondThing.setValue(1, forKey: "listid")
+        secondThing.setValue("secondThing", forKey: "thing")
+        context?.save(nil)
+        
+        var thirdThing : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("TodoThing", inManagedObjectContext: context!)
+        thirdThing.setValue(NSDate(), forKey: "deadline")
+        thirdThing.setValue(3, forKey: "id")
+        thirdThing.setValue(2, forKey: "listid")
+        thirdThing.setValue("thirdThing", forKey: "thing")
+        context?.save(nil)
         
     }
-
 }
 
