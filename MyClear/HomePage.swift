@@ -11,6 +11,41 @@ import UIKit
 var lists_db : [AnyObject]! = []
 var todoThings_db : [AnyObject]! = []
 
+func loadDataFromDataBase () {
+    
+    //coreData
+    listDomains.removeAll(keepCapacity: false)
+    
+    var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+    
+    //list
+    var listsFetchRequest = NSFetchRequest(entityName: "List")
+    lists_db = context?.executeFetchRequest(listsFetchRequest, error: nil)
+    for(var index = 0; index < lists_db?.count; index++) {
+        var listdomain : ListDomain = ListDomain();
+        listdomain.id = lists_db[index].valueForKey("id")?.intValue
+        listdomain.listName = lists_db[index].valueForKey("listname") as String
+        listDomains.append(listdomain)
+    }
+    
+    //todoThing
+    var todoThingsFetchRequest = NSFetchRequest(entityName: "TodoThing")
+    todoThings_db = context?.executeFetchRequest(todoThingsFetchRequest, error: nil)
+    for(var index = 0; index < todoThings_db?.count; index++){
+        var todoThingDomain : TodoThingDomain = TodoThingDomain()
+        todoThingDomain.id = todoThings_db[index].valueForKey("id")?.intValue
+        todoThingDomain.deadLine = todoThings_db[index].valueForKey("deadline") as NSDate
+        todoThingDomain.listID = todoThings_db[index].valueForKey("listid")?.intValue
+        todoThingDomain.thing = todoThings_db[index].valueForKey("thing") as String
+        
+        for(var listindex = 0; listindex < listDomains.count; listindex++) {
+            if listDomains[listindex].id == todoThingDomain.listID {
+                listDomains[listindex].todoThingDomains?.append(todoThingDomain)
+            }
+        }
+    }
+}
+
 class HomePage: UITableViewController {
     
     @IBOutlet weak var homePageTableView: UITableView!
@@ -24,10 +59,10 @@ class HomePage: UITableViewController {
         self.homePageTableView.dataSource = self
         
         //隐藏空白item
-        var tblView =  UIView(frame: CGRectZero)
-        homePageTableView.tableFooterView = tblView
-        homePageTableView.tableFooterView?.hidden = true
-        homePageTableView.backgroundColor = UIColor.clearColor()
+//        var tblView =  UIView(frame: CGRectZero)
+//        homePageTableView.tableFooterView = tblView
+//        homePageTableView.tableFooterView?.hidden = true
+//        homePageTableView.backgroundColor = UIColor.clearColor()
 //        var tblView =  UIView(frame: CGRect(x: 0,y: 0,width: 0,height: 0))
 //        tblView.backgroundColor = UIColor.clearColor()
 //        homePageTableView.tableFooterView = tblView
@@ -38,7 +73,7 @@ class HomePage: UITableViewController {
         //保存一份数据
 //        saveData()
         
-        loadData()
+        loadDataFromDataBase()
     }
 
     override func didReceiveMemoryWarning() {
@@ -133,42 +168,8 @@ class HomePage: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         //读取数据
-//        loadData()
-    }
-    
-    func loadData() {
-        println("loaddata")
-        //coreData
-        listDomains.removeAll(keepCapacity: false)
-        
-        var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
-        
-        //list
-        var listsFetchRequest = NSFetchRequest(entityName: "List")
-        lists_db = context?.executeFetchRequest(listsFetchRequest, error: nil)
-        for(var index = 0; index < lists_db?.count; index++) {
-            var listdomain : ListDomain = ListDomain();
-            listdomain.id = lists_db[index].valueForKey("id")?.intValue
-            listdomain.listName = lists_db[index].valueForKey("listname") as String
-            listDomains.append(listdomain)
-        }
-        
-        //todoThing
-        var todoThingsFetchRequest = NSFetchRequest(entityName: "TodoThing")
-        todoThings_db = context?.executeFetchRequest(todoThingsFetchRequest, error: nil)
-        for(var index = 0; index < todoThings_db?.count; index++){
-            var todoThingDomain : TodoThingDomain = TodoThingDomain()
-            todoThingDomain.id = todoThings_db[index].valueForKey("id")?.intValue
-            todoThingDomain.deadLine = todoThings_db[index].valueForKey("deadline") as NSDate
-            todoThingDomain.listID = todoThings_db[index].valueForKey("listid")?.intValue
-            todoThingDomain.thing = todoThings_db[index].valueForKey("thing") as String
-            
-            for(var listindex = 0; listindex < listDomains.count; listindex++) {
-                if listDomains[listindex].id == todoThingDomain.listID {
-                    listDomains[listindex].todoThingDomains?.append(todoThingDomain)
-                }
-            }
-        }
+        loadDataFromDataBase()
+        self.homePageTableView.reloadData();
     }
 }
 

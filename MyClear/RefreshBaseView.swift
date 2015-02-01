@@ -9,10 +9,10 @@ import UIKit
 
 //控件的刷新状态
 enum RefreshState {
-    case  Pulling               // 松开就可以返回的状态
-    case  Normal                // 普通状态
-    case  WillRefreshing
-    case  back                  //返回上一级
+    case pulling    //松开返回正常状态
+    case addNewItem // 松开就可以返回的状态
+    case normal     // 普通状态
+    case back       //返回上一级
 }
 
 //控件的类型
@@ -35,13 +35,13 @@ class RefreshBaseView: UIView {
     var statusLabel:UILabel!
     var arrowImage:UIImageView!
     
-    //回调
-    var beginRefreshingCallback:(()->Void)?
+    //响应headView的回调
+    var responseToHeadView:((RefreshState)->Void)?
     
     // 交给子类去实现 和 调用
     var  oldState:RefreshState?
     
-    var State:RefreshState = RefreshState.Normal{
+    var State:RefreshState = RefreshState.normal{
         willSet{
         }
         didSet{
@@ -52,17 +52,15 @@ class RefreshBaseView: UIView {
     
     func setState(newValue:RefreshState){
         
-        if self.State == newValue {
-            return
-        }
         switch newValue {
-        case .Normal:
+        case .normal:
             self.arrowImage.hidden = false
             break
-        case .Pulling:
-            break
         case .back:
-            beginRefreshingCallback!()
+            responseToHeadView!(RefreshState.back)
+            break
+        case .addNewItem:
+            responseToHeadView!(RefreshState.addNewItem)
             break
         default:
             break
@@ -74,7 +72,6 @@ class RefreshBaseView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
        
-        
         //状态标签
         statusLabel = UILabel()
         statusLabel.autoresizingMask = UIViewAutoresizing.FlexibleWidth
@@ -92,7 +89,7 @@ class RefreshBaseView: UIView {
         self.autoresizingMask = UIViewAutoresizing.FlexibleWidth
         self.backgroundColor = UIColor.clearColor()
         //设置默认状态
-        self.State = RefreshState.Normal;
+        self.State = RefreshState.normal;
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -144,7 +141,7 @@ class RefreshBaseView: UIView {
         var popTime:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds));
         
         dispatch_after(popTime, dispatch_get_main_queue(), {
-            self.State = RefreshState.Normal;
+            self.State = RefreshState.normal;
             })
     }
 }

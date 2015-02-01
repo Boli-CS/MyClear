@@ -57,16 +57,34 @@ class RefreshHeaderView: RefreshBaseView {
         if (currentOffsetY >= happenOffsetY) {
             return
         }
-        if self.scrollView.dragging{
-            var normal2pullingOffsetY:CGFloat = happenOffsetY - self.frame.size.height
-            if  self.State == RefreshState.Normal && currentOffsetY < normal2pullingOffsetY{
-                self.State = RefreshState.Pulling
-            }else if self.State == RefreshState.Pulling && currentOffsetY >= normal2pullingOffsetY{
-                self.State = RefreshState.Normal
+        var normal2pullingOffsetY:CGFloat = happenOffsetY - self.frame.size.height
+
+        if self.scrollView.dragging {
+            //拉动中
+            if self.State == RefreshState.normal && currentOffsetY < normal2pullingOffsetY {
+                self.State = RefreshState.addNewItem
             }
-        }else if self.State == RefreshState.Pulling {
-            self.State = RefreshState.back
+            if self.State == RefreshState.addNewItem && currentOffsetY >= normal2pullingOffsetY {
+                self.State = RefreshState.normal
+            }
+            if self.State == RefreshState.addNewItem && currentOffsetY < 2 * normal2pullingOffsetY {
+                self.State = RefreshState.back
+            }
+            if self.State == RefreshState.back && currentOffsetY >= 2 * normal2pullingOffsetY {
+                self.State = RefreshState.addNewItem
+            }
         }
+        else {
+            if self.State == RefreshState.addNewItem {
+                setState(RefreshState.addNewItem)
+                self.State = RefreshState.normal
+            }
+            if self.State == RefreshState.back {
+                setState(RefreshState.back)
+                self.State = RefreshState.normal
+            }
+        }
+        
     }
     
     //设置状态
@@ -76,18 +94,23 @@ class RefreshHeaderView: RefreshBaseView {
             return;
         }
         oldState = State
-        setState(newValue)
     }
     didSet{
         switch State{
-        case .Normal:
-            self.statusLabel.text = RefreshHeaderPullToRefresh
+        case .normal:
+            self.statusLabel.text = RefreshHeaderPullToNormal
             UIView.animateWithDuration(RefreshSlowAnimationDuration, animations: {
                 self.arrowImage.transform = CGAffineTransformIdentity
             })
             break
-        case .Pulling:
-            self.statusLabel.text = RefreshHeaderReleaseToRefresh
+        case .back:
+            self.statusLabel.text = RefreshHeaderReleaseToBack
+            UIView.animateWithDuration(RefreshSlowAnimationDuration, animations: {
+                self.arrowImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI ))
+            })
+            break
+        case .addNewItem:
+            self.statusLabel.text = RefreshHeaderReleaseToAdd
             UIView.animateWithDuration(RefreshSlowAnimationDuration, animations: {
                 self.arrowImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI ))
             })

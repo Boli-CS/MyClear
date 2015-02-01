@@ -16,23 +16,20 @@ class MyTodoPage: UITableViewController {
     @IBOutlet var myTodoList_tableView: UITableView!
     
     func addHeadView() {
-        self.myTodoList_tableView.addHeaderWithCallback {
-            self.dismissViewControllerAnimated(true, completion: nil)
+        self.myTodoList_tableView.addHeaderWithCallback { (var state : RefreshState) -> Void in
+            
+        
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad();
         loadData();
         self.addHeadView()
         
-        //隐藏空白item
-        var tblView =  UIView(frame: CGRectZero)
-        myTodoList_tableView.tableFooterView = tblView
-        myTodoList_tableView.tableFooterView?.hidden = true
-        myTodoList_tableView.backgroundColor = UIColor.clearColor()
-        var nipName=UINib(nibName: "CustomCell", bundle:nil)
-        self.myTodoList_tableView.registerNib(nipName, forCellReuseIdentifier: "CustomCell")
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+//        var nipName=UINib(nibName: "CustomCell", bundle:nil)
+//        self.myTodoList_tableView.registerNib(nipName, forCellReuseIdentifier: "CustomCell")
+//        self.navigationController?.setNavigationBarHidden(true, animated: false)
 
     }
     

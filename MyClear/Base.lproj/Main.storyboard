@@ -8,11 +8,11 @@
         <!--My List Page-->
         <scene sceneID="92V-nZ-dLI">
             <objects>
-                <tableViewController storyboardIdentifier="mylist" id="fW9-GT-FzH" customClass="MyListPage" customModule="MyClear" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="49" sectionHeaderHeight="22" sectionFooterHeight="22" id="dcI-dh-iqa">
+                <tableViewController storyboardIdentifier="mylist" modalPresentationStyle="pageSheet" id="fW9-GT-FzH" customClass="MyListPage" customModule="MyClear" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="49" sectionHeaderHeight="22" sectionFooterHeight="22" id="dcI-dh-iqa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mylistcell_identifier" rowHeight="70" id="2sk-ta-Rlp" customClass="MyListCell" customModule="MyClear" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -64,16 +64,16 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jYr-IL-j7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="284" y="-233"/>
+            <point key="canvasLocation" x="291" y="-199"/>
         </scene>
         <!--My Todo Page-->
         <scene sceneID="TSJ-CH-3Mh">
             <objects>
                 <tableViewController storyboardIdentifier="mytodopage" id="5Tb-Wj-cuE" customClass="MyTodoPage" customModule="MyClear" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="DJk-Tb-fxP">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="DJk-Tb-fxP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mytodocell_identifier" rowHeight="70" id="GEE-V9-1fA" customClass="MyTodoCell" customModule="MyClear" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -193,7 +193,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UQg-IF-FCr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="homepagecell" rowHeight="70" id="D2U-VW-2Qa" customClass="HomePageCell" customModule="MyClear" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -249,7 +249,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRA-aJ-L2u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-199" y="36"/>
+            <point key="canvasLocation" x="-148" y="-10"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QMO-i1-1Bp">
