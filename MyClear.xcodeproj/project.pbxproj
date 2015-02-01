@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E806A2121A7C7E0A00BB4E0E /* TodoThingDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E806A2111A7C7E0A00BB4E0E /* TodoThingDomain.swift */; };
+		E806A2141A7DB47A00BB4E0E /* myListCell_textField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E806A2131A7DB47A00BB4E0E /* myListCell_textField.swift */; };
 		E8406A9B1A6FF2E100CBDEFD /* MyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406A9A1A6FF2E100CBDEFD /* MyListCell.swift */; };
 		E8406AA01A70E56900CBDEFD /* ListName.m in Sources */ = {isa = PBXBuildFile; fileRef = E8406A9F1A70E56900CBDEFD /* ListName.m */; };
 		E8406AA31A70E56900CBDEFD /* TodoThing.m in Sources */ = {isa = PBXBuildFile; fileRef = E8406AA21A70E56900CBDEFD /* TodoThing.m */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		E806A2111A7C7E0A00BB4E0E /* TodoThingDomain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoThingDomain.swift; sourceTree = "<group>"; };
+		E806A2131A7DB47A00BB4E0E /* myListCell_textField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myListCell_textField.swift; sourceTree = "<group>"; };
 		E8406A9A1A6FF2E100CBDEFD /* MyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyListCell.swift; sourceTree = "<group>"; };
 		E8406A9D1A70E56800CBDEFD /* MyClear-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyClear-Bridging-Header.h"; sourceTree = "<group>"; };
 		E8406A9E1A70E56900CBDEFD /* ListName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListName.h; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			children = (
 				E8F789BA1A6F962E00E7FBE0 /* MyListPage.swift */,
 				E8406A9A1A6FF2E100CBDEFD /* MyListCell.swift */,
+				E806A2131A7DB47A00BB4E0E /* myListCell_textField.swift */,
 			);
 			name = Mylist;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				E806A2121A7C7E0A00BB4E0E /* TodoThingDomain.swift in Sources */,
 				E8F7897B1A6CDCC400E7FBE0 /* AppDelegate.swift in Sources */,
 				E8406AA01A70E56900CBDEFD /* ListName.m in Sources */,
+				E806A2141A7DB47A00BB4E0E /* myListCell_textField.swift in Sources */,
 				E8F789C11A6F96A500E7FBE0 /* TipandTrickPage.swift in Sources */,
 				E8406AB41A7118CF00CBDEFD /* RefreshBaseView.swift in Sources */,
 				E8F7897E1A6CDCC400E7FBE0 /* MyClear.xcdatamodeld in Sources */,

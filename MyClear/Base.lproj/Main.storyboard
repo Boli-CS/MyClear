@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="f8W-jc-JK4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="f8W-jc-JK4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -19,13 +19,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2sk-ta-Rlp" id="jTE-Hx-Qw7">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8S-6i-gZy">
-                                            <rect key="frame" x="270" y="11" width="42" height="51"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="justified" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nTB-vL-xjE">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="justified" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nTB-vL-xjE" customClass="myListCell_textField" customModule="MyClear" customModuleProvider="target">
                                             <rect key="frame" x="14" y="11" width="254" height="51"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -33,11 +27,29 @@
                                                 <action selector="myListCell_textField_editingDidEnd:" destination="fW9-GT-FzH" eventType="editingDidEnd" id="YE2-rc-h1V"/>
                                             </connections>
                                         </textField>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8S-6i-gZy">
+                                            <rect key="frame" x="270" y="11" width="42" height="51"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="42" id="zez-00-zUE"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="C8S-6i-gZy" firstAttribute="trailing" secondItem="jTE-Hx-Qw7" secondAttribute="trailingMargin" id="6wp-3b-J4F"/>
+                                        <constraint firstItem="C8S-6i-gZy" firstAttribute="leading" secondItem="nTB-vL-xjE" secondAttribute="trailing" constant="2" id="K1c-cd-LPe"/>
+                                        <constraint firstItem="nTB-vL-xjE" firstAttribute="leading" secondItem="jTE-Hx-Qw7" secondAttribute="leadingMargin" constant="6" id="akQ-jh-AOP"/>
+                                        <constraint firstItem="C8S-6i-gZy" firstAttribute="bottom" secondItem="nTB-vL-xjE" secondAttribute="bottom" id="doI-hP-bIq"/>
+                                        <constraint firstItem="C8S-6i-gZy" firstAttribute="top" secondItem="nTB-vL-xjE" secondAttribute="top" id="f3x-9n-4ZR"/>
+                                        <constraint firstItem="nTB-vL-xjE" firstAttribute="top" secondItem="jTE-Hx-Qw7" secondAttribute="topMargin" constant="3" id="gCd-h5-qf0"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="nTB-vL-xjE" secondAttribute="bottom" constant="-0.5" id="oib-58-7Yi"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="myListCell_label" destination="C8S-6i-gZy" id="AMT-pC-Idb"/>
-                                    <outlet property="myListCell_textField" destination="nTB-vL-xjE" id="bou-Xv-RFq"/>
+                                    <outlet property="listCount_label" destination="C8S-6i-gZy" id="yoL-Hj-Xfm"/>
+                                    <outlet property="listName_myListCell_textField" destination="nTB-vL-xjE" id="Pss-DT-AsV"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

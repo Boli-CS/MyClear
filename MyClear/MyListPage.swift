@@ -32,17 +32,24 @@ class MyListPage: UITableViewController {
     }
     
     @IBAction func myListCell_textField_editingDidEnd(sender: AnyObject) {
-        
+        println("myListCell_textField_editingDidEnd")
+        println((sender as myListCell_textField).id)
+        for(var index = 0; index < lists_db.count; index++) {
+            println(lists_db[index].valueForKey("id"))
+            if (sender as myListCell_textField).id! == lists_db[index].valueForKey("id")?.intValue {
+                var data = lists_db[index] as NSManagedObject
+                data.setValue((sender as myListCell_textField).text, forKey: "listname")
+                data.managedObjectContext?.save(nil)
+            }
+            
+        }
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.addHeaderView()
-        
-        
-        loadData()
-        
 
     }
     
@@ -58,52 +65,18 @@ class MyListPage: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = myListPage_tableView.dequeueReusableCellWithIdentifier("mylistcell_identifier") as MyListCell
-        cell.myListCell_textField.text = listDomains[indexPath.row].listName
+        cell.listName_myListCell_textField.text = listDomains[indexPath.row].listName
+        if let var count : Int = listDomains[indexPath.row].todoThingDomains?.count {
+            cell.listCount_label.text = "\(count)"
+        }
+        cell.listName_myListCell_textField.id = listDomains[indexPath.row].id
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
+        println("tableView")
     }
     
-    func loadData() {
-        //coreData
-        listDomains.removeAll(keepCapacity: false)
-        
-        var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
-        
-        //list
-        var listsFetchRequest = NSFetchRequest(entityName: "List")
-        var lists : [AnyObject]! = context?.executeFetchRequest(listsFetchRequest, error: nil)
-        for(var index = 0; index < lists?.count; index++) {
-            var listdomain : ListDomain = ListDomain();
-            listdomain.id = lists[index].valueForKey("id")?.intValue
-            listdomain.listName = lists[index].valueForKey("listname") as String
-            listDomains.append(listdomain)
-        }
-        
-        //todoThing
-        var todoThingsFetchRequest = NSFetchRequest(entityName: "TodoThing")
-        var todoThings : [AnyObject]! = context?.executeFetchRequest(todoThingsFetchRequest, error: nil)
-        for(var index = 0; index < todoThings?.count; index++){
-            var todoThingDomain : TodoThingDomain = TodoThingDomain()
-            todoThingDomain.id = todoThings[index].valueForKey("id")?.intValue
-            todoThingDomain.deadLine = todoThings[index].valueForKey("deadline") as NSDate
-            todoThingDomain.listID = todoThings[index].valueForKey("listid")?.intValue
-            todoThingDomain.thing = todoThings[index].valueForKey("thing") as String
-            
-            println(todoThingDomain.id)
-            println(todoThingDomain.deadLine)
-            println(todoThingDomain.listID)
-            println(todoThingDomain.thing)
-            println("-----------")
-
-            for(var listindex = 0; listindex < listDomains.count; listindex++) {
-                if listDomains[listindex].id == todoThingDomain.listID {
-                    listDomains[listindex].todoThingDomains?.append(todoThingDomain)
-                }
-            }
-        }
-    }
+    
     
 }

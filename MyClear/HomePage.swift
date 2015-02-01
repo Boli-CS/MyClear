@@ -8,6 +8,9 @@
 
 import UIKit
 
+var lists_db : [AnyObject]! = []
+var todoThings_db : [AnyObject]! = []
+
 class HomePage: UITableViewController {
     
     @IBOutlet weak var homePageTableView: UITableView!
@@ -34,6 +37,8 @@ class HomePage: UITableViewController {
         
         //保存一份数据
 //        saveData()
+        
+        loadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,7 +56,13 @@ class HomePage: UITableViewController {
         let cell = self.homePageTableView.dequeueReusableCellWithIdentifier("homepagecell") as HomePageCell
         cell.homePageCell_textFied.text = self.homePageCell_textField[indexPath.item]
         if indexPath.item == 0 {
-            cell.homePageCell_todoNum_label.text = "1"
+            if let var count : Int = listDomains?.count {
+                cell.homePageCell_todoNum_label.text = "\(count)"
+            }
+            else {
+                cell.homePageCell_todoNum_label.text = "0"
+            }
+            
         }
         return cell
     }
@@ -118,6 +129,46 @@ class HomePage: UITableViewController {
         thirdThing.setValue("thirdThing", forKey: "thing")
         context?.save(nil)
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        //读取数据
+        loadData()
+    }
+    
+    func loadData() {
+        println("loaddata")
+        //coreData
+        listDomains.removeAll(keepCapacity: false)
+        
+        var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+        
+        //list
+        var listsFetchRequest = NSFetchRequest(entityName: "List")
+        lists_db = context?.executeFetchRequest(listsFetchRequest, error: nil)
+        for(var index = 0; index < lists_db?.count; index++) {
+            var listdomain : ListDomain = ListDomain();
+            listdomain.id = lists_db[index].valueForKey("id")?.intValue
+            listdomain.listName = lists_db[index].valueForKey("listname") as String
+            listDomains.append(listdomain)
+        }
+        
+        //todoThing
+        var todoThingsFetchRequest = NSFetchRequest(entityName: "TodoThing")
+        todoThings_db = context?.executeFetchRequest(todoThingsFetchRequest, error: nil)
+        for(var index = 0; index < todoThings_db?.count; index++){
+            var todoThingDomain : TodoThingDomain = TodoThingDomain()
+            todoThingDomain.id = todoThings_db[index].valueForKey("id")?.intValue
+            todoThingDomain.deadLine = todoThings_db[index].valueForKey("deadline") as NSDate
+            todoThingDomain.listID = todoThings_db[index].valueForKey("listid")?.intValue
+            todoThingDomain.thing = todoThings_db[index].valueForKey("thing") as String
+            
+            for(var listindex = 0; listindex < listDomains.count; listindex++) {
+                if listDomains[listindex].id == todoThingDomain.listID {
+                    listDomains[listindex].todoThingDomains?.append(todoThingDomain)
+                }
+            }
+        }
     }
 }
 

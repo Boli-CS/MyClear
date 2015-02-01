@@ -8,10 +8,12 @@
 
 import UIKit
 
+
 class MyListCell: UITableViewCell {
     
-    @IBOutlet weak var myListCell_textField: UITextField!
     
-    @IBOutlet weak var myListCell_label: UILabel!
+    @IBOutlet weak var listName_myListCell_textField: myListCell_textField!
     
+    @IBOutlet weak var listCount_label: UILabel!
+
 }
