@@ -20,7 +20,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="justified" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nTB-vL-xjE" customClass="myListCell_textField" customModule="MyClear" customModuleProvider="target">
-                                            <rect key="frame" x="14" y="11" width="254" height="51"/>
+                                            <rect key="frame" x="14" y="11" width="220" height="51"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
@@ -39,7 +39,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="C8S-6i-gZy" firstAttribute="trailing" secondItem="jTE-Hx-Qw7" secondAttribute="trailingMargin" id="6wp-3b-J4F"/>
-                                        <constraint firstItem="C8S-6i-gZy" firstAttribute="leading" secondItem="nTB-vL-xjE" secondAttribute="trailing" constant="2" id="K1c-cd-LPe"/>
+                                        <constraint firstItem="C8S-6i-gZy" firstAttribute="leading" secondItem="nTB-vL-xjE" secondAttribute="trailing" constant="36" id="K1c-cd-LPe"/>
                                         <constraint firstItem="nTB-vL-xjE" firstAttribute="leading" secondItem="jTE-Hx-Qw7" secondAttribute="leadingMargin" constant="6" id="akQ-jh-AOP"/>
                                         <constraint firstItem="C8S-6i-gZy" firstAttribute="bottom" secondItem="nTB-vL-xjE" secondAttribute="bottom" id="doI-hP-bIq"/>
                                         <constraint firstItem="C8S-6i-gZy" firstAttribute="top" secondItem="nTB-vL-xjE" secondAttribute="top" id="f3x-9n-4ZR"/>
@@ -65,6 +65,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jYr-IL-j7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="284" y="-233"/>
+        </scene>
+        <!--My Todo Page-->
+        <scene sceneID="TSJ-CH-3Mh">
+            <objects>
+                <tableViewController storyboardIdentifier="mytodopage" id="5Tb-Wj-cuE" customClass="MyTodoPage" customModule="MyClear" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="DJk-Tb-fxP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mytodocell_identifier" rowHeight="70" id="GEE-V9-1fA" customClass="MyTodoCell" customModule="MyClear" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GEE-V9-1fA" id="90P-hq-Lg8">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gOZ-bZ-eee" customClass="MyTodoCellTextField" customModule="MyClear" customModuleProvider="target">
+                                            <rect key="frame" x="8" y="8" width="304" height="54"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="gOZ-bZ-eee" firstAttribute="leading" secondItem="90P-hq-Lg8" secondAttribute="leadingMargin" id="CqZ-NQ-UeT"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="gOZ-bZ-eee" secondAttribute="bottom" constant="-0.5" id="G0P-yw-4h3"/>
+                                        <constraint firstItem="gOZ-bZ-eee" firstAttribute="top" secondItem="90P-hq-Lg8" secondAttribute="topMargin" id="J7V-5q-qD9"/>
+                                        <constraint firstItem="gOZ-bZ-eee" firstAttribute="trailing" secondItem="90P-hq-Lg8" secondAttribute="trailingMargin" id="nPc-Ug-CmS"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="todoThingName_myTodoCellTextField" destination="gOZ-bZ-eee" id="rua-xa-r49"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="5Tb-Wj-cuE" id="joX-Y0-XqX"/>
+                            <outlet property="delegate" destination="5Tb-Wj-cuE" id="LEG-gC-hoV"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="myTodoList_tableView" destination="DJk-Tb-fxP" id="g5c-nm-7eI"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WmE-ON-xiY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="743" y="-419"/>
         </scene>
         <!--Sound Page-->
         <scene sceneID="X8K-lJ-csN">

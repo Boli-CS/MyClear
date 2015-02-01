@@ -133,7 +133,7 @@ class HomePage: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         //读取数据
-        loadData()
+//        loadData()
     }
     
     func loadData() {

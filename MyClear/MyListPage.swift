@@ -32,18 +32,23 @@ class MyListPage: UITableViewController {
     }
     
     @IBAction func myListCell_textField_editingDidEnd(sender: AnyObject) {
-        println("myListCell_textField_editingDidEnd")
-        println((sender as myListCell_textField).id)
+        //修改数据库入库
         for(var index = 0; index < lists_db.count; index++) {
             println(lists_db[index].valueForKey("id"))
             if (sender as myListCell_textField).id! == lists_db[index].valueForKey("id")?.intValue {
                 var data = lists_db[index] as NSManagedObject
                 data.setValue((sender as myListCell_textField).text, forKey: "listname")
                 data.managedObjectContext?.save(nil)
+                
             }
-            
         }
 
+        //修改domain
+        for(var index = 0; index < listDomains.count; index++) {
+            if (sender as myListCell_textField).id! == listDomains[index].id {
+                listDomains[index].listName = (sender as myListCell_textField).text
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -55,12 +60,10 @@ class MyListPage: UITableViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listDomains.count;
-//        return 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -74,9 +77,9 @@ class MyListPage: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("tableView")
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        var vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as MyTodoPage
+        vc.listID = listDomains[indexPath.row].id
+        self.presentViewController(vc, animated: true, completion: nil)
     }
-    
-    
-    
 }
