@@ -55,6 +55,15 @@ class MyListPage: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.addHeaderView()
+        
+        //隐藏空白item
+        var tblView =  UIView(frame: CGRectZero)
+        myListPage_tableView.tableFooterView = tblView
+        myListPage_tableView.tableFooterView?.hidden = true
+        myListPage_tableView.backgroundColor = UIColor.clearColor()
+        var nipName=UINib(nibName: "CustomCell", bundle:nil)
+        self.myListPage_tableView.registerNib(nipName, forCellReuseIdentifier: "CustomCell")
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
 
     }
     

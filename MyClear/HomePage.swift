@@ -32,7 +32,7 @@ class HomePage: UITableViewController {
 //        tblView.backgroundColor = UIColor.clearColor()
 //        homePageTableView.tableFooterView = tblView
         var nipName=UINib(nibName: "CustomCell", bundle:nil)
-        self.homePageTableView.registerNib(nipName, forCellReuseIdentifier: "Custo)mCell")
+        self.homePageTableView.registerNib(nipName, forCellReuseIdentifier: "CustomCell")
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         //保存一份数据

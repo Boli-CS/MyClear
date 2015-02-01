@@ -13,5 +13,4 @@ class MyTodoCell: UITableViewCell {
     
     @IBOutlet weak var todoThingName_myTodoCellTextField: MyTodoCellTextField!
     
-    var id : Int32?
 }

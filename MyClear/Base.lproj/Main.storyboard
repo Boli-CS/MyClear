@@ -84,6 +84,9 @@
                                             <rect key="frame" x="8" y="8" width="304" height="54"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="myTodoCell_textField_editingDidEnd:" destination="5Tb-Wj-cuE" eventType="editingDidEnd" id="A3Z-4P-NPU"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                     <constraints>
