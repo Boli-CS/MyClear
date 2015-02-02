@@ -159,9 +159,9 @@ class HomePage: UITableViewController {
         
         var thirdThing : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("TodoThing", inManagedObjectContext: context!)
         thirdThing.setValue(NSDate(), forKey: "deadline")
-        thirdThing.setValue(3, forKey: "id")
+        thirdThing.setValue(1, forKey: "id")
         thirdThing.setValue(2, forKey: "listid")
-        thirdThing.setValue("thirdThing", forKey: "thing")
+        thirdThing.setValue("firstThing", forKey: "thing")
         context?.save(nil)
         
     }

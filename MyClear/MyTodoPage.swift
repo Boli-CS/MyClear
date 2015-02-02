@@ -17,8 +17,22 @@ class MyTodoPage: UITableViewController {
     
     func addHeadView() {
         self.myTodoList_tableView.addHeaderWithCallback { (var state : RefreshState) -> Void in
-            
-        
+            if RefreshState.back == state {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            if RefreshState.addNewItem == state {
+                var maxID : Int32 = -1
+                var newItem : TodoThingDomain = TodoThingDomain()
+                newItem.deadLine = NSDate()
+                newItem.listID = self.listID
+                newItem.thing = ""
+                for(var index = 0; index < self.todoThings.count; index++) {
+                    maxID = self.todoThings[index].id! > maxID ? self.todoThings[index].id! : maxID
+                }
+                newItem.id = maxID + 1
+                self.todoThings.insert(newItem, atIndex: 0)
+                self.myTodoList_tableView.reloadData()
+            }
         }
     }
     
@@ -43,19 +57,46 @@ class MyTodoPage: UITableViewController {
     }
     
     @IBAction func myTodoCell_textField_editingDidEnd(sender: AnyObject) {
-        //database
+        var isNewItem = true
+        var matchedIndex : Int?
+        var thisTextField = sender as MyTodoCellTextField
+        
         for(var index = 0; index < todoThings_db.count; index++) {
-            if todoThings_db[index].valueForKey("id")?.intValue == (sender as MyTodoCellTextField).id {
-                var data = todoThings_db[index] as NSManagedObject
-                data.setValue((sender as MyTodoCellTextField).text, forKey: "thing")
-                data.managedObjectContext?.save(nil)
+            if todoThings_db[index].valueForKey("id")?.intValue == thisTextField.id {
+                isNewItem = false
+                matchedIndex = index
             }
         }
-        
-        //domain
-        for(var index = 0; index < todoThings.count; index++) {
-            if todoThings[index].id == (sender as MyTodoCellTextField).id {
-                todoThings[index].thing = (sender as MyTodoCellTextField).text
+        if isNewItem {
+            if thisTextField.text.isEmpty {
+                self.todoThings.removeAtIndex(0)
+                self.myTodoList_tableView.reloadData()
+            }
+            else {
+                var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+                var firstrow : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("TodoThing", inManagedObjectContext: context!)
+                firstrow.setValue(NSDate(), forKey: "deadline")
+                firstrow.setValue(Int(thisTextField.id!), forKey: "id")
+                firstrow.setValue(Int(listID!), forKey: "listid")
+                firstrow.setValue(thisTextField.text, forKey: "thing")
+                context?.save(nil)
+                loadDataFromDataBase()
+                self.myTodoList_tableView.reloadData()
+            }
+            
+        }
+        else {
+            //database
+            var data = todoThings_db[matchedIndex!] as NSManagedObject
+            data.setValue((sender as MyTodoCellTextField).text, forKey: "thing")
+            data.managedObjectContext?.save(nil)
+
+            
+            //修改domain
+            for(var index = 0; index < todoThings.count; index++) {
+                if thisTextField.id! == todoThings[index].id {
+                    todoThings[index].thing = thisTextField.text
+                }
             }
         }
     }
@@ -69,6 +110,9 @@ class MyTodoPage: UITableViewController {
         let cell = myTodoList_tableView.dequeueReusableCellWithIdentifier("mytodocell_identifier") as MyTodoCell
         cell.todoThingName_myTodoCellTextField.text = todoThings[indexPath.row].thing
         cell.todoThingName_myTodoCellTextField.id = todoThings[indexPath.row].id
+        if cell.todoThingName_myTodoCellTextField.text.isEmpty {
+            cell.todoThingName_myTodoCellTextField.becomeFirstResponder()
+        }
         return cell
     }
     

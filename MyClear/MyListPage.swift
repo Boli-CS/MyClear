@@ -22,13 +22,12 @@ class MyListPage: UITableViewController {
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             if state == RefreshState.addNewItem {
-                var maxID : Int32 = 0;
+                var maxID : Int32 = -1;
                 for(var index = 0; index < listDomains.count; index++) {
-                    if listDomains[index].id > maxID {
-                        maxID = listDomains[index].id!
-                    }
+                    maxID = listDomains[index].id > maxID ? listDomains[index].id! : maxID
                 }
                 var listDomain : ListDomain = ListDomain()
+                //空list添加id为0
                 listDomain.id = maxID + 1
                 listDomain.listName = ""
                 listDomain.todoThingDomains = []
@@ -74,7 +73,6 @@ class MyListPage: UITableViewController {
                 firstrow.setValue(thisTextField.text, forKey: "listname")
                 context?.save(nil)
                 loadDataFromDataBase()
-                
             }
         }
         else {
@@ -131,5 +129,10 @@ class MyListPage: UITableViewController {
         var vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as MyTodoPage
         vc.listID = listDomains[indexPath.row].id
         self.presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        loadDataFromDataBase()
+        self.myListPage_tableView.reloadData()
     }
 }
