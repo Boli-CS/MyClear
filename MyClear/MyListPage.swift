@@ -12,6 +12,8 @@ import CoreData
 
 var listDomains : [ListDomain]! = []
 
+var emptyCell : MyListCell?
+
 class MyListPage: UITableViewController {
     
     @IBOutlet weak var myListPage_tableView: UITableView!
@@ -72,6 +74,7 @@ class MyListPage: UITableViewController {
                 firstrow.setValue(Int(thisTextField.id!), forKey: "id")
                 firstrow.setValue(thisTextField.text, forKey: "listname")
                 context?.save(nil)
+
                 loadDataFromDataBase()
             }
         }
@@ -110,6 +113,9 @@ class MyListPage: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath == 0 {
+            emptyCell = nil
+        }
         let cell = myListPage_tableView.dequeueReusableCellWithIdentifier("mylistcell_identifier") as MyListCell
         cell.listName_myListCell_textField.text = listDomains[indexPath.row].listName
         if let var count : Int = listDomains[indexPath.row].todoThingDomains?.count {
@@ -117,9 +123,10 @@ class MyListPage: UITableViewController {
         }
         cell.listName_myListCell_textField.id = listDomains[indexPath.row].id
         if cell.listName_myListCell_textField.text.isEmpty {
-            println(cell.listName_myListCell_textField.text)
-            println(cell.listName_myListCell_textField.text.isEmpty)
-            cell.listName_myListCell_textField.becomeFirstResponder()
+            emptyCell = cell
+        }
+        if indexPath.item == listDomains.count - 1 && emptyCell != nil {
+            emptyCell?.listName_myListCell_textField.becomeFirstResponder()
         }
         return cell
     }
@@ -133,6 +140,28 @@ class MyListPage: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         loadDataFromDataBase()
+        self.myListPage_tableView.reloadData()
+    }
+    
+    //delete
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+        
+        //delete data from database
+        for(var index = 0; index < lists_db.count; index++) {
+            if listDomains[indexPath.item].id == lists_db[index].valueForKey("id")?.intValue {
+                context?.deleteObject(lists_db[index] as NSManagedObject)
+                context?.save(nil)
+            }
+        }
+        for(var index = 0; index < todoThings_db.count; index++) {
+            if listDomains[indexPath.item].id == todoThings_db[index].valueForKey("listid")?.intValue {
+                context?.deleteObject(todoThings_db[index] as NSManagedObject)
+                context?.save(nil)
+            }
+        }
+        
+        listDomains.removeAtIndex(indexPath.item)
         self.myListPage_tableView.reloadData()
     }
 }
