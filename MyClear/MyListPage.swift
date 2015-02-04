@@ -12,11 +12,17 @@ import CoreData
 
 var listDomains : [ListDomain]! = []
 
-var emptyCell : MyListCell?
-
-class MyListPage: UITableViewController {
+class MyListPage: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var myListPage_tableView: UITableView!
+    
+    var listColorRed : CGFloat = 17.0;
+    var listColorGreen : CGFloat = 126.0;
+    var listColorBlue : CGFloat = 250.0;
+    
+    var emptyCell : MyListCell?
+    
+    var edittingTextField : myListCell_textField?
 
     func addHeaderView() {
         self.tableView.addHeaderWithCallback { (var state : RefreshState) -> Void in
@@ -45,10 +51,6 @@ class MyListPage: UITableViewController {
 //        self.tableView.addFooterWithCallback({
 //            print("2")
 //        })
-    }
-    
-    func backToPreviousView() {
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func myListCell_textField_editingDidEnd(sender: AnyObject) {
@@ -97,7 +99,7 @@ class MyListPage: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.addHeaderView()
-        
+
 //        var nipName=UINib(nibName: "CustomCell", bundle:nil)
 //        self.myListPage_tableView.registerNib(nipName, forCellReuseIdentifier: "CustomCell")
 //        self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -128,6 +130,15 @@ class MyListPage: UITableViewController {
         if indexPath.item == listDomains.count - 1 && emptyCell != nil {
             emptyCell?.listName_myListCell_textField.becomeFirstResponder()
         }
+        var count : CGFloat = CGFloat(listDomains.count)
+        var cellIndex : CGFloat = CGFloat(indexPath.item)
+        
+        //background color of cell
+        cell.backgroundColor = UIColor(
+            red: (listColorRed - (listColorRed / count) * cellIndex) / 255.0,
+            green: (listColorGreen + ((255 - listColorGreen) / count) * cellIndex) / 255.0,
+            blue: (listColorBlue + ((255 - listColorBlue) / count) * cellIndex) / 255.0,
+            alpha: 1)
         return cell
     }
     
@@ -163,5 +174,9 @@ class MyListPage: UITableViewController {
         
         listDomains.removeAtIndex(indexPath.item)
         self.myListPage_tableView.reloadData()
+    }
+    
+    @IBAction func myListCell_textField_editingDidBegin(sender: AnyObject) {
+        edittingTextField = sender as myListCell_textField
     }
 }

@@ -15,6 +15,10 @@ class MyTodoPage: UITableViewController {
     
     var emptyCell : MyTodoCell?
     
+    var thingColorRed : CGFloat = 217;
+    var thingColorGreed : CGFloat = 0;
+    var thingColorBlue : CGFloat = 22;
+    
     @IBOutlet var myTodoList_tableView: UITableView!
     
     func addHeadView() {
@@ -120,6 +124,13 @@ class MyTodoPage: UITableViewController {
         if indexPath.item == todoThings.count - 1 && emptyCell != nil {
             emptyCell?.todoThingName_myTodoCellTextField.becomeFirstResponder()
         }
+        
+        //background of cell
+        var count : CGFloat = CGFloat(todoThings.count)
+        var cellIndex : CGFloat = CGFloat(indexPath.item)
+        cell.backgroundColor = UIColor(red: (thingColorRed + ((255.0 - thingColorRed) / count) * cellIndex) / 255.0,
+            green: cellIndex / count,
+            blue: (thingColorBlue + cellIndex) / 255.0, alpha: 1)
         return cell
     }
     
