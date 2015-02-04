@@ -23,6 +23,9 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     var emptyCell : MyListCell?
     
     var edittingTextField : myListCell_textField?
+    
+    //上滑操作跳转到对应的view
+    var jumpViewId : Int = 0
 
     func addHeaderView() {
         self.tableView.addHeaderWithCallback { (var state : RefreshState) -> Void in
@@ -45,12 +48,18 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
                 
             }
         }
-        
-        
-        
-//        self.tableView.addFooterWithCallback({
-//            print("2")
-//        })
+    }
+    
+    func addFootView() {
+        self.tableView.addFooterWithCallback { () -> Void in
+            if listDomains.count > 0 && self.jumpViewId >= 0 {
+                let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                var vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as MyTodoPage
+                vc.listID = Int32(self.jumpViewId)
+                self.presentViewController(vc, animated: true, completion: nil)
+            }
+        }
+
     }
     
     @IBAction func myListCell_textField_editingDidEnd(sender: AnyObject) {
@@ -99,6 +108,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.addHeaderView()
+        self.addFootView()
 
 //        var nipName=UINib(nibName: "CustomCell", bundle:nil)
 //        self.myListPage_tableView.registerNib(nipName, forCellReuseIdentifier: "CustomCell")
@@ -146,6 +156,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         var vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as MyTodoPage
         vc.listID = listDomains[indexPath.row].id
+        self.jumpViewId = Int(listDomains[indexPath.row].id!)
         self.presentViewController(vc, animated: true, completion: nil)
     }
     

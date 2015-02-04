@@ -8,6 +8,10 @@
 
 import UIKit
 class RefreshHeaderView: RefreshBaseView {
+    
+    //响应headView的回调
+    var responseToHeadView:((RefreshState)->Void)?
+    
     class func footer()->RefreshHeaderView{
         var footer:RefreshHeaderView  = RefreshHeaderView(frame: CGRectMake(0, 0,   UIScreen.mainScreen().bounds.width,  CGFloat(RefreshViewHeight)))
         return footer
@@ -120,10 +124,28 @@ class RefreshHeaderView: RefreshBaseView {
             
         }
     }
+        
     }
     
     func addState(state:RefreshState){
         self.State = state
+    }
+    
+    func setState(newValue:RefreshState){
+        
+        switch newValue {
+        case .normal:
+            self.arrowImage.hidden = false
+            break
+        case .back:
+            responseToHeadView!(RefreshState.back)
+            break
+        case .addNewItem:
+            responseToHeadView!(RefreshState.addNewItem)
+            break
+        default:
+            break
+        }
     }
 }
     

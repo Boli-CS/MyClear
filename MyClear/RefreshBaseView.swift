@@ -10,9 +10,10 @@ import UIKit
 //控件的刷新状态
 enum RefreshState {
     case pulling    //松开返回正常状态
-    case addNewItem // 松开就可以返回的状态
+    case addNewItem // 松开就增加新的元素状态
     case normal     // 普通状态
     case back       //返回上一级
+    case jump       //跳转到下一个view
 }
 
 //控件的类型
@@ -35,9 +36,6 @@ class RefreshBaseView: UIView {
     var statusLabel:UILabel!
     var arrowImage:UIImageView!
     
-    //响应headView的回调
-    var responseToHeadView:((RefreshState)->Void)?
-    
     // 交给子类去实现 和 调用
     var  oldState:RefreshState?
     
@@ -49,24 +47,6 @@ class RefreshBaseView: UIView {
         }
         
     }
-    
-    func setState(newValue:RefreshState){
-        
-        switch newValue {
-        case .normal:
-            self.arrowImage.hidden = false
-            break
-        case .back:
-            responseToHeadView!(RefreshState.back)
-            break
-        case .addNewItem:
-            responseToHeadView!(RefreshState.addNewItem)
-            break
-        default:
-            break
-        }
-    }
-    
     
     //控件初始化
     override init(frame: CGRect) {

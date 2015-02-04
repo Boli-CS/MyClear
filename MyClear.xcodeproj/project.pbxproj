@@ -13,10 +13,10 @@
 		E806A21B1A7DBE2B00BB4E0E /* MyTodoCellTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E806A21A1A7DBE2B00BB4E0E /* MyTodoCellTextField.swift */; };
 		E806A21D1A7DBE5500BB4E0E /* MyTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E806A21C1A7DBE5500BB4E0E /* MyTodoCell.swift */; };
 		E806A21F1A81206D00BB4E0E /* SecondaryPageBaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E806A21E1A81206D00BB4E0E /* SecondaryPageBaseClass.swift */; };
+		E806A2211A823A0A00BB4E0E /* RefreshFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E806A2201A823A0A00BB4E0E /* RefreshFooterView.swift */; };
 		E8406A9B1A6FF2E100CBDEFD /* MyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406A9A1A6FF2E100CBDEFD /* MyListCell.swift */; };
 		E8406AA01A70E56900CBDEFD /* ListName.m in Sources */ = {isa = PBXBuildFile; fileRef = E8406A9F1A70E56900CBDEFD /* ListName.m */; };
 		E8406AA31A70E56900CBDEFD /* TodoThing.m in Sources */ = {isa = PBXBuildFile; fileRef = E8406AA21A70E56900CBDEFD /* TodoThing.m */; };
-		E8406AB31A7118CF00CBDEFD /* Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406AAD1A7118CF00CBDEFD /* Refresh.swift */; };
 		E8406AB41A7118CF00CBDEFD /* RefreshBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406AAE1A7118CF00CBDEFD /* RefreshBaseView.swift */; };
 		E8406AB51A7118CF00CBDEFD /* RefreshConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406AAF1A7118CF00CBDEFD /* RefreshConst.swift */; };
 		E8406AB71A7118CF00CBDEFD /* RefreshHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406AB11A7118CF00CBDEFD /* RefreshHeaderView.swift */; };
@@ -57,13 +57,13 @@
 		E806A21A1A7DBE2B00BB4E0E /* MyTodoCellTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTodoCellTextField.swift; sourceTree = "<group>"; };
 		E806A21C1A7DBE5500BB4E0E /* MyTodoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTodoCell.swift; sourceTree = "<group>"; };
 		E806A21E1A81206D00BB4E0E /* SecondaryPageBaseClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondaryPageBaseClass.swift; sourceTree = "<group>"; };
+		E806A2201A823A0A00BB4E0E /* RefreshFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshFooterView.swift; sourceTree = "<group>"; };
 		E8406A9A1A6FF2E100CBDEFD /* MyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyListCell.swift; sourceTree = "<group>"; };
 		E8406A9D1A70E56800CBDEFD /* MyClear-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyClear-Bridging-Header.h"; sourceTree = "<group>"; };
 		E8406A9E1A70E56900CBDEFD /* ListName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListName.h; sourceTree = "<group>"; };
 		E8406A9F1A70E56900CBDEFD /* ListName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListName.m; sourceTree = "<group>"; };
 		E8406AA11A70E56900CBDEFD /* TodoThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoThing.h; sourceTree = "<group>"; };
 		E8406AA21A70E56900CBDEFD /* TodoThing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoThing.m; sourceTree = "<group>"; };
-		E8406AAD1A7118CF00CBDEFD /* Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Refresh.swift; sourceTree = "<group>"; };
 		E8406AAE1A7118CF00CBDEFD /* RefreshBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshBaseView.swift; sourceTree = "<group>"; };
 		E8406AAF1A7118CF00CBDEFD /* RefreshConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshConst.swift; sourceTree = "<group>"; };
 		E8406AB11A7118CF00CBDEFD /* RefreshHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshHeaderView.swift; sourceTree = "<group>"; };
@@ -141,17 +141,10 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		E8406AA61A70E70900CBDEFD /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = CoreData;
-			sourceTree = "<group>";
-		};
 		E8406AAC1A71186500CBDEFD /* refresh */ = {
 			isa = PBXGroup;
 			children = (
-				E8406AAD1A7118CF00CBDEFD /* Refresh.swift */,
+				E806A2201A823A0A00BB4E0E /* RefreshFooterView.swift */,
 				E8406AAE1A7118CF00CBDEFD /* RefreshBaseView.swift */,
 				E8406AAF1A7118CF00CBDEFD /* RefreshConst.swift */,
 				E8406AB11A7118CF00CBDEFD /* RefreshHeaderView.swift */,
@@ -204,7 +197,6 @@
 				E8406AC01A7BDC2200CBDEFD /* Domain */,
 				E8406ABB1A7BC06800CBDEFD /* model */,
 				E8406AAC1A71186500CBDEFD /* refresh */,
-				E8406AA61A70E70900CBDEFD /* CoreData */,
 				E8406A991A6FF2C800CBDEFD /* Mylist */,
 				E8F789B91A6F95FC00E7FBE0 /* secondaryPages */,
 				E8F7897A1A6CDCC400E7FBE0 /* AppDelegate.swift */,
@@ -376,6 +368,7 @@
 				E8406AB41A7118CF00CBDEFD /* RefreshBaseView.swift in Sources */,
 				E8F7897E1A6CDCC400E7FBE0 /* MyClear.xcdatamodeld in Sources */,
 				E8F789C31A6F96D900E7FBE0 /* NewsLetterPage.swift in Sources */,
+				E806A2211A823A0A00BB4E0E /* RefreshFooterView.swift in Sources */,
 				E8406AA31A70E56900CBDEFD /* TodoThing.m in Sources */,
 				E806A21D1A7DBE5500BB4E0E /* MyTodoCell.swift in Sources */,
 				E8406AB81A7118CF00CBDEFD /* UIScrollView+Refresh.swift in Sources */,
@@ -383,7 +376,6 @@
 				E8406AC21A7BDC5700CBDEFD /* ListDomain.swift in Sources */,
 				E8F789BF1A6F968300E7FBE0 /* ThemePage.swift in Sources */,
 				E8406ABD1A7BC0DB00CBDEFD /* List.swift in Sources */,
-				E8406AB31A7118CF00CBDEFD /* Refresh.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

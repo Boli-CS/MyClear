@@ -19,5 +19,14 @@ extension UIScrollView {
         
         header.addState(RefreshState.normal)
     }
+    
+    func addFooterWithCallback( callback:(() -> Void)!){
+        var footer:RefreshFooterView = RefreshFooterView.footer()
+        
+        self.addSubview(footer)
+        footer.responseToFootView = callback
+        
+        footer.addState(RefreshState.normal)
+    }
 
 }

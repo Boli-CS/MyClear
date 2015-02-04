@@ -52,6 +52,16 @@ class HomePage: UITableViewController {
     
     let homePageCell_textField = ["My Lists", "Sounds", "Theme", "Tips & Tricks", "NewsLetter", "Settings"]
     
+    var storyboadrID = "mylist"
+    
+    func addFootView() {
+        self.tableView.addFooterWithCallback { () -> Void in
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+            var vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(self.storyboadrID) as UIViewController
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -74,6 +84,8 @@ class HomePage: UITableViewController {
 //        saveData()
         
         loadDataFromDataBase()
+        
+        addFootView();
     }
 
     override func didReceiveMemoryWarning() {
@@ -108,21 +120,27 @@ class HomePage: UITableViewController {
         switch indexPath.item {
         case 0:
             vc = mainStoryboard.instantiateViewControllerWithIdentifier("mylist") as UIViewController
+            storyboadrID = "mylist"
             break;
         case 1:
             vc  = mainStoryboard.instantiateViewControllerWithIdentifier("sound") as UIViewController
+            storyboadrID = "sound"
             break;
         case 2:
             vc = mainStoryboard.instantiateViewControllerWithIdentifier("theme") as UIViewController
+            storyboadrID = "theme"
             break;
         case 3:
             vc = mainStoryboard.instantiateViewControllerWithIdentifier("tiptrick") as UIViewController
+            storyboadrID = "tiptrick"
             break;
         case 4:
             vc = mainStoryboard.instantiateViewControllerWithIdentifier("newletter") as UIViewController
+            storyboadrID = "newletter"
             break;
         case 5:
             vc = mainStoryboard.instantiateViewControllerWithIdentifier("setting") as UIViewController
+            storyboadrID = "setting"
             break;
         default:
             break;
