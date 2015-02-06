@@ -152,6 +152,10 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         return cell
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 70
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         var vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as MyTodoPage
@@ -167,27 +171,62 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     
     //delete
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
-        
-        //delete data from database
-        for(var index = 0; index < lists_db.count; index++) {
-            if listDomains[indexPath.item].id == lists_db[index].valueForKey("id")?.intValue {
-                context?.deleteObject(lists_db[index] as NSManagedObject)
-                context?.save(nil)
-            }
-        }
-        for(var index = 0; index < todoThings_db.count; index++) {
-            if listDomains[indexPath.item].id == todoThings_db[index].valueForKey("listid")?.intValue {
-                context?.deleteObject(todoThings_db[index] as NSManagedObject)
-                context?.save(nil)
-            }
-        }
-        
-        listDomains.removeAtIndex(indexPath.item)
-        self.myListPage_tableView.reloadData()
+//        if editingStyle == UITableViewCellEditingStyle.Delete {
+//            var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+//        
+//            //delete data from database
+//            for(var index = 0; index < lists_db.count; index++) {
+//                if listDomains[indexPath.item].id == lists_db[index].valueForKey("id")?.intValue {
+//                    context?.deleteObject(lists_db[index] as NSManagedObject)
+//                    context?.save(nil)
+//                }
+//            }
+//            for(var index = 0; index < todoThings_db.count; index++) {
+//                if listDomains[indexPath.item].id == todoThings_db[index].valueForKey("listid")?.intValue {
+//                    context?.deleteObject(todoThings_db[index] as NSManagedObject)
+//                    context?.save(nil)
+//                }
+//            }
+//        
+//            listDomains.removeAtIndex(indexPath.item)
+//        }
+//        self.myListPage_tableView.reloadData()
     }
     
     @IBAction func myListCell_textField_editingDidBegin(sender: AnyObject) {
         edittingTextField = sender as myListCell_textField
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        
+        var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: nil, handler:{action, indexpath in
+            var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+            
+            //delete data from database
+            for(var index = 0; index < lists_db.count; index++) {
+                if listDomains[indexPath.item].id == lists_db[index].valueForKey("id")?.intValue {
+                    context?.deleteObject(lists_db[index] as NSManagedObject)
+                    context?.save(nil)
+                }
+            }
+            for(var index = 0; index < todoThings_db.count; index++) {
+                if listDomains[indexPath.item].id == todoThings_db[index].valueForKey("listid")?.intValue {
+                    context?.deleteObject(todoThings_db[index] as NSManagedObject)
+                    context?.save(nil)
+                }
+            }
+            
+            listDomains.removeAtIndex(indexPath.item)
+            self.myListPage_tableView.reloadData()
+        });
+        
+        deleteRowAction.backgroundColor = UIColor(patternImage: UIImage(named: "delete")!)
+        
+        return [deleteRowAction];
     }
 }

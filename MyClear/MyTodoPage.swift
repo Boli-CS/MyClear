@@ -134,18 +134,34 @@ class MyTodoPage: UITableViewController {
         return cell
     }
     
-    //delete
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
-        
-        for(var index = 0; index < todoThings_db.count; index++) {
-            if todoThings_db[index].valueForKey("id")?.intValue == todoThings[indexPath.item].id {
-                context?.deleteObject(todoThings_db[index] as NSManagedObject)
-                context?.save(nil)
-            }
-        }
-        todoThings.removeAtIndex(indexPath.item)
-        self.myTodoList_tableView.reloadData()
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 70
     }
     
+    //delete
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        var deleteAciont = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: nil, handler: {action, indexpath in
+            var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+            
+            for(var index = 0; index < todoThings_db.count; index++) {
+                if todoThings_db[index].valueForKey("id")?.intValue == self.todoThings[indexPath.item].id {
+                    context?.deleteObject(todoThings_db[index] as NSManagedObject)
+                    context?.save(nil)
+                }
+            }
+            self.todoThings.removeAtIndex(indexPath.item)
+            self.myTodoList_tableView.reloadData()
+        });
+        deleteAciont.backgroundColor = UIColor(patternImage: UIImage(named: "delete")!)
+        
+        return [deleteAciont];
+    }
 }

@@ -99,6 +99,10 @@ class HomePage: UITableViewController {
 
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 70
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.homePageTableView.dequeueReusableCellWithIdentifier("homepagecell") as HomePageCell
         cell.homePageCell_textFied.text = self.homePageCell_textField[indexPath.item]
@@ -111,6 +115,7 @@ class HomePage: UITableViewController {
             }
             
         }
+        cell.backgroundColor = UIColor(patternImage: UIImage(named: "HomePageCellBackground")!)
         return cell
     }
     
