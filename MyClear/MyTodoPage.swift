@@ -65,7 +65,7 @@ class MyTodoPage: UITableViewController {
     @IBAction func myTodoCell_textField_editingDidEnd(sender: AnyObject) {
         var isNewItem = true
         var matchedIndex : Int?
-        var thisTextField = sender as MyTodoCellTextField
+        var thisTextField = sender as! MyTodoCellTextField
         
         for(var index = 0; index < todoThings_db.count; index++) {
             if todoThings_db[index].valueForKey("id")?.intValue == thisTextField.id {
@@ -79,7 +79,7 @@ class MyTodoPage: UITableViewController {
                 self.myTodoList_tableView.reloadData()
             }
             else {
-                var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+                var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
                 var firstrow : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("TodoThing", inManagedObjectContext: context!)
                 firstrow.setValue(NSDate(), forKey: "deadline")
                 firstrow.setValue(Int(thisTextField.id!), forKey: "id")
@@ -93,8 +93,8 @@ class MyTodoPage: UITableViewController {
         }
         else {
             //database
-            var data = todoThings_db[matchedIndex!] as NSManagedObject
-            data.setValue((sender as MyTodoCellTextField).text, forKey: "thing")
+            var data = todoThings_db[matchedIndex!] as! NSManagedObject
+            data.setValue((sender as! MyTodoCellTextField).text, forKey: "thing")
             data.managedObjectContext?.save(nil)
 
             
@@ -115,7 +115,7 @@ class MyTodoPage: UITableViewController {
         if indexPath == 0 {
             emptyCell = nil
         }
-        let cell = myTodoList_tableView.dequeueReusableCellWithIdentifier("mytodocell_identifier") as MyTodoCell
+        let cell = myTodoList_tableView.dequeueReusableCellWithIdentifier("mytodocell_identifier") as! MyTodoCell
         cell.todoThingName_myTodoCellTextField.text = todoThings[indexPath.row].thing
         cell.todoThingName_myTodoCellTextField.id = todoThings[indexPath.row].id
         if cell.todoThingName_myTodoCellTextField.text.isEmpty {
@@ -149,11 +149,11 @@ class MyTodoPage: UITableViewController {
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         var deleteAciont = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: nil, handler: {action, indexpath in
-            var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+            var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
             
             for(var index = 0; index < todoThings_db.count; index++) {
                 if todoThings_db[index].valueForKey("id")?.intValue == self.todoThings[indexPath.item].id {
-                    context?.deleteObject(todoThings_db[index] as NSManagedObject)
+                    context?.deleteObject(todoThings_db[index] as! NSManagedObject)
                     context?.save(nil)
                 }
             }

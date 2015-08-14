@@ -54,7 +54,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         self.tableView.addFooterWithCallback { () -> Void in
             if listDomains.count > 0 && self.jumpViewId >= 0 {
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-                var vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as MyTodoPage
+                var vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as! MyTodoPage
                 vc.listID = Int32(self.jumpViewId)
                 self.presentViewController(vc, animated: true, completion: nil)
             }
@@ -63,7 +63,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func myListCell_textField_editingDidEnd(sender: AnyObject) {
-        var thisTextField = sender as myListCell_textField
+        var thisTextField = sender as! myListCell_textField
         var isNewItem = true
         var matchedIndex = -1
         
@@ -80,7 +80,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
                 self.myListPage_tableView.reloadData()
             }
             else {
-                var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+                var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
                 var firstrow : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: context!)
                 firstrow.setValue(Int(thisTextField.id!), forKey: "id")
                 firstrow.setValue(thisTextField.text, forKey: "listname")
@@ -91,7 +91,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         }
         else {
             //修改数据库入库
-            var data = lists_db[matchedIndex] as NSManagedObject
+            var data = lists_db[matchedIndex] as! NSManagedObject
             data.setValue(thisTextField.text, forKey: "listname")
             data.managedObjectContext?.save(nil)
             
@@ -128,7 +128,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         if indexPath == 0 {
             emptyCell = nil
         }
-        let cell = myListPage_tableView.dequeueReusableCellWithIdentifier("mylistcell_identifier") as MyListCell
+        let cell = myListPage_tableView.dequeueReusableCellWithIdentifier("mylistcell_identifier") as! MyListCell
         cell.listName_myListCell_textField.text = listDomains[indexPath.row].listName
         if let var count : Int = listDomains[indexPath.row].todoThingDomains?.count {
             cell.listCount_label.text = "\(count)"
@@ -158,7 +158,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        var vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as MyTodoPage
+        var vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as! MyTodoPage
         vc.listID = listDomains[indexPath.row].id
         self.jumpViewId = Int(listDomains[indexPath.row].id!)
         self.presentViewController(vc, animated: true, completion: nil)
@@ -194,7 +194,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func myListCell_textField_editingDidBegin(sender: AnyObject) {
-        edittingTextField = sender as myListCell_textField
+        edittingTextField = sender as! myListCell_textField
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -205,18 +205,18 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
         var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: nil, handler:{action, indexpath in
-            var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+            var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
             
             //delete data from database
             for(var index = 0; index < lists_db.count; index++) {
                 if listDomains[indexPath.item].id == lists_db[index].valueForKey("id")?.intValue {
-                    context?.deleteObject(lists_db[index] as NSManagedObject)
+                    context?.deleteObject(lists_db[index] as! NSManagedObject)
                     context?.save(nil)
                 }
             }
             for(var index = 0; index < todoThings_db.count; index++) {
                 if listDomains[indexPath.item].id == todoThings_db[index].valueForKey("listid")?.intValue {
-                    context?.deleteObject(todoThings_db[index] as NSManagedObject)
+                    context?.deleteObject(todoThings_db[index] as! NSManagedObject)
                     context?.save(nil)
                 }
             }

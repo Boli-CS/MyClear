@@ -102,19 +102,19 @@ class RefreshHeaderView: RefreshBaseView {
     didSet{
         switch State{
         case .normal:
-            self.statusLabel.text = RefreshHeaderPullToNormal
+            self.statusLabel.text = RefreshHeaderPullToNormal as String
             UIView.animateWithDuration(RefreshSlowAnimationDuration, animations: {
                 self.arrowImage.transform = CGAffineTransformIdentity
             })
             break
         case .back:
-            self.statusLabel.text = RefreshHeaderReleaseToBack
+            self.statusLabel.text = RefreshHeaderReleaseToBack as String
             UIView.animateWithDuration(RefreshSlowAnimationDuration, animations: {
                 self.arrowImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI ))
             })
             break
         case .addNewItem:
-            self.statusLabel.text = RefreshHeaderReleaseToAdd
+            self.statusLabel.text = RefreshHeaderReleaseToAdd as String
             UIView.animateWithDuration(RefreshSlowAnimationDuration, animations: {
                 self.arrowImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI ))
             })

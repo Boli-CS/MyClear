@@ -29,7 +29,7 @@ class RefreshFooterView: RefreshBaseView {
     override func willMoveToSuperview(newSuperview: UIView!) {
         super.willMoveToSuperview(newSuperview)
         if (self.superview != nil){
-            self.superview!.removeObserver(self, forKeyPath: RefreshContentSize,context:nil)
+            self.superview!.removeObserver(self, forKeyPath: RefreshContentSize as String,context:nil)
         }
         if (newSuperview != nil)  {
             newSuperview.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.New, context: nil)
@@ -91,14 +91,14 @@ class RefreshFooterView: RefreshBaseView {
     didSet{
         switch State{
         case .normal:
-            self.statusLabel.text = RefreshFooterPullToRefresh;
+            self.statusLabel.text = RefreshFooterPullToRefresh as String
             self.arrowImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
             UIView.animateWithDuration(RefreshSlowAnimationDuration, animations: {
                 self.scrollView.contentInset.bottom = self.scrollViewOriginalInset.bottom
             })
             break
         case .pulling:
-            self.statusLabel.text = RefreshFooterPullToRefresh
+            self.statusLabel.text = RefreshFooterPullToRefresh as String
             UIView.animateWithDuration(RefreshSlowAnimationDuration, animations: {
                self.arrowImage.transform = CGAffineTransformIdentity
                 })
@@ -115,14 +115,14 @@ class RefreshFooterView: RefreshBaseView {
     {
         var totalCount:Int = 0
         if self.scrollView is UITableView {
-            var tableView:UITableView = self.scrollView as UITableView
+            var tableView:UITableView = self.scrollView as! UITableView
            
             for (var i:Int = 0 ; i <  tableView.numberOfSections() ; i++){
                 totalCount = totalCount + tableView.numberOfRowsInSection(i)
                 
             }
         } else if self.scrollView is UICollectionView{
-          var collectionView:UICollectionView = self.scrollView as UICollectionView
+          var collectionView:UICollectionView = self.scrollView as! UICollectionView
             for (var i:Int = 0 ; i <  collectionView.numberOfSections() ; i++){
                 totalCount = totalCount + collectionView.numberOfItemsInSection(i)
                 

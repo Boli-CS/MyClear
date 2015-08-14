@@ -16,7 +16,7 @@ func loadDataFromDataBase () {
     //coreData
     listDomains.removeAll(keepCapacity: false)
     
-    var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+    var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     //list
     var listsFetchRequest = NSFetchRequest(entityName: "List")
@@ -24,7 +24,7 @@ func loadDataFromDataBase () {
     for(var index = 0; index < lists_db?.count; index++) {
         var listdomain : ListDomain = ListDomain();
         listdomain.id = lists_db[index].valueForKey("id")?.intValue
-        listdomain.listName = lists_db[index].valueForKey("listname") as String
+        listdomain.listName = lists_db[index].valueForKey("listname") as! String
         listDomains.append(listdomain)
     }
     
@@ -34,9 +34,9 @@ func loadDataFromDataBase () {
     for(var index = 0; index < todoThings_db?.count; index++){
         var todoThingDomain : TodoThingDomain = TodoThingDomain()
         todoThingDomain.id = todoThings_db[index].valueForKey("id")?.intValue
-        todoThingDomain.deadLine = todoThings_db[index].valueForKey("deadline") as NSDate
+        todoThingDomain.deadLine = todoThings_db[index].valueForKey("deadline") as! NSDate
         todoThingDomain.listID = todoThings_db[index].valueForKey("listid")?.intValue
-        todoThingDomain.thing = todoThings_db[index].valueForKey("thing") as String
+        todoThingDomain.thing = todoThings_db[index].valueForKey("thing") as! String
         
         for(var listindex = 0; listindex < listDomains.count; listindex++) {
             if listDomains[listindex].id == todoThingDomain.listID {
@@ -57,7 +57,7 @@ class HomePage: UITableViewController {
     func addFootView() {
         self.tableView.addFooterWithCallback { () -> Void in
             let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-            var vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(self.storyboadrID) as UIViewController
+            var vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(self.storyboadrID) as! UIViewController
             self.presentViewController(vc, animated: true, completion: nil)
         }
     }
@@ -104,7 +104,7 @@ class HomePage: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.homePageTableView.dequeueReusableCellWithIdentifier("homepagecell") as HomePageCell
+        let cell = self.homePageTableView.dequeueReusableCellWithIdentifier("homepagecell") as! HomePageCell
         cell.homePageCell_textFied.text = self.homePageCell_textField[indexPath.item]
         if indexPath.item == 0 {
             if let var count : Int = listDomains?.count {
@@ -121,30 +121,30 @@ class HomePage: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        var vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("mylist") as UIViewController;
+        var vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("mylist") as! UIViewController;
         switch indexPath.item {
         case 0:
-            vc = mainStoryboard.instantiateViewControllerWithIdentifier("mylist") as UIViewController
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("mylist") as!UIViewController
             storyboadrID = "mylist"
             break;
         case 1:
-            vc  = mainStoryboard.instantiateViewControllerWithIdentifier("sound") as UIViewController
+            vc  = mainStoryboard.instantiateViewControllerWithIdentifier("sound") as! UIViewController
             storyboadrID = "sound"
             break;
         case 2:
-            vc = mainStoryboard.instantiateViewControllerWithIdentifier("theme") as UIViewController
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("theme") as! UIViewController
             storyboadrID = "theme"
             break;
         case 3:
-            vc = mainStoryboard.instantiateViewControllerWithIdentifier("tiptrick") as UIViewController
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("tiptrick") as! UIViewController
             storyboadrID = "tiptrick"
             break;
         case 4:
-            vc = mainStoryboard.instantiateViewControllerWithIdentifier("newletter") as UIViewController
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("newletter") as! UIViewController
             storyboadrID = "newletter"
             break;
         case 5:
-            vc = mainStoryboard.instantiateViewControllerWithIdentifier("setting") as UIViewController
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("setting") as! UIViewController
             storyboadrID = "setting"
             break;
         default:
@@ -155,7 +155,7 @@ class HomePage: UITableViewController {
     
     func saveData() {
         //List
-        var context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+        var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         var firstrow : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: context!)
         firstrow.setValue(1, forKey: "id")
         firstrow.setValue("firstList", forKey: "listname")
