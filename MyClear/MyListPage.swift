@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import AVFoundation
 
 
 var listDomains : [ListDomain]! = []
@@ -21,11 +22,21 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     var listColorBlue : CGFloat = 250.0;
     
     var emptyCell : MyListCell?
-    
     var edittingTextField : myListCell_textField?
     
     //上滑操作跳转到对应的view
     var jumpViewId : Int = 0
+    
+    func loadSound(filename:NSString) -> AVAudioPlayer {
+        var url = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(filename, ofType: "caf")!)
+        println(url)
+        var error:NSError? = nil
+        let player = AVAudioPlayer(contentsOfURL: url, error: &error)
+        player.prepareToPlay()
+        return player
+    }
+    
+    var player_1:AVAudioPlayer? = nil
 
     func addHeaderView() {
         self.tableView.addHeaderWithCallback { (var state : RefreshState) -> Void in
@@ -109,6 +120,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         self.addHeaderView()
         self.addFootView()
+        self.player_1 = self.loadSound("Scifi-Archive")
 
 //        var nipName=UINib(nibName: "CustomCell", bundle:nil)
 //        self.myListPage_tableView.registerNib(nipName, forCellReuseIdentifier: "CustomCell")
@@ -162,6 +174,8 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         vc.listID = listDomains[indexPath.row].id
         self.jumpViewId = Int(listDomains[indexPath.row].id!)
         self.presentViewController(vc, animated: true, completion: nil)
+        self.player_1?.play()
+
     }
     
     override func viewDidAppear(animated: Bool) {

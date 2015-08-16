@@ -14,6 +14,7 @@
 		E806A21D1A7DBE5500BB4E0E /* MyTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E806A21C1A7DBE5500BB4E0E /* MyTodoCell.swift */; };
 		E806A21F1A81206D00BB4E0E /* SecondaryPageBaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E806A21E1A81206D00BB4E0E /* SecondaryPageBaseClass.swift */; };
 		E806A2211A823A0A00BB4E0E /* RefreshFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E806A2201A823A0A00BB4E0E /* RefreshFooterView.swift */; };
+		E806A2231A87044700BB4E0E /* Scifi-Archive.caf in Resources */ = {isa = PBXBuildFile; fileRef = E806A2221A87044700BB4E0E /* Scifi-Archive.caf */; };
 		E8406A9B1A6FF2E100CBDEFD /* MyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406A9A1A6FF2E100CBDEFD /* MyListCell.swift */; };
 		E8406AA01A70E56900CBDEFD /* ListName.m in Sources */ = {isa = PBXBuildFile; fileRef = E8406A9F1A70E56900CBDEFD /* ListName.m */; };
 		E8406AA31A70E56900CBDEFD /* TodoThing.m in Sources */ = {isa = PBXBuildFile; fileRef = E8406AA21A70E56900CBDEFD /* TodoThing.m */; };
@@ -58,6 +59,7 @@
 		E806A21C1A7DBE5500BB4E0E /* MyTodoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTodoCell.swift; sourceTree = "<group>"; };
 		E806A21E1A81206D00BB4E0E /* SecondaryPageBaseClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondaryPageBaseClass.swift; sourceTree = "<group>"; };
 		E806A2201A823A0A00BB4E0E /* RefreshFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshFooterView.swift; sourceTree = "<group>"; };
+		E806A2221A87044700BB4E0E /* Scifi-Archive.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Scifi-Archive.caf"; path = "sound/Scifi-Archive.caf"; sourceTree = "<group>"; };
 		E8406A9A1A6FF2E100CBDEFD /* MyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyListCell.swift; sourceTree = "<group>"; };
 		E8406A9D1A70E56800CBDEFD /* MyClear-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyClear-Bridging-Header.h"; sourceTree = "<group>"; };
 		E8406A9E1A70E56900CBDEFD /* ListName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListName.h; sourceTree = "<group>"; };
@@ -119,6 +121,14 @@
 			name = MyTodo;
 			sourceTree = "<group>";
 		};
+		E806A2241A8704A800BB4E0E /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				E806A2221A87044700BB4E0E /* Scifi-Archive.caf */,
+			);
+			name = sound;
+			sourceTree = "<group>";
+		};
 		E8406A991A6FF2C800CBDEFD /* Mylist */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +184,7 @@
 		E8F7896C1A6CDCC400E7FBE0 = {
 			isa = PBXGroup;
 			children = (
+				E806A2241A8704A800BB4E0E /* sound */,
 				E8406A9C1A70E50C00CBDEFD /* Models */,
 				E8F789771A6CDCC400E7FBE0 /* MyClear */,
 				E8F789901A6CDCC400E7FBE0 /* MyClearTests */,
@@ -329,6 +340,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E806A2231A87044700BB4E0E /* Scifi-Archive.caf in Resources */,
 				E8F789831A6CDCC400E7FBE0 /* Main.storyboard in Resources */,
 				E8F789881A6CDCC400E7FBE0 /* LaunchScreen.xib in Resources */,
 				E8F789851A6CDCC400E7FBE0 /* Images.xcassets in Resources */,
