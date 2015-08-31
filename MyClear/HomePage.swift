@@ -24,7 +24,7 @@ func loadDataFromDataBase () {
     for(var index = 0; index < lists_db?.count; index++) {
         var listdomain : ListDomain = ListDomain();
         listdomain.id = lists_db[index].valueForKey("id")?.intValue
-        listdomain.listName = lists_db[index].valueForKey("listname") as! String
+        listdomain.listName = lists_db[index].valueForKey("listname") as? String
         listDomains.append(listdomain)
     }
     
@@ -34,9 +34,9 @@ func loadDataFromDataBase () {
     for(var index = 0; index < todoThings_db?.count; index++){
         var todoThingDomain : TodoThingDomain = TodoThingDomain()
         todoThingDomain.id = todoThings_db[index].valueForKey("id")?.intValue
-        todoThingDomain.deadLine = todoThings_db[index].valueForKey("deadline") as! NSDate
+        todoThingDomain.deadLine = todoThings_db[index].valueForKey("deadline") as? NSDate
         todoThingDomain.listID = todoThings_db[index].valueForKey("listid")?.intValue
-        todoThingDomain.thing = todoThings_db[index].valueForKey("thing") as! String
+        todoThingDomain.thing = todoThings_db[index].valueForKey("thing") as? String
         
         for(var listindex = 0; listindex < listDomains.count; listindex++) {
             if listDomains[listindex].id == todoThingDomain.listID {

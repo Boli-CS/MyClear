@@ -10,7 +10,6 @@ import UIKit
 
 class MyTodoCell: UITableViewCell {
 
-    
-    @IBOutlet weak var todoThingName_myTodoCellTextField: MyTodoCellTextField!
+    @IBOutlet weak var todoThingName_myTodoCellTextView: MyTodoCellTextView!
     
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyTodoCellTextField: UITextField {
+class MyTodoCellTextView: UITextView {
 
     var id : Int32?
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyTodoPage: UITableViewController {
+class MyTodoPage: UITableViewController, UITextViewDelegate {
 
     var listID : Int32?;
     var todoThings : [TodoThingDomain] = []
@@ -62,10 +62,10 @@ class MyTodoPage: UITableViewController {
         }
     }
     
-    @IBAction func myTodoCell_textField_editingDidEnd(sender: AnyObject) {
+    func textViewDidEndEditing(textView: UITextView) {
         var isNewItem = true
         var matchedIndex : Int?
-        var thisTextField = sender as! MyTodoCellTextField
+        var thisTextField = textView as! MyTodoCellTextView
         
         for(var index = 0; index < todoThings_db.count; index++) {
             if todoThings_db[index].valueForKey("id")?.intValue == thisTextField.id {
@@ -94,7 +94,7 @@ class MyTodoPage: UITableViewController {
         else {
             //database
             var data = todoThings_db[matchedIndex!] as! NSManagedObject
-            data.setValue((sender as! MyTodoCellTextField).text, forKey: "thing")
+            data.setValue((textView as! MyTodoCellTextView).text, forKey: "thing")
             data.managedObjectContext?.save(nil)
 
             
@@ -107,6 +107,31 @@ class MyTodoPage: UITableViewController {
         }
     }
     
+    func textViewDidChange(textView: UITextView) {
+        if textView.selectedRange.location == 0 {
+            textView.text = ""
+            return
+        }
+
+        var typedContent = (textView.text as NSString).substringToIndex(textView.selectedRange.location) as String
+        
+        for (var i  = 0; i < todoThings_db.count; i++) {
+            
+            var string = todoThings_db[i].valueForKey("thing") as? NSString
+            
+            if listID == todoThings_db[i].valueForKey("listid")?.intValue
+                && startsWith(string as! String, typedContent) == true {
+                    textView.text = string as! String
+                    var newRange : UITextRange = textView.selectedTextRange?.copy() as! UITextRange
+                    textView.selectedTextRange = newRange
+                    break
+            }
+            else {
+                textView.text = (textView.text as NSString).substringToIndex(textView.selectedRange.location)
+            }
+        }
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todoThings.count
     }
@@ -115,15 +140,16 @@ class MyTodoPage: UITableViewController {
         if indexPath == 0 {
             emptyCell = nil
         }
-        let cell = myTodoList_tableView.dequeueReusableCellWithIdentifier("mytodocell_identifier") as! MyTodoCell
-        cell.todoThingName_myTodoCellTextField.text = todoThings[indexPath.row].thing
-        cell.todoThingName_myTodoCellTextField.id = todoThings[indexPath.row].id
-        if cell.todoThingName_myTodoCellTextField.text.isEmpty {
+        let cell = myTodoList_tableView.dequeueReusableCellWithIdentifier("myTodoCell_identifier") as! MyTodoCell
+        cell.todoThingName_myTodoCellTextView.text = todoThings[indexPath.row].thing
+        cell.todoThingName_myTodoCellTextView.id = todoThings[indexPath.row].id
+        if cell.todoThingName_myTodoCellTextView.text.isEmpty {
             emptyCell = cell
         }
         if indexPath.item == todoThings.count - 1 && emptyCell != nil {
-            emptyCell?.todoThingName_myTodoCellTextField.becomeFirstResponder()
+            emptyCell?.todoThingName_myTodoCellTextView.becomeFirstResponder()
         }
+        cell.todoThingName_myTodoCellTextView.delegate = self
         
         //background of cell
         var count : CGFloat = CGFloat(todoThings.count)
@@ -164,4 +190,6 @@ class MyTodoPage: UITableViewController {
         
         return [deleteAciont];
     }
+    
+    
 }

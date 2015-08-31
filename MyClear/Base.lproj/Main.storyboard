@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="f8W-jc-JK4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="f8W-jc-JK4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -14,7 +14,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mylistcell_identifier" rowHeight="70" id="2sk-ta-Rlp" customClass="MyListCell" customModule="MyClear" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="myListCell_identifier" rowHeight="70" id="2sk-ta-Rlp" customClass="MyListCell" customModule="MyClear" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2sk-ta-Rlp" id="jTE-Hx-Qw7">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -35,7 +35,7 @@
                                                 <constraint firstAttribute="width" constant="42" id="zez-00-zUE"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -77,29 +77,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mytodocell_identifier" rowHeight="70" id="GEE-V9-1fA" customClass="MyTodoCell" customModule="MyClear" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="myTodoCell_identifier" rowHeight="70" id="GEE-V9-1fA" customClass="MyTodoCell" customModule="MyClear" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GEE-V9-1fA" id="90P-hq-Lg8">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gOZ-bZ-eee" customClass="MyTodoCellTextField" customModule="MyClear" customModuleProvider="target">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="miv-vq-QCE" customClass="MyTodoCellTextView" customModule="MyClear" customModuleProvider="target">
                                             <rect key="frame" x="8" y="8" width="304" height="54"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                            <connections>
-                                                <action selector="myTodoCell_textField_editingDidEnd:" destination="5Tb-Wj-cuE" eventType="editingDidEnd" id="A3Z-4P-NPU"/>
-                                            </connections>
-                                        </textField>
+                                            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstItem="gOZ-bZ-eee" firstAttribute="leading" secondItem="90P-hq-Lg8" secondAttribute="leadingMargin" id="CqZ-NQ-UeT"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="gOZ-bZ-eee" secondAttribute="bottom" constant="-0.5" id="G0P-yw-4h3"/>
-                                        <constraint firstItem="gOZ-bZ-eee" firstAttribute="top" secondItem="90P-hq-Lg8" secondAttribute="topMargin" id="J7V-5q-qD9"/>
-                                        <constraint firstItem="gOZ-bZ-eee" firstAttribute="trailing" secondItem="90P-hq-Lg8" secondAttribute="trailingMargin" id="nPc-Ug-CmS"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="todoThingName_myTodoCellTextField" destination="gOZ-bZ-eee" id="rua-xa-r49"/>
+                                    <outlet property="todoThingName_myTodoCellTextView" destination="miv-vq-QCE" id="sLa-4C-wQA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -161,7 +153,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="pf4-B7-nv8">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sound_resuseIdentifier" id="pf4-B7-nv8">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pf4-B7-nv8" id="O7j-7X-lVi">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -293,7 +285,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="Dco-XL-xEf">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingCell_resuseIdentifier" rowHeight="60" id="Dco-XL-xEf">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dco-XL-xEf" id="ezY-ye-8Sh">

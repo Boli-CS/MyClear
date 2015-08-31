@@ -28,7 +28,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     var jumpViewId : Int = 0
     
     func loadSound(filename:NSString) -> AVAudioPlayer {
-        var url = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(filename, ofType: "caf")!)
+        var url = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(filename as String, ofType: "caf")!)
         println(url)
         var error:NSError? = nil
         let player = AVAudioPlayer(contentsOfURL: url, error: &error)
@@ -140,7 +140,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         if indexPath == 0 {
             emptyCell = nil
         }
-        let cell = myListPage_tableView.dequeueReusableCellWithIdentifier("mylistcell_identifier") as! MyListCell
+        let cell = myListPage_tableView.dequeueReusableCellWithIdentifier("myListCell_identifier") as! MyListCell
         cell.listName_myListCell_textField.text = listDomains[indexPath.row].listName
         if let var count : Int = listDomains[indexPath.row].todoThingDomains?.count {
             cell.listCount_label.text = "\(count)"
@@ -208,7 +208,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func myListCell_textField_editingDidBegin(sender: AnyObject) {
-        edittingTextField = sender as! myListCell_textField
+        edittingTextField = sender as? myListCell_textField
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
