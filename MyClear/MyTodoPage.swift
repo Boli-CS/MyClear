@@ -108,6 +108,7 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
     }
     
     func textViewDidChange(textView: UITextView) {
+        var range = textView.selectedTextRange
         if textView.selectedRange.location == 0 {
             textView.text = ""
             return
@@ -122,7 +123,7 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
             if listID == todoThings_db[i].valueForKey("listid")?.intValue
                 && startsWith(string as! String, typedContent) == true {
                     textView.text = string as! String
-                    var newRange : UITextRange = textView.selectedTextRange?.copy() as! UITextRange
+                    var newRange : UITextRange = range?.copy() as! UITextRange
                     textView.selectedTextRange = newRange
                     break
             }
