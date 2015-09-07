@@ -15,6 +15,7 @@
 		E806A21F1A81206D00BB4E0E /* SecondaryPageBaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E806A21E1A81206D00BB4E0E /* SecondaryPageBaseClass.swift */; };
 		E806A2211A823A0A00BB4E0E /* RefreshFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E806A2201A823A0A00BB4E0E /* RefreshFooterView.swift */; };
 		E806A2231A87044700BB4E0E /* Scifi-Archive.caf in Resources */ = {isa = PBXBuildFile; fileRef = E806A2221A87044700BB4E0E /* Scifi-Archive.caf */; };
+		E82190521B95DA3A00059EC9 /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82190511B95DA3A00059EC9 /* ThemeCell.swift */; };
 		E8406A9B1A6FF2E100CBDEFD /* MyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406A9A1A6FF2E100CBDEFD /* MyListCell.swift */; };
 		E8406AA01A70E56900CBDEFD /* ListName.m in Sources */ = {isa = PBXBuildFile; fileRef = E8406A9F1A70E56900CBDEFD /* ListName.m */; };
 		E8406AA31A70E56900CBDEFD /* TodoThing.m in Sources */ = {isa = PBXBuildFile; fileRef = E8406AA21A70E56900CBDEFD /* TodoThing.m */; };
@@ -60,6 +61,7 @@
 		E806A21E1A81206D00BB4E0E /* SecondaryPageBaseClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondaryPageBaseClass.swift; sourceTree = "<group>"; };
 		E806A2201A823A0A00BB4E0E /* RefreshFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshFooterView.swift; sourceTree = "<group>"; };
 		E806A2221A87044700BB4E0E /* Scifi-Archive.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Scifi-Archive.caf"; path = "sound/Scifi-Archive.caf"; sourceTree = "<group>"; };
+		E82190511B95DA3A00059EC9 /* ThemeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
 		E8406A9A1A6FF2E100CBDEFD /* MyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyListCell.swift; sourceTree = "<group>"; };
 		E8406A9D1A70E56800CBDEFD /* MyClear-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyClear-Bridging-Header.h"; sourceTree = "<group>"; };
 		E8406A9E1A70E56900CBDEFD /* ListName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListName.h; sourceTree = "<group>"; };
@@ -127,6 +129,15 @@
 				E806A2221A87044700BB4E0E /* Scifi-Archive.caf */,
 			);
 			name = sound;
+			sourceTree = "<group>";
+		};
+		E82190501B95D9BD00059EC9 /* MyTheme */ = {
+			isa = PBXGroup;
+			children = (
+				E8F789BE1A6F968300E7FBE0 /* ThemePage.swift */,
+				E82190511B95DA3A00059EC9 /* ThemeCell.swift */,
+			);
+			name = MyTheme;
 			sourceTree = "<group>";
 		};
 		E8406A991A6FF2C800CBDEFD /* Mylist */ = {
@@ -204,6 +215,7 @@
 		E8F789771A6CDCC400E7FBE0 /* MyClear */ = {
 			isa = PBXGroup;
 			children = (
+				E82190501B95D9BD00059EC9 /* MyTheme */,
 				E806A2151A7DBD5D00BB4E0E /* MyTodo */,
 				E8406AC01A7BDC2200CBDEFD /* Domain */,
 				E8406ABB1A7BC06800CBDEFD /* model */,
@@ -251,7 +263,6 @@
 			isa = PBXGroup;
 			children = (
 				E8F789BC1A6F965F00E7FBE0 /* SoundPage.swift */,
-				E8F789BE1A6F968300E7FBE0 /* ThemePage.swift */,
 				E8F789C01A6F96A500E7FBE0 /* TipandTrickPage.swift */,
 				E8F789C21A6F96D900E7FBE0 /* NewsLetterPage.swift */,
 				E8F789A11A6E779500E7FBE0 /* SettingPage.swift */,
@@ -374,6 +385,7 @@
 				E806A21F1A81206D00BB4E0E /* SecondaryPageBaseClass.swift in Sources */,
 				E8406AA01A70E56900CBDEFD /* ListName.m in Sources */,
 				E806A21B1A7DBE2B00BB4E0E /* MyTodoCellTextView.swift in Sources */,
+				E82190521B95DA3A00059EC9 /* ThemeCell.swift in Sources */,
 				E806A2141A7DB47A00BB4E0E /* myListCell_textField.swift in Sources */,
 				E806A2191A7DBDD300BB4E0E /* MyTodoPage.swift in Sources */,
 				E8F789C11A6F96A500E7FBE0 /* TipandTrickPage.swift in Sources */,

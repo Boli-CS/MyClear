@@ -153,11 +153,9 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
         cell.todoThingName_myTodoCellTextView.delegate = self
         
         //background of cell
-        var count : CGFloat = CGFloat(todoThings.count)
-        var cellIndex : CGFloat = CGFloat(indexPath.item)
-        cell.backgroundColor = UIColor(red: (thingColorRed + ((255.0 - thingColorRed) / count) * cellIndex) / 255.0,
-            green: cellIndex / count,
-            blue: (thingColorBlue + cellIndex) / 255.0, alpha: 1)
+        let itemCount = todoThings.count - 1
+        let color = (CGFloat(indexPath.row) / CGFloat(itemCount)) * 0.6
+        cell.backgroundColor = UIColor(red: 1.0, green: color, blue: 0.0, alpha: 1.0)
         return cell
     }
     

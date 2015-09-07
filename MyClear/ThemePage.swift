@@ -9,7 +9,10 @@
 
 import UIKit
 
-class ThemePage: UIViewController {
+class ThemePage: UITableViewController {
+    
+    @IBOutlet weak var themes_themePage_UITableView: UITableView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +22,35 @@ class ThemePage: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return themes.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = themes_themePage_UITableView.dequeueReusableCellWithIdentifier("themeCell_reuesIdentifier") as! ThemeCell
+        cell.themeName_themeCell_label.text = themes[indexPath.item].themeName;
+        
+        //渐变的背景颜色
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [themes[indexPath.item].startColor.CGColor, themes[indexPath.item].endColor.CGColor]
+        gradientLayer.locations = [0.0, 1.0]
+        
+        gradientLayer.frame = cell.bounds
+        let backgroundView = UIView(frame: cell.bounds)
+        backgroundView.layer.insertSublayer(gradientLayer, atIndex: 0)
+        cell.backgroundView = backgroundView
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 70
     }
     
 }

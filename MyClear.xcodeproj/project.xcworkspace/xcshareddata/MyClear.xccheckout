@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>44340DE8-2BAD-4117-9F05-57720FE88EFB</string>
 	<key>IDESourceControlProjectName</key>
-	<string>MyClear</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>E2B04BE8A0DA973FF33862A73810D4B5DB5DEF7D</key>
 		<string>https://github.com/Boli-CS/MyClear.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>MyClear.xcodeproj</string>
+	<string>MyClear.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E2B04BE8A0DA973FF33862A73810D4B5DB5DEF7D</key>
