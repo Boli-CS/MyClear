@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14B25" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14F27" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="List" representedClassName="ListName" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="listname" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Theme" syncable="YES">
+        <attribute name="themeID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="TodoThing" representedClassName="TodoThing" syncable="YES">
         <attribute name="deadline" optional="YES" attributeType="Date" syncable="YES"/>
@@ -11,7 +14,8 @@
         <attribute name="thing" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="List" positionX="-137" positionY="90" width="128" height="73"/>
+        <element name="List" positionX="-137" positionY="90" width="128" height="75"/>
         <element name="TodoThing" positionX="-297" positionY="90" width="128" height="103"/>
+        <element name="Theme" positionX="-189" positionY="144" width="128" height="60"/>
     </elements>
 </model>

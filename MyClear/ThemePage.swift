@@ -17,6 +17,11 @@ class ThemePage: UITableViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.themes_themePage_UITableView.addHeaderWithCallback { (var state : RefreshState) -> Void in
+            if RefreshState.back == state {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,9 +49,16 @@ class ThemePage: UITableViewController, UITableViewDelegate {
         gradientLayer.colors = [themes[indexPath.item].startColor.CGColor, themes[indexPath.item].endColor.CGColor]
         gradientLayer.startPoint = CGPointMake(0, 0)
         gradientLayer.endPoint = CGPointMake(0, 1)
-        
         gradientLayer.frame = cell.bounds
         cell.layer.insertSublayer(gradientLayer, atIndex: 0)
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        GlobalSetting.currentTheme = Int32(indexPath.item)
+        var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        var firstrow : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("Theme", inManagedObjectContext: context!)
+        firstrow.setValue(indexPath.item - 1, forKey: "themeID")
+        context?.save(nil)
     }
     
 }

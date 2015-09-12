@@ -11,6 +11,8 @@ import UIKit
 var lists_db : [AnyObject]! = []
 var todoThings_db : [AnyObject]! = []
 
+var theme_db : [AnyObject]!
+
 func loadDataFromDataBase () {
     
     //coreData
@@ -43,6 +45,17 @@ func loadDataFromDataBase () {
                 listDomains[listindex].todoThingDomains?.append(todoThingDomain)
             }
         }
+    }
+}
+
+func loadTheme() {
+    var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    //list
+    var listsFetchRequest = NSFetchRequest(entityName: "Theme")
+    theme_db = context?.executeFetchRequest(listsFetchRequest, error: nil)
+    if(theme_db.count > 0) {
+        GlobalSetting.currentTheme = theme_db[0].valueForKey("themeID")?.intValue
     }
 }
 

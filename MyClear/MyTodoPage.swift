@@ -153,9 +153,19 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
         cell.todoThingName_myTodoCellTextView.delegate = self
         
         //background of cell
-        let itemCount = todoThings.count - 1
-        let color = (CGFloat(indexPath.row) / CGFloat(itemCount)) * 0.6
-        cell.backgroundColor = UIColor(red: 1.0, green: color, blue: 0.0, alpha: 1.0)
+        var start_red : CGFloat, start_green : CGFloat, start_blue : CGFloat, start_alpha : CGFloat
+        var end_red : CGFloat, end_green : CGFloat, end_blue : CGFloat, end_alpha : CGFloat
+
+        let count = todoThings.count > 5 ? todoThings.count : 5
+        
+        var index = Int(GlobalSetting.currentTheme!)
+        cell.backgroundColor = UIColor(
+            red: (CGFloat)( (themes[index].endColor.getRed() - themes[index].startColor.getRed()) / count * indexPath.item + themes[index].startColor.getRed() ) / 255.0,
+            green: (CGFloat)( (themes[index].endColor.getGreen() - themes[index].startColor.getGreen()) / count * indexPath.item + themes[index].startColor.getGreen() ) / 255.0,
+            blue: (CGFloat)( (themes[index].endColor.getBlue() - themes[index].startColor.getBlue()) / count * indexPath.item + themes[index].startColor.getBlue() ) / 255.0,
+            alpha: 1.0)
+        
+        themes[index].startColor.getRed()
         return cell
     }
     
@@ -189,6 +199,5 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
         
         return [deleteAciont];
     }
-    
     
 }
