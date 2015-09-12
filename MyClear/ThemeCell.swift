@@ -35,7 +35,4 @@ class ThemeCell : UITableViewCell{
     
     @IBOutlet weak var themeName_themeCell_label: UILabel!
     
-    
-    
-    
 }
