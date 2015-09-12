@@ -54,11 +54,17 @@ class ThemePage: UITableViewController, UITableViewDelegate {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        GlobalSetting.currentTheme = Int32(indexPath.item)
         var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        var firstrow : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("Theme", inManagedObjectContext: context!)
-        firstrow.setValue(indexPath.item - 1, forKey: "themeID")
-        context?.save(nil)
+        
+        //list
+        var listsFetchRequest = NSFetchRequest(entityName: "Theme")
+        var theme_tmp : [AnyObject]! = context?.executeFetchRequest(listsFetchRequest, error: nil)
+        
+        var data = theme_tmp[0] as! NSManagedObject
+        data.setValue(indexPath.item, forKey: "themeID")
+        data.managedObjectContext?.save(nil)
+        
+        GlobalSetting.currentTheme = Int32(indexPath.item)
     }
     
 }

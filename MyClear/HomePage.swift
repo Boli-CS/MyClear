@@ -57,6 +57,12 @@ func loadTheme() {
     if(theme_db.count > 0) {
         GlobalSetting.currentTheme = theme_db[0].valueForKey("themeID")?.intValue
     }
+    else {
+        var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        var firstrow : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("Theme", inManagedObjectContext: context!)
+        firstrow.setValue(Int(GlobalSetting.currentTheme!), forKey: "themeID")
+        context?.save(nil)
+    }
 }
 
 class HomePage: UITableViewController {
@@ -95,6 +101,8 @@ class HomePage: UITableViewController {
         
         //保存一份数据
 //        saveData()
+        //加载theme信息
+        loadTheme()
         
         loadDataFromDataBase()
         
