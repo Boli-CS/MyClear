@@ -27,8 +27,6 @@
 		E8406ABF1A7BC11600CBDEFD /* TodoThing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406ABE1A7BC11600CBDEFD /* TodoThing.swift */; };
 		E8406AC21A7BDC5700CBDEFD /* ListDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8406AC11A7BDC5700CBDEFD /* ListDomain.swift */; };
 		E8DACCB41BA4132500A8A75C /* GlobalSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DACCB31BA4132500A8A75C /* GlobalSetting.swift */; };
-		E8DACCC81BA6E1C100A8A75C /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DACCBF1BA6E18600A8A75C /* SQLite.framework */; };
-		E8DACCCA1BA6E2BA00A8A75C /* SQLite.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E8DACCBF1BA6E18600A8A75C /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E8F7897B1A6CDCC400E7FBE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7897A1A6CDCC400E7FBE0 /* AppDelegate.swift */; };
 		E8F7897E1A6CDCC400E7FBE0 /* MyClear.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E8F7897C1A6CDCC400E7FBE0 /* MyClear.xcdatamodeld */; };
 		E8F789801A6CDCC400E7FBE0 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7897F1A6CDCC400E7FBE0 /* HomePage.swift */; };
@@ -43,44 +41,10 @@
 		E8F789BF1A6F968300E7FBE0 /* ThemePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789BE1A6F968300E7FBE0 /* ThemePage.swift */; };
 		E8F789C11A6F96A500E7FBE0 /* TipandTrickPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789C01A6F96A500E7FBE0 /* TipandTrickPage.swift */; };
 		E8F789C31A6F96D900E7FBE0 /* NewsLetterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F789C21A6F96D900E7FBE0 /* NewsLetterPage.swift */; };
+		F9F35213FD2FBDC9D3B14640 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF3AF7B89A8B1D493AB4F6E /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E8DACCBE1BA6E18600A8A75C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E8DACCB61BA6E18600A8A75C /* SQLite.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DC3773F319C8CBB3004FCF85;
-			remoteInfo = SQLite;
-		};
-		E8DACCC01BA6E18600A8A75C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E8DACCB61BA6E18600A8A75C /* SQLite.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DC3773FE19C8CBB3004FCF85;
-			remoteInfo = "SQLite Tests";
-		};
-		E8DACCC21BA6E18600A8A75C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E8DACCB61BA6E18600A8A75C /* SQLite.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DCC6B3801A9191C300734B78;
-			remoteInfo = SQLiteCipher;
-		};
-		E8DACCC41BA6E18600A8A75C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E8DACCB61BA6E18600A8A75C /* SQLite.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DCC6B3921A9191D100734B78;
-			remoteInfo = "SQLiteCipher Tests";
-		};
-		E8DACCC61BA6E1A500A8A75C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E8DACCB61BA6E18600A8A75C /* SQLite.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = DC3773F219C8CBB3004FCF85;
-			remoteInfo = SQLite;
-		};
 		E8F7898E1A6CDCC400E7FBE0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E8F7896D1A6CDCC400E7FBE0 /* Project object */;
@@ -97,13 +61,15 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E8DACCCA1BA6E2BA00A8A75C /* SQLite.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7DF3AF7B89A8B1D493AB4F6E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81E3449F29AA0553295D795F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		9442AD7CDDC697E737FDE688 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E806A2111A7C7E0A00BB4E0E /* TodoThingDomain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoThingDomain.swift; sourceTree = "<group>"; };
 		E806A2131A7DB47A00BB4E0E /* myListCell_textField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myListCell_textField.swift; sourceTree = "<group>"; };
 		E806A2181A7DBDD300BB4E0E /* MyTodoPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTodoPage.swift; sourceTree = "<group>"; };
@@ -127,7 +93,6 @@
 		E8406ABE1A7BC11600CBDEFD /* TodoThing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoThing.swift; sourceTree = "<group>"; };
 		E8406AC11A7BDC5700CBDEFD /* ListDomain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDomain.swift; sourceTree = "<group>"; };
 		E8DACCB31BA4132500A8A75C /* GlobalSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSetting.swift; sourceTree = "<group>"; };
-		E8DACCB61BA6E18600A8A75C /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = ../../../git/SQLite.swift/SQLite.xcodeproj; sourceTree = "<group>"; };
 		E8F789751A6CDCC400E7FBE0 /* MyClear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyClear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8F789791A6CDCC400E7FBE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8F7897A1A6CDCC400E7FBE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -153,7 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8DACCC81BA6E1C100A8A75C /* SQLite.framework in Frameworks */,
+				F9F35213FD2FBDC9D3B14640 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +132,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		010BCEE66DC6ECDD6EF11EFF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				81E3449F29AA0553295D795F /* Pods.debug.xcconfig */,
+				9442AD7CDDC697E737FDE688 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		902298E9A60CDC1409FF595A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7DF3AF7B89A8B1D493AB4F6E /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E806A2151A7DBD5D00BB4E0E /* MyTodo */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,34 +228,16 @@
 			name = Domain;
 			sourceTree = "<group>";
 		};
-		E8DACCB51BA6E16600A8A75C /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				E8DACCB61BA6E18600A8A75C /* SQLite.xcodeproj */,
-			);
-			name = libs;
-			sourceTree = "<group>";
-		};
-		E8DACCB71BA6E18600A8A75C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E8DACCBF1BA6E18600A8A75C /* SQLite.framework */,
-				E8DACCC11BA6E18600A8A75C /* SQLite Tests.xctest */,
-				E8DACCC31BA6E18600A8A75C /* SQLite.framework */,
-				E8DACCC51BA6E18600A8A75C /* SQLiteCipher Tests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		E8F7896C1A6CDCC400E7FBE0 = {
 			isa = PBXGroup;
 			children = (
-				E8DACCB51BA6E16600A8A75C /* libs */,
 				E806A2241A8704A800BB4E0E /* sound */,
 				E8406A9C1A70E50C00CBDEFD /* Models */,
 				E8F789771A6CDCC400E7FBE0 /* MyClear */,
 				E8F789901A6CDCC400E7FBE0 /* MyClearTests */,
 				E8F789761A6CDCC400E7FBE0 /* Products */,
+				010BCEE66DC6ECDD6EF11EFF /* Pods */,
+				902298E9A60CDC1409FF595A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -353,15 +317,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E8F789971A6CDCC400E7FBE0 /* Build configuration list for PBXNativeTarget "MyClear" */;
 			buildPhases = (
+				690E11D5FB56DE58D38DB05B /* Check Pods Manifest.lock */,
 				E8F789711A6CDCC400E7FBE0 /* Sources */,
 				E8F789721A6CDCC400E7FBE0 /* Frameworks */,
 				E8F789731A6CDCC400E7FBE0 /* Resources */,
 				E8DACCC91BA6E29000A8A75C /* CopyFiles */,
+				CCF9C22D1FC3CF3A73E4255E /* Embed Pods Frameworks */,
+				45390855B36BB54F4D26B70E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E8DACCC71BA6E1A500A8A75C /* PBXTargetDependency */,
 			);
 			name = MyClear;
 			productName = MyClear;
@@ -415,12 +381,6 @@
 			mainGroup = E8F7896C1A6CDCC400E7FBE0;
 			productRefGroup = E8F789761A6CDCC400E7FBE0 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = E8DACCB71BA6E18600A8A75C /* Products */;
-					ProjectRef = E8DACCB61BA6E18600A8A75C /* SQLite.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				E8F789741A6CDCC400E7FBE0 /* MyClear */,
@@ -428,37 +388,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		E8DACCBF1BA6E18600A8A75C /* SQLite.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SQLite.framework;
-			remoteRef = E8DACCBE1BA6E18600A8A75C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E8DACCC11BA6E18600A8A75C /* SQLite Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "SQLite Tests.xctest";
-			remoteRef = E8DACCC01BA6E18600A8A75C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E8DACCC31BA6E18600A8A75C /* SQLite.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SQLite.framework;
-			remoteRef = E8DACCC21BA6E18600A8A75C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E8DACCC51BA6E18600A8A75C /* SQLiteCipher Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "SQLiteCipher Tests.xctest";
-			remoteRef = E8DACCC41BA6E18600A8A75C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E8F789731A6CDCC400E7FBE0 /* Resources */ = {
@@ -480,6 +409,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		45390855B36BB54F4D26B70E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		690E11D5FB56DE58D38DB05B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CCF9C22D1FC3CF3A73E4255E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E8F789711A6CDCC400E7FBE0 /* Sources */ = {
@@ -529,11 +506,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E8DACCC71BA6E1A500A8A75C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SQLite;
-			targetProxy = E8DACCC61BA6E1A500A8A75C /* PBXContainerItemProxy */;
-		};
 		E8F7898F1A6CDCC400E7FBE0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E8F789741A6CDCC400E7FBE0 /* MyClear */;
@@ -640,6 +612,7 @@
 		};
 		E8F789981A6CDCC400E7FBE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 81E3449F29AA0553295D795F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -653,6 +626,7 @@
 		};
 		E8F789991A6CDCC400E7FBE0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9442AD7CDDC697E737FDE688 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
