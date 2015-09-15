@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CoreData
+import SQLite
 import AVFoundation
 
 
@@ -16,6 +16,8 @@ var listDomains : [ListDomain]! = []
 class MyListPage: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var myListPage_tableView: UITableView!
+    
+    let db = Database(GlobalSetting.dbPath)
     
     var listColorRed : CGFloat = 17.0;
     var listColorGreen : CGFloat = 126.0;
@@ -44,9 +46,9 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             if state == RefreshState.addNewItem {
-                var maxID : Int32 = -1;
+                var maxID : Int64 = -1;
                 for(var index = 0; index < listDomains.count; index++) {
-                    maxID = listDomains[index].id > maxID ? listDomains[index].id! : maxID
+                    maxID = listDomains[index].id > maxID ? listDomains[index].id : maxID
                 }
                 var listDomain : ListDomain = ListDomain()
                 //空list添加id为0
@@ -66,7 +68,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
             if listDomains.count > 0 && self.jumpViewId >= 0 {
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                 var vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as! MyTodoPage
-                vc.listID = Int32(self.jumpViewId)
+                vc.listID = Int64(self.jumpViewId)
                 self.presentViewController(vc, animated: true, completion: nil)
             }
         }
@@ -76,14 +78,17 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     @IBAction func myListCell_textField_editingDidEnd(sender: AnyObject) {
         var thisTextField = sender as! myListCell_textField
         var isNewItem = true
-        var matchedIndex = -1
+        var matchedIndex : Int64 = -1
         
-        for(var index = 0; index < lists_db.count; index++) {
-            if lists_db[index].valueForKey("id")?.intValue == thisTextField.id {
+        var index = 0
+        for list in db[GlobalSetting.listTableName] {
+            if list[GlobalSetting.List.id] == thisTextField.id! {
                 isNewItem = false
-                matchedIndex = index
+                matchedIndex = Int64(index)
             }
+            index++
         }
+    
         if isNewItem {
             //新加list
             if thisTextField.text.isEmpty {
@@ -91,20 +96,17 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
                 self.myListPage_tableView.reloadData()
             }
             else {
-                var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-                var firstrow : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: context!)
-                firstrow.setValue(Int(thisTextField.id!), forKey: "id")
-                firstrow.setValue(thisTextField.text, forKey: "listname")
-                context?.save(nil)
+                db[GlobalSetting.listTableName].insert(
+                    GlobalSetting.List.id <- thisTextField.id!,
+                    GlobalSetting.List.listName <- thisTextField.text)
 
                 loadDataFromDataBase()
             }
         }
         else {
             //修改数据库入库
-            var data = lists_db[matchedIndex] as! NSManagedObject
-            data.setValue(thisTextField.text, forKey: "listname")
-            data.managedObjectContext?.save(nil)
+            db[GlobalSetting.listTableName].filter(GlobalSetting.List.id == matchedIndex).update(GlobalSetting.List.listName <- thisTextField.text)
+            
             
             //修改domain
             for(var index = 0; index < listDomains.count; index++) {
@@ -172,7 +174,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         var vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as! MyTodoPage
         vc.listID = listDomains[indexPath.row].id
-        self.jumpViewId = Int(listDomains[indexPath.row].id!)
+        self.jumpViewId = Int(listDomains[indexPath.row].id)
         self.presentViewController(vc, animated: true, completion: nil)
         self.player_1?.play()
 
@@ -219,21 +221,10 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
         var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: nil, handler:{action, indexpath in
-            var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
             
             //delete data from database
-            for(var index = 0; index < lists_db.count; index++) {
-                if listDomains[indexPath.item].id == lists_db[index].valueForKey("id")?.intValue {
-                    context?.deleteObject(lists_db[index] as! NSManagedObject)
-                    context?.save(nil)
-                }
-            }
-            for(var index = 0; index < todoThings_db.count; index++) {
-                if listDomains[indexPath.item].id == todoThings_db[index].valueForKey("listid")?.intValue {
-                    context?.deleteObject(todoThings_db[index] as! NSManagedObject)
-                    context?.save(nil)
-                }
-            }
+            self.db[GlobalSetting.listTableName].filter(GlobalSetting.List.id == listDomains[indexPath.item].id).delete()
+            self.db[GlobalSetting.todoThingTableName].filter(GlobalSetting.TodoThing.listID == listDomains[indexPath.item].id).delete()
             
             listDomains.removeAtIndex(indexPath.item)
             self.myListPage_tableView.reloadData()

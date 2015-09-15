@@ -8,13 +8,36 @@
 
 import Foundation
 import UIKit
+import SQLite
 
-class GlobalSetting {
+public class GlobalSetting {
+
+    static var currentTheme : Int64 = 0;
     
-    static var currentTheme : Int32? = 0;
+    static var dbPath = NSHomeDirectory() + "/Documents/db.sqlite3";
     
+    static var listTableName = "List"
+    public struct List {
+        static let id = Expression<Int64>("id")
+        static let listName = Expression<String>("ListName")
+    }
     
+    static var themeTableName = "Theme"
+    public struct Theme {
+        static let themeID = Expression<Int64>("ThemeID")
+    }
+    
+    static var todoThingTableName = "TodoThing"
+    public struct TodoThing {
+        static let id = Expression<Int64>("ID")
+        static let deadLine = Expression<Int64>("DeadLine")
+        static let listID = Expression<Int64>("ListID")
+        static let thing = Expression<String>("Thing")
+        
+    }
 }
+
+
 
 extension UIColor {
     

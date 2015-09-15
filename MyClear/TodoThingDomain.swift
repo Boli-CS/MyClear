@@ -8,17 +8,11 @@
 
 class TodoThingDomain {
     
-    var deadLine : NSDate?
+    var deadLine : Int64 = 0
     
-    var id : Int32?
+    var id : Int64 = 0
     
-    var listID : Int32?
+    var listID : Int64 = 0
     
-    var thing : String?
-    
-    init() {
-        
-    }
-    
-    
+    var thing : String = ""
 }

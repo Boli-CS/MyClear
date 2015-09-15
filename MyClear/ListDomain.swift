@@ -8,9 +8,9 @@
 
 class ListDomain {
     
-    var id : Int32? = 0
+    var id : Int64 = 0
     
-    var listName : String? = ""
+    var listName : String = ""
     
     var todoThingDomains : [TodoThingDomain]? = []
     

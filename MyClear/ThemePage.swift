@@ -8,11 +8,13 @@
 
 
 import UIKit
+import SQLite
 
 class ThemePage: UITableViewController, UITableViewDelegate {
     
     @IBOutlet weak var themes_themePage_UITableView: UITableView!
     
+    let db = Database(GlobalSetting.dbPath)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,17 +56,10 @@ class ThemePage: UITableViewController, UITableViewDelegate {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         //list
-        var listsFetchRequest = NSFetchRequest(entityName: "Theme")
-        var theme_tmp : [AnyObject]! = context?.executeFetchRequest(listsFetchRequest, error: nil)
-        
-        var data = theme_tmp[0] as! NSManagedObject
-        data.setValue(indexPath.item, forKey: "themeID")
-        data.managedObjectContext?.save(nil)
-        
-        GlobalSetting.currentTheme = Int32(indexPath.item)
+        db[GlobalSetting.themeTableName].update(GlobalSetting.Theme.themeID <- Int64(indexPath.item))
+        GlobalSetting.currentTheme = Int64(indexPath.item)
     }
     
 }

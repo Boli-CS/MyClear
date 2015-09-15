@@ -7,38 +7,30 @@
 //
 
 import UIKit
-
-var lists_db : [AnyObject]! = []
-var todoThings_db : [AnyObject]! = []
-
-var theme_db : [AnyObject]!
+import SQLite
 
 func loadDataFromDataBase () {
     
     //coreData
     listDomains.removeAll(keepCapacity: false)
-    
-    var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
+
+    let db = Database(GlobalSetting.dbPath)
     //list
-    var listsFetchRequest = NSFetchRequest(entityName: "List")
-    lists_db = context?.executeFetchRequest(listsFetchRequest, error: nil)
-    for(var index = 0; index < lists_db?.count; index++) {
+    for list in db[GlobalSetting.listTableName] {
         var listdomain : ListDomain = ListDomain();
-        listdomain.id = lists_db[index].valueForKey("id")?.intValue
-        listdomain.listName = lists_db[index].valueForKey("listname") as? String
+        listdomain.id = list[GlobalSetting.List.id]
+        listdomain.listName = list[GlobalSetting.List.listName]
         listDomains.append(listdomain)
+
     }
     
     //todoThing
-    var todoThingsFetchRequest = NSFetchRequest(entityName: "TodoThing")
-    todoThings_db = context?.executeFetchRequest(todoThingsFetchRequest, error: nil)
-    for(var index = 0; index < todoThings_db?.count; index++){
+    for todoThing in db[GlobalSetting.todoThingTableName]{
         var todoThingDomain : TodoThingDomain = TodoThingDomain()
-        todoThingDomain.id = todoThings_db[index].valueForKey("id")?.intValue
-        todoThingDomain.deadLine = todoThings_db[index].valueForKey("deadline") as? NSDate
-        todoThingDomain.listID = todoThings_db[index].valueForKey("listid")?.intValue
-        todoThingDomain.thing = todoThings_db[index].valueForKey("thing") as? String
+        todoThingDomain.id = todoThing[GlobalSetting.TodoThing.id]
+        todoThingDomain.deadLine = todoThing[GlobalSetting.TodoThing.deadLine]
+        todoThingDomain.listID = todoThing[GlobalSetting.TodoThing.listID]
+        todoThingDomain.thing = todoThing[GlobalSetting.TodoThing.thing]
         
         for(var listindex = 0; listindex < listDomains.count; listindex++) {
             if listDomains[listindex].id == todoThingDomain.listID {
@@ -49,19 +41,14 @@ func loadDataFromDataBase () {
 }
 
 func loadTheme() {
-    var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
+    let db = Database(GlobalSetting.dbPath)
     //list
-    var listsFetchRequest = NSFetchRequest(entityName: "Theme")
-    theme_db = context?.executeFetchRequest(listsFetchRequest, error: nil)
-    if(theme_db.count > 0) {
-        GlobalSetting.currentTheme = theme_db[0].valueForKey("themeID")?.intValue
+    if(db[GlobalSetting.themeTableName].count > 0) {
+        GlobalSetting.currentTheme = db[GlobalSetting.themeTableName].first![GlobalSetting.Theme.themeID]
     }
     else {
-        var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        var firstrow : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("Theme", inManagedObjectContext: context!)
-        firstrow.setValue(Int(GlobalSetting.currentTheme!), forKey: "themeID")
-        context?.save(nil)
+        db[GlobalSetting.themeTableName].insert(GlobalSetting.Theme.themeID <- 0)
     }
 }
 
@@ -99,8 +86,6 @@ class HomePage: UITableViewController {
         self.homePageTableView.registerNib(nipName, forCellReuseIdentifier: "CustomCell")
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        //保存一份数据
-//        saveData()
         //加载theme信息
         loadTheme()
         
@@ -172,42 +157,6 @@ class HomePage: UITableViewController {
             break;
         }
         self.presentViewController(vc, animated: true, completion: nil)
-    }
-    
-    func saveData() {
-        //List
-        var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        var firstrow : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: context!)
-        firstrow.setValue(1, forKey: "id")
-        firstrow.setValue("firstList", forKey: "listname")
-        context?.save(nil)
-       
-        var secondrow : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("List", inManagedObjectContext: context!)
-        secondrow.setValue(2, forKey: "id")
-        secondrow.setValue("secondList", forKey: "listname")
-        context?.save(nil)
-        
-        var firstThing : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("TodoThing", inManagedObjectContext: context!)
-        firstThing.setValue(NSDate(), forKey: "deadline")
-        firstThing.setValue(1, forKey: "id")
-        firstThing.setValue(1, forKey: "listid")
-        firstThing.setValue("firstThing", forKey: "thing")
-        context?.save(nil)
-
-        var secondThing : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("TodoThing", inManagedObjectContext: context!)
-        secondThing.setValue(NSDate(), forKey: "deadline")
-        secondThing.setValue(2, forKey: "id")
-        secondThing.setValue(1, forKey: "listid")
-        secondThing.setValue("secondThing", forKey: "thing")
-        context?.save(nil)
-        
-        var thirdThing : AnyObject = NSEntityDescription.insertNewObjectForEntityForName("TodoThing", inManagedObjectContext: context!)
-        thirdThing.setValue(NSDate(), forKey: "deadline")
-        thirdThing.setValue(1, forKey: "id")
-        thirdThing.setValue(2, forKey: "listid")
-        thirdThing.setValue("firstThing", forKey: "thing")
-        context?.save(nil)
-        
     }
     
     override func viewDidAppear(animated: Bool) {

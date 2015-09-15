@@ -9,6 +9,6 @@ import UIKit
 
 class myListCell_textField: UITextField {
     
-    var id : Int32?
+    var id : Int64?
 
 }

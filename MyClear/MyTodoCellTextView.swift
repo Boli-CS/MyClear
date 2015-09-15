@@ -10,5 +10,5 @@ import UIKit
 
 class MyTodoCellTextView: UITextView {
 
-    var id : Int32?
+    var id : Int64 = 0
 }
