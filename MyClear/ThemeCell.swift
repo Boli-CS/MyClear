@@ -22,10 +22,10 @@ public struct theme_color {
 }
 
 var themes : Array<theme_color> = [
-    theme_color(themeName : "red",
+    theme_color(themeName : NSLocalizedString("THEME_RED",comment: "Red"),
         startColor : UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 1),
         endColor : UIColor(red: 255.0, green: 125.0, blue: 125.0, alpha: 1)),
-    theme_color(themeName : "blue",
+    theme_color(themeName : NSLocalizedString("THEME_BLUE",comment: "Blue"),
         startColor : UIColor(red: 0.0, green: 0.0, blue: 255.0, alpha: 1),
         endColor : UIColor(red: 125.0, green: 125.0, blue: 255.0, alpha: 1))
 ]
