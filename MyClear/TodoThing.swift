@@ -9,7 +9,7 @@
 
 class TodoThing {
 
-    var deadLine : NSDate?
+    var deadLine : Int64?
     
     var id : Int32?
     
