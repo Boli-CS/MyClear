@@ -14,23 +14,23 @@ func loadDataFromDataBase () {
     //coreData
     listDomains.removeAll(keepCapacity: false)
 
-    let db = try! Connection(GlobalSetting.dbPath)
+    let db = try! Connection(GlobalVariables.dbPath)
     //list
-    for list in db.prepare(GlobalSetting.listTable) {
+    for list in db.prepare(GlobalVariables.listTable) {
         let listdomain : ListDomain = ListDomain();
-        listdomain.id = list[GlobalSetting.List.id]
-        listdomain.listName = list[GlobalSetting.List.listName]
+        listdomain.id = list[GlobalVariables.List.id]
+        listdomain.listName = list[GlobalVariables.List.listName]
         listDomains.append(listdomain)
 
     }
     
     //todoThing
-    for todoThing in db.prepare(GlobalSetting.todoThingTable){
+    for todoThing in db.prepare(GlobalVariables.todoThingTable){
         let todoThingDomain : TodoThingDomain = TodoThingDomain()
-        todoThingDomain.id = todoThing[GlobalSetting.TodoThing.id]
-        todoThingDomain.deadLine = todoThing[GlobalSetting.TodoThing.deadLine]
-        todoThingDomain.listID = todoThing[GlobalSetting.TodoThing.listID]
-        todoThingDomain.thing = todoThing[GlobalSetting.TodoThing.thing]
+        todoThingDomain.id = todoThing[GlobalVariables.TodoThing.id]
+        todoThingDomain.deadLine = todoThing[GlobalVariables.TodoThing.deadLine]
+        todoThingDomain.listID = todoThing[GlobalVariables.TodoThing.listID]
+        todoThingDomain.thing = todoThing[GlobalVariables.TodoThing.thing]
         
         for(var listindex = 0; listindex < listDomains.count; listindex++) {
             if listDomains[listindex].id == todoThingDomain.listID {
@@ -42,18 +42,18 @@ func loadDataFromDataBase () {
 
 func loadTheme() {
     
-    let db = try! Connection(GlobalSetting.dbPath)
+    let db = try! Connection(GlobalVariables.dbPath)
     //list
-    if(db.scalar(GlobalSetting.themeTable.count) > 0) {
-        for user in db.prepare(GlobalSetting.themeTable) {
-            GlobalSetting.currentTheme = user[GlobalSetting.Theme.themeID]
-            print("GlobalSetting.currentTheme:" + String(GlobalSetting.currentTheme))
+    if(db.scalar(GlobalVariables.themeTable.count) > 0) {
+        for user in db.prepare(GlobalVariables.themeTable) {
+            GlobalVariables.currentTheme = user[GlobalVariables.Theme.themeID]
+            print("GlobalVariables.currentTheme:" + String(GlobalVariables.currentTheme))
         }
         
     }
     else {
         do {
-            try db.run(GlobalSetting.themeTable.insert(GlobalSetting.Theme.themeID <- 0))
+            try db.run(GlobalVariables.themeTable.insert(GlobalVariables.Theme.themeID <- 0))
         } catch let error {
             print(error)
         }

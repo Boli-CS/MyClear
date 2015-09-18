@@ -17,7 +17,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var myListPage_tableView: UITableView!
     
-    let db = try! Connection(GlobalSetting.dbPath)
+    let db = try! Connection(GlobalVariables.dbPath)
     
     var listColorRed : CGFloat = 17.0;
     var listColorGreen : CGFloat = 126.0;
@@ -85,8 +85,8 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         var matchedIndex : Int64 = -1
         
         var index = 0
-        for list in db.prepare(GlobalSetting.listTable) {
-            if list[GlobalSetting.List.id] == thisTextField.id! {
+        for list in db.prepare(GlobalVariables.listTable) {
+            if list[GlobalVariables.List.id] == thisTextField.id! {
                 isNewItem = false
                 matchedIndex = Int64(index)
             }
@@ -101,9 +101,9 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
             }
             else {
                 do {
-                    try db.run(GlobalSetting.listTable.insert(
-                        GlobalSetting.List.id <- thisTextField.id!,
-                        GlobalSetting.List.listName <- thisTextField.text!))
+                    try db.run(GlobalVariables.listTable.insert(
+                        GlobalVariables.List.id <- thisTextField.id!,
+                        GlobalVariables.List.listName <- thisTextField.text!))
                 }catch let error {
                     print(error)
                 }
@@ -114,7 +114,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         else {
             //修改数据库入库
             do {
-                try db.run(GlobalSetting.listTable.filter(GlobalSetting.List.id == matchedIndex).update(GlobalSetting.List.listName <- thisTextField.text!))
+                try db.run(GlobalVariables.listTable.filter(GlobalVariables.List.id == matchedIndex).update(GlobalVariables.List.listName <- thisTextField.text!))
             }catch let error {
                 print(error)
             }
@@ -235,8 +235,8 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         
             //delete data from database
             do {
-                try self.db.run(GlobalSetting.listTable.filter(GlobalSetting.List.id == listDomains[indexPath.item].id).delete())
-                try self.db.run(GlobalSetting.todoThingTable.filter(GlobalSetting.TodoThing.listID == listDomains[indexPath.item].id).delete())
+                try self.db.run(GlobalVariables.listTable.filter(GlobalVariables.List.id == listDomains[indexPath.item].id).delete())
+                try self.db.run(GlobalVariables.todoThingTable.filter(GlobalVariables.TodoThing.listID == listDomains[indexPath.item].id).delete())
             }catch let error {
                 print(error)
             }

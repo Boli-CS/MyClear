@@ -14,7 +14,7 @@ class ThemePage: UITableViewController {
     
     @IBOutlet weak var themes_themePage_UITableView: UITableView!
     
-    let db = try! Connection(GlobalSetting.dbPath)
+    let db = try! Connection(GlobalVariables.dbPath)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,11 +59,11 @@ class ThemePage: UITableViewController {
         
         //list
         do {
-            try self.db.run(GlobalSetting.themeTable.update(GlobalSetting.Theme.themeID <- Int64(indexPath.item)))
+            try self.db.run(GlobalVariables.themeTable.update(GlobalVariables.Theme.themeID <- Int64(indexPath.item)))
         } catch let error {
             print(error)
         }
-        GlobalSetting.currentTheme = Int64(indexPath.item)
+        GlobalVariables.currentTheme = Int64(indexPath.item)
     }
     
 }

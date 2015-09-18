@@ -1,5 +1,5 @@
 //
-//  GlobalSetting.swift
+//  GlobalVariables.swift
 //  MyClear
 //
 //  Created by boli on 9/12/15.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SQLite
 
-public class GlobalSetting {
+public class GlobalVariables {
 
     static var currentTheme : Int64 = 0;
     

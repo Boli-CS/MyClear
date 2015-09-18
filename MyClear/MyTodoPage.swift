@@ -19,7 +19,7 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
     var thingColorRed : CGFloat = 217;
     var thingColorGreed : CGFloat = 0;
     var thingColorBlue : CGFloat = 22;
-    let db = try! Connection(GlobalSetting.dbPath);
+    let db = try! Connection(GlobalVariables.dbPath);
     
     @IBOutlet var myTodoList_tableView: UITableView!
     
@@ -70,8 +70,8 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
         let thisTextField = textView as! MyTodoCellTextView
         
         var index : Int64 = 0
-        for todoThing in db.prepare(GlobalSetting.todoThingTable) {
-            if todoThing[GlobalSetting.TodoThing.id] == thisTextField.id {
+        for todoThing in db.prepare(GlobalVariables.todoThingTable) {
+            if todoThing[GlobalVariables.TodoThing.id] == thisTextField.id {
                 isNewItem = false
                 matchedIndex = index
             }
@@ -86,15 +86,16 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
             }
             else {
                 do {
-                    try db.run(GlobalSetting.todoThingTable.insert(
-                        GlobalSetting.TodoThing.id <- thisTextField.id,
-                        GlobalSetting.TodoThing.listID <- listID,
-                        GlobalSetting.TodoThing.thing <- thisTextField.text,
-                        GlobalSetting.TodoThing.deadLine <- 1))
+                    try db.run(GlobalVariables.todoThingTable.insert(
+                        GlobalVariables.TodoThing.id <- thisTextField.id,
+                        GlobalVariables.TodoThing.listID <- listID,
+                        GlobalVariables.TodoThing.thing <- thisTextField.text,
+                        GlobalVariables.TodoThing.deadLine <- 1))
                 }catch let error {
                     print(error)
                 }
                 loadDataFromDataBase()
+                self.loadData()
                 self.myTodoList_tableView.reloadData()
             }
             
@@ -102,7 +103,7 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
         else {
             //database
             do {
-                try db.run(GlobalSetting.todoThingTable.filter(GlobalSetting.TodoThing.id == matchedIndex).update(GlobalSetting.TodoThing.thing <- (textView as! MyTodoCellTextView).text))
+                try db.run(GlobalVariables.todoThingTable.filter(GlobalVariables.TodoThing.id == matchedIndex).update(GlobalVariables.TodoThing.thing <- (textView as! MyTodoCellTextView).text))
             }catch let error {
                 print(error)
             }
@@ -125,11 +126,11 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
 
         let typedContent = (textView.text as NSString).substringToIndex(textView.selectedRange.location) as String
         
-        for todoThing in db.prepare(GlobalSetting.todoThingTable) {
+        for todoThing in db.prepare(GlobalVariables.todoThingTable) {
             
-            let string = todoThing[GlobalSetting.TodoThing.thing]
+            let string = todoThing[GlobalVariables.TodoThing.thing]
             
-            if listID == todoThing[GlobalSetting.TodoThing.listID]
+            if listID == todoThing[GlobalVariables.TodoThing.listID]
                 && string.characters.startsWith(typedContent.characters) == true {
                     textView.text = string
                     let newRange : UITextRange = range?.copy() as! UITextRange
@@ -164,7 +165,7 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
         //background of cell
         let count = todoThings.count > 5 ? todoThings.count : 5
         
-        let index = Int(GlobalSetting.currentTheme)
+        let index = Int(GlobalVariables.currentTheme)
         cell.backgroundColor = UIColor(
             red: (CGFloat)( (themes[index].endColor.getRed() - themes[index].startColor.getRed()) / count * indexPath.item + themes[index].startColor.getRed() ) / 255.0,
             green: (CGFloat)( (themes[index].endColor.getGreen() - themes[index].startColor.getGreen()) / count * indexPath.item + themes[index].startColor.getGreen() ) / 255.0,
@@ -191,7 +192,7 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let deleteAciont = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: nil, handler: {action, indexpath in
             do {
-                try self.db.run(GlobalSetting.todoThingTable.filter(GlobalSetting.TodoThing.id == self.todoThings[indexPath.item].id).delete())
+                try self.db.run(GlobalVariables.todoThingTable.filter(GlobalVariables.TodoThing.id == self.todoThings[indexPath.item].id).delete())
             } catch let error {
                 print(error)
             }
@@ -203,5 +204,5 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
         
         return [deleteAciont];
     }
-    
+
 }

@@ -45,27 +45,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func initializeDB(){
-        if(!NSFileManager.defaultManager().fileExistsAtPath(GlobalSetting.dbPath)) {
-            print("begin to create database: " + GlobalSetting.dbPath)
-            let db = try! Connection(GlobalSetting.dbPath)
+        if(!NSFileManager.defaultManager().fileExistsAtPath(GlobalVariables.dbPath)) {
+            print("begin to create database: " + GlobalVariables.dbPath)
+            let db = try! Connection(GlobalVariables.dbPath)
             do {
-                try db.run(GlobalSetting.listTable.create{t in
-                    t.column(GlobalSetting.List.id, primaryKey : true)
-                    t.column(GlobalSetting.List.listName, unique : true)
+                try db.run(GlobalVariables.listTable.create{t in
+                    t.column(GlobalVariables.List.id, primaryKey : true)
+                    t.column(GlobalVariables.List.listName, unique : true)
                 })
-                try db.run(GlobalSetting.themeTable.create{t in
-                    t.column(GlobalSetting.Theme.themeID, primaryKey : true)
+                try db.run(GlobalVariables.themeTable.create{t in
+                    t.column(GlobalVariables.Theme.themeID, primaryKey : true)
                 })
-                try db.run(GlobalSetting.todoThingTable.create{t in
-                    t.column(GlobalSetting.TodoThing.id, primaryKey : true)
-                    t.column(GlobalSetting.TodoThing.listID)
-                    t.column(GlobalSetting.TodoThing.thing, unique : true)
-                    t.column(GlobalSetting.TodoThing.deadLine)
+                try db.run(GlobalVariables.todoThingTable.create{t in
+                    t.column(GlobalVariables.TodoThing.id, primaryKey : true)
+                    t.column(GlobalVariables.TodoThing.listID)
+                    t.column(GlobalVariables.TodoThing.thing, unique : true)
+                    t.column(GlobalVariables.TodoThing.deadLine)
                 })
             } catch let error {
                 print(error)
             }
-            print("finish to create database: " + GlobalSetting.dbPath)
+            print("finish to create database: " + GlobalVariables.dbPath)
         }
     }
     
