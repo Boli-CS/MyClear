@@ -14,10 +14,10 @@ func loadDataFromDataBase () {
     //coreData
     listDomains.removeAll(keepCapacity: false)
 
-    let db = Database(GlobalSetting.dbPath)
+    let db = try! Connection(GlobalSetting.dbPath)
     //list
-    for list in db[GlobalSetting.listTableName] {
-        var listdomain : ListDomain = ListDomain();
+    for list in db.prepare(GlobalSetting.listTable) {
+        let listdomain : ListDomain = ListDomain();
         listdomain.id = list[GlobalSetting.List.id]
         listdomain.listName = list[GlobalSetting.List.listName]
         listDomains.append(listdomain)
@@ -25,8 +25,8 @@ func loadDataFromDataBase () {
     }
     
     //todoThing
-    for todoThing in db[GlobalSetting.todoThingTableName]{
-        var todoThingDomain : TodoThingDomain = TodoThingDomain()
+    for todoThing in db.prepare(GlobalSetting.todoThingTable){
+        let todoThingDomain : TodoThingDomain = TodoThingDomain()
         todoThingDomain.id = todoThing[GlobalSetting.TodoThing.id]
         todoThingDomain.deadLine = todoThing[GlobalSetting.TodoThing.deadLine]
         todoThingDomain.listID = todoThing[GlobalSetting.TodoThing.listID]
@@ -42,13 +42,21 @@ func loadDataFromDataBase () {
 
 func loadTheme() {
     
-    let db = Database(GlobalSetting.dbPath)
+    let db = try! Connection(GlobalSetting.dbPath)
     //list
-    if(db[GlobalSetting.themeTableName].count > 0) {
-        GlobalSetting.currentTheme = db[GlobalSetting.themeTableName].first![GlobalSetting.Theme.themeID]
+    if(db.scalar(GlobalSetting.themeTable.count) > 0) {
+        for user in db.prepare(GlobalSetting.themeTable) {
+            GlobalSetting.currentTheme = user[GlobalSetting.Theme.themeID]
+            print("GlobalSetting.currentTheme:" + String(GlobalSetting.currentTheme))
+        }
+        
     }
     else {
-        db[GlobalSetting.themeTableName].insert(GlobalSetting.Theme.themeID <- 0)
+        do {
+            try db.run(GlobalSetting.themeTable.insert(GlobalSetting.Theme.themeID <- 0))
+        } catch let error {
+            print(error)
+        }
     }
 }
 
@@ -63,7 +71,7 @@ class HomePage: UITableViewController {
     func addFootView() {
         self.tableView.addFooterWithCallback { () -> Void in
             let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-            var vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(self.storyboadrID) as! UIViewController
+            let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier(self.storyboadrID) 
             self.presentViewController(vc, animated: true, completion: nil)
         }
     }
@@ -82,7 +90,7 @@ class HomePage: UITableViewController {
 //        var tblView =  UIView(frame: CGRect(x: 0,y: 0,width: 0,height: 0))
 //        tblView.backgroundColor = UIColor.clearColor()
 //        homePageTableView.tableFooterView = tblView
-        var nipName=UINib(nibName: "CustomCell", bundle:nil)
+        let nipName=UINib(nibName: "CustomCell", bundle:nil)
         self.homePageTableView.registerNib(nipName, forCellReuseIdentifier: "CustomCell")
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
@@ -113,7 +121,7 @@ class HomePage: UITableViewController {
         let cell = self.homePageTableView.dequeueReusableCellWithIdentifier("homepagecell") as! HomePageCell
         cell.homePageCell_textFied.text = self.homePageCell_textField[indexPath.item]
         if indexPath.item == 0 {
-            if let var count : Int = listDomains?.count {
+            if let count : Int = listDomains?.count {
                 cell.homePageCell_todoNum_label.text = "\(count)"
             }
             else {
@@ -127,30 +135,30 @@ class HomePage: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        var vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("mylist") as! UIViewController;
+        var vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("mylist") ;
         switch indexPath.item {
         case 0:
-            vc = mainStoryboard.instantiateViewControllerWithIdentifier("mylist") as!UIViewController
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("mylist") 
             storyboadrID = "mylist"
             break;
         case 1:
-            vc  = mainStoryboard.instantiateViewControllerWithIdentifier("sound") as! UIViewController
+            vc  = mainStoryboard.instantiateViewControllerWithIdentifier("sound") 
             storyboadrID = "sound"
             break;
         case 2:
-            vc = mainStoryboard.instantiateViewControllerWithIdentifier("theme") as! UIViewController
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("theme") 
             storyboadrID = "theme"
             break;
         case 3:
-            vc = mainStoryboard.instantiateViewControllerWithIdentifier("tiptrick") as! UIViewController
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("tiptrick") 
             storyboadrID = "tiptrick"
             break;
         case 4:
-            vc = mainStoryboard.instantiateViewControllerWithIdentifier("newletter") as! UIViewController
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("newletter") 
             storyboadrID = "newletter"
             break;
         case 5:
-            vc = mainStoryboard.instantiateViewControllerWithIdentifier("setting") as! UIViewController
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("setting") 
             storyboadrID = "setting"
             break;
         default:

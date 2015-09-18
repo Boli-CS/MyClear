@@ -11,7 +11,7 @@ import UIKit
 class SecondaryPageBaseClass : UITableViewController{
     
     func addHeaderView() {
-        self.tableView.addHeaderWithCallback { (var state : RefreshState) -> Void in
+        self.tableView.addHeaderWithCallback { (state : RefreshState) -> Void in
             if state == RefreshState.back {
                 self.dismissViewControllerAnimated(true, completion: nil)
             }

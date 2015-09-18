@@ -17,7 +17,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var myListPage_tableView: UITableView!
     
-    let db = Database(GlobalSetting.dbPath)
+    let db = try! Connection(GlobalSetting.dbPath)
     
     var listColorRed : CGFloat = 17.0;
     var listColorGreen : CGFloat = 126.0;
@@ -30,10 +30,14 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     var jumpViewId : Int = 0
     
     func loadSound(filename:NSString) -> AVAudioPlayer {
-        var url = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(filename as String, ofType: "caf")!)
-        println(url)
-        var error:NSError? = nil
-        let player = AVAudioPlayer(contentsOfURL: url, error: &error)
+        let url = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(filename as String, ofType: "caf")!)
+        print(url)
+        var player: AVAudioPlayer!
+        do {
+            player = try AVAudioPlayer(contentsOfURL: url)
+        } catch let error {
+            print(error)
+        }
         player.prepareToPlay()
         return player
     }
@@ -41,7 +45,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     var player_1:AVAudioPlayer? = nil
 
     func addHeaderView() {
-        self.tableView.addHeaderWithCallback { (var state : RefreshState) -> Void in
+        self.tableView.addHeaderWithCallback { (state : RefreshState) -> Void in
             if state == RefreshState.back {
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
@@ -50,13 +54,13 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
                 for(var index = 0; index < listDomains.count; index++) {
                     maxID = listDomains[index].id > maxID ? listDomains[index].id : maxID
                 }
-                var listDomain : ListDomain = ListDomain()
+                let listDomain : ListDomain = ListDomain()
                 //空list添加id为0
                 listDomain.id = maxID + 1
                 listDomain.listName = ""
                 listDomain.todoThingDomains = []
                 listDomains.insert(listDomain, atIndex: 0)
-                println(listDomains.count)
+                print(listDomains.count)
                 self.myListPage_tableView.reloadData()
                 
             }
@@ -67,7 +71,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         self.tableView.addFooterWithCallback { () -> Void in
             if listDomains.count > 0 && self.jumpViewId >= 0 {
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-                var vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as! MyTodoPage
+                let vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as! MyTodoPage
                 vc.listID = Int64(self.jumpViewId)
                 self.presentViewController(vc, animated: true, completion: nil)
             }
@@ -76,12 +80,12 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func myListCell_textField_editingDidEnd(sender: AnyObject) {
-        var thisTextField = sender as! myListCell_textField
+        let thisTextField = sender as! myListCell_textField
         var isNewItem = true
         var matchedIndex : Int64 = -1
         
         var index = 0
-        for list in db[GlobalSetting.listTableName] {
+        for list in db.prepare(GlobalSetting.listTable) {
             if list[GlobalSetting.List.id] == thisTextField.id! {
                 isNewItem = false
                 matchedIndex = Int64(index)
@@ -91,27 +95,34 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     
         if isNewItem {
             //新加list
-            if thisTextField.text.isEmpty {
+            if thisTextField.text!.isEmpty {
                 listDomains.removeAtIndex(0)
                 self.myListPage_tableView.reloadData()
             }
             else {
-                db[GlobalSetting.listTableName].insert(
-                    GlobalSetting.List.id <- thisTextField.id!,
-                    GlobalSetting.List.listName <- thisTextField.text)
+                do {
+                    try db.run(GlobalSetting.listTable.insert(
+                        GlobalSetting.List.id <- thisTextField.id!,
+                        GlobalSetting.List.listName <- thisTextField.text!))
+                }catch let error {
+                    print(error)
+                }
 
                 loadDataFromDataBase()
             }
         }
         else {
             //修改数据库入库
-            db[GlobalSetting.listTableName].filter(GlobalSetting.List.id == matchedIndex).update(GlobalSetting.List.listName <- thisTextField.text)
-            
+            do {
+                try db.run(GlobalSetting.listTable.filter(GlobalSetting.List.id == matchedIndex).update(GlobalSetting.List.listName <- thisTextField.text!))
+            }catch let error {
+                print(error)
+            }
             
             //修改domain
             for(var index = 0; index < listDomains.count; index++) {
                 if thisTextField.id! == listDomains[index].id {
-                    listDomains[index].listName = thisTextField.text
+                    listDomains[index].listName = thisTextField.text!
                 }
             }
         }
@@ -144,18 +155,18 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         }
         let cell = myListPage_tableView.dequeueReusableCellWithIdentifier("myListCell_identifier") as! MyListCell
         cell.listName_myListCell_textField.text = listDomains[indexPath.row].listName
-        if let var count : Int = listDomains[indexPath.row].todoThingDomains?.count {
+        if let count : Int = listDomains[indexPath.row].todoThingDomains?.count {
             cell.listCount_label.text = "\(count)"
         }
         cell.listName_myListCell_textField.id = listDomains[indexPath.row].id
-        if cell.listName_myListCell_textField.text.isEmpty {
+        if cell.listName_myListCell_textField.text!.isEmpty {
             emptyCell = cell
         }
         if indexPath.item == listDomains.count - 1 && emptyCell != nil {
             emptyCell?.listName_myListCell_textField.becomeFirstResponder()
         }
-        var count : CGFloat = CGFloat(listDomains.count)
-        var cellIndex : CGFloat = CGFloat(indexPath.item)
+        let count : CGFloat = CGFloat(listDomains.count)
+        let cellIndex : CGFloat = CGFloat(indexPath.item)
         
         //background color of cell
         cell.backgroundColor = UIColor(
@@ -172,7 +183,7 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        var vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as! MyTodoPage
+        let vc  = mainStoryboard.instantiateViewControllerWithIdentifier("mytodopage") as! MyTodoPage
         vc.listID = listDomains[indexPath.row].id
         self.jumpViewId = Int(listDomains[indexPath.row].id)
         self.presentViewController(vc, animated: true, completion: nil)
@@ -218,13 +229,17 @@ class MyListPage: UITableViewController, UITextFieldDelegate {
         return true
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
-        var deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: nil, handler:{action, indexpath in
-            
+        let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: nil, handler:{action, indexpath in
+        
             //delete data from database
-            self.db[GlobalSetting.listTableName].filter(GlobalSetting.List.id == listDomains[indexPath.item].id).delete()
-            self.db[GlobalSetting.todoThingTableName].filter(GlobalSetting.TodoThing.listID == listDomains[indexPath.item].id).delete()
+            do {
+                try self.db.run(GlobalSetting.listTable.filter(GlobalSetting.List.id == listDomains[indexPath.item].id).delete())
+                try self.db.run(GlobalSetting.todoThingTable.filter(GlobalSetting.TodoThing.listID == listDomains[indexPath.item].id).delete())
+            }catch let error {
+                print(error)
+            }
             
             listDomains.removeAtIndex(indexPath.item)
             self.myListPage_tableView.reloadData()

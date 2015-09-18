@@ -14,20 +14,20 @@ public class GlobalSetting {
 
     static var currentTheme : Int64 = 0;
     
-    static var dbPath = NSHomeDirectory() + "/Documents/db.sqlite3";
+    static let dbPath = NSHomeDirectory() + "/Documents/db.sqlite3";
     
-    static var listTableName = "List"
+    static let listTable = Table("List")
     public struct List {
         static let id = Expression<Int64>("id")
         static let listName = Expression<String>("ListName")
     }
     
-    static var themeTableName = "Theme"
+    static let themeTable = Table("Theme")
     public struct Theme {
         static let themeID = Expression<Int64>("ThemeID")
     }
     
-    static var todoThingTableName = "TodoThing"
+    static let todoThingTable = Table("TodoThing")
     public struct TodoThing {
         static let id = Expression<Int64>("ID")
         static let deadLine = Expression<Int64>("DeadLine")

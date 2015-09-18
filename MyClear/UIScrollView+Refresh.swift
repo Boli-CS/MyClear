@@ -13,7 +13,7 @@ import UIKit
 extension UIScrollView {
     
     func addHeaderWithCallback( callback:((RefreshState) -> Void)!){
-        var header:RefreshHeaderView = RefreshHeaderView.footer()
+        let header:RefreshHeaderView = RefreshHeaderView.footer()
         self.addSubview(header)
         header.responseToHeadView = callback
         
@@ -21,7 +21,7 @@ extension UIScrollView {
     }
     
     func addFooterWithCallback( callback:(() -> Void)!){
-        var footer:RefreshFooterView = RefreshFooterView.footer()
+        let footer:RefreshFooterView = RefreshFooterView.footer()
         
         self.addSubview(footer)
         footer.responseToFootView = callback

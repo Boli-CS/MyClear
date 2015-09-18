@@ -10,16 +10,16 @@
 import UIKit
 import SQLite
 
-class ThemePage: UITableViewController, UITableViewDelegate {
+class ThemePage: UITableViewController {
     
     @IBOutlet weak var themes_themePage_UITableView: UITableView!
     
-    let db = Database(GlobalSetting.dbPath)
+    let db = try! Connection(GlobalSetting.dbPath)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.themes_themePage_UITableView.addHeaderWithCallback { (var state : RefreshState) -> Void in
+        self.themes_themePage_UITableView.addHeaderWithCallback { (state : RefreshState) -> Void in
             if RefreshState.back == state {
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
@@ -58,7 +58,11 @@ class ThemePage: UITableViewController, UITableViewDelegate {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //list
-        db[GlobalSetting.themeTableName].update(GlobalSetting.Theme.themeID <- Int64(indexPath.item))
+        do {
+            try self.db.run(GlobalSetting.themeTable.update(GlobalSetting.Theme.themeID <- Int64(indexPath.item)))
+        } catch let error {
+            print(error)
+        }
         GlobalSetting.currentTheme = Int64(indexPath.item)
     }
     

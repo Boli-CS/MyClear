@@ -46,24 +46,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func initializeDB(){
         if(!NSFileManager.defaultManager().fileExistsAtPath(GlobalSetting.dbPath)) {
-            println("begin to create database..........")
-            let db = Database(GlobalSetting.dbPath)
-            db.create(table: db[GlobalSetting.listTableName]){ t in
-                t.column(GlobalSetting.List.id, primaryKey : true)
-                t.column(GlobalSetting.List.listName, unique : true)
+            print("begin to create database: " + GlobalSetting.dbPath)
+            let db = try! Connection(GlobalSetting.dbPath)
+            do {
+                try db.run(GlobalSetting.listTable.create{t in
+                    t.column(GlobalSetting.List.id, primaryKey : true)
+                    t.column(GlobalSetting.List.listName, unique : true)
+                })
+                try db.run(GlobalSetting.themeTable.create{t in
+                    t.column(GlobalSetting.Theme.themeID, primaryKey : true)
+                })
+                try db.run(GlobalSetting.todoThingTable.create{t in
+                    t.column(GlobalSetting.TodoThing.id, primaryKey : true)
+                    t.column(GlobalSetting.TodoThing.listID)
+                    t.column(GlobalSetting.TodoThing.thing, unique : true)
+                    t.column(GlobalSetting.TodoThing.deadLine)
+                })
+            } catch let error {
+                print(error)
             }
-            
-            db.create(table: db[GlobalSetting.themeTableName]){t in
-                t.column(GlobalSetting.Theme.themeID, primaryKey : true)
-            }
-            
-            db.create(table: db[GlobalSetting.todoThingTableName]){t in
-                t.column(GlobalSetting.TodoThing.id, primaryKey : true)
-                t.column(GlobalSetting.TodoThing.listID)
-                t.column(GlobalSetting.TodoThing.thing, unique : true)
-                t.column(GlobalSetting.TodoThing.deadLine)
-            }
-            println("finish to create database.........")
+            print("finish to create database: " + GlobalSetting.dbPath)
         }
     }
     

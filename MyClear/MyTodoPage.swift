@@ -19,18 +19,18 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
     var thingColorRed : CGFloat = 217;
     var thingColorGreed : CGFloat = 0;
     var thingColorBlue : CGFloat = 22;
-    let db = Database(GlobalSetting.dbPath);
+    let db = try! Connection(GlobalSetting.dbPath);
     
     @IBOutlet var myTodoList_tableView: UITableView!
     
     func addHeadView() {
-        self.myTodoList_tableView.addHeaderWithCallback { (var state : RefreshState) -> Void in
+        self.myTodoList_tableView.addHeaderWithCallback { (state : RefreshState) -> Void in
             if RefreshState.back == state {
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             if RefreshState.addNewItem == state {
                 var maxID : Int64 = -1
-                var newItem : TodoThingDomain = TodoThingDomain()
+                let newItem : TodoThingDomain = TodoThingDomain()
                 newItem.deadLine = 1
                 newItem.listID = self.listID
                 newItem.thing = ""
@@ -67,10 +67,10 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
     func textViewDidEndEditing(textView: UITextView) {
         var isNewItem = true
         var matchedIndex : Int64 = -1
-        var thisTextField = textView as! MyTodoCellTextView
+        let thisTextField = textView as! MyTodoCellTextView
         
         var index : Int64 = 0
-        for todoThing in db[GlobalSetting.todoThingTableName] {
+        for todoThing in db.prepare(GlobalSetting.todoThingTable) {
             if todoThing[GlobalSetting.TodoThing.id] == thisTextField.id {
                 isNewItem = false
                 matchedIndex = index
@@ -85,12 +85,15 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
                 self.myTodoList_tableView.reloadData()
             }
             else {
-                db[GlobalSetting.todoThingTableName].insert(
-                    GlobalSetting.TodoThing.id <- thisTextField.id,
-                    GlobalSetting.TodoThing.listID <- listID,
-                    GlobalSetting.TodoThing.thing <- thisTextField.text,
-                    GlobalSetting.TodoThing.deadLine <- 1
-                )
+                do {
+                    try db.run(GlobalSetting.todoThingTable.insert(
+                        GlobalSetting.TodoThing.id <- thisTextField.id,
+                        GlobalSetting.TodoThing.listID <- listID,
+                        GlobalSetting.TodoThing.thing <- thisTextField.text,
+                        GlobalSetting.TodoThing.deadLine <- 1))
+                }catch let error {
+                    print(error)
+                }
                 loadDataFromDataBase()
                 self.myTodoList_tableView.reloadData()
             }
@@ -98,8 +101,11 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
         }
         else {
             //database
-            let todoThing = db[GlobalSetting.todoThingTableName].filter(GlobalSetting.TodoThing.id == matchedIndex)
-            todoThing.update(GlobalSetting.TodoThing.thing <- (textView as! MyTodoCellTextView).text)
+            do {
+                try db.run(GlobalSetting.todoThingTable.filter(GlobalSetting.TodoThing.id == matchedIndex).update(GlobalSetting.TodoThing.thing <- (textView as! MyTodoCellTextView).text))
+            }catch let error {
+                print(error)
+            }
             
             //修改domain
             for(var index = 0; index < todoThings.count; index++) {
@@ -111,22 +117,22 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
     }
     
     func textViewDidChange(textView: UITextView) {
-        var range = textView.selectedTextRange
+        let range = textView.selectedTextRange
         if textView.selectedRange.location == 0 {
             textView.text = ""
             return
         }
 
-        var typedContent = (textView.text as NSString).substringToIndex(textView.selectedRange.location) as String
+        let typedContent = (textView.text as NSString).substringToIndex(textView.selectedRange.location) as String
         
-        for todoThing in db[GlobalSetting.todoThingTableName] {
+        for todoThing in db.prepare(GlobalSetting.todoThingTable) {
             
-            var string = todoThing[GlobalSetting.TodoThing.thing]
+            let string = todoThing[GlobalSetting.TodoThing.thing]
             
             if listID == todoThing[GlobalSetting.TodoThing.listID]
-                && startsWith(string, typedContent) == true {
+                && string.characters.startsWith(typedContent.characters) == true {
                     textView.text = string
-                    var newRange : UITextRange = range?.copy() as! UITextRange
+                    let newRange : UITextRange = range?.copy() as! UITextRange
                     textView.selectedTextRange = newRange
                     break
             }
@@ -156,12 +162,9 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
         cell.todoThingName_myTodoCellTextView.delegate = self
         
         //background of cell
-        var start_red : CGFloat, start_green : CGFloat, start_blue : CGFloat, start_alpha : CGFloat
-        var end_red : CGFloat, end_green : CGFloat, end_blue : CGFloat, end_alpha : CGFloat
-
         let count = todoThings.count > 5 ? todoThings.count : 5
         
-        var index = Int(GlobalSetting.currentTheme)
+        let index = Int(GlobalSetting.currentTheme)
         cell.backgroundColor = UIColor(
             red: (CGFloat)( (themes[index].endColor.getRed() - themes[index].startColor.getRed()) / count * indexPath.item + themes[index].startColor.getRed() ) / 255.0,
             green: (CGFloat)( (themes[index].endColor.getGreen() - themes[index].startColor.getGreen()) / count * indexPath.item + themes[index].startColor.getGreen() ) / 255.0,
@@ -185,10 +188,13 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
         return true
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        var deleteAciont = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: nil, handler: {action, indexpath in
-            
-            self.db[GlobalSetting.todoThingTableName].filter(GlobalSetting.TodoThing.id == self.todoThings[indexPath.item].id).delete()
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let deleteAciont = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: nil, handler: {action, indexpath in
+            do {
+                try self.db.run(GlobalSetting.todoThingTable.filter(GlobalSetting.TodoThing.id == self.todoThings[indexPath.item].id).delete())
+            } catch let error {
+                print(error)
+            }
             
             self.todoThings.removeAtIndex(indexPath.item)
             self.myTodoList_tableView.reloadData()
