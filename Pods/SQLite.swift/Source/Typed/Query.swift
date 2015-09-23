@@ -50,8 +50,8 @@ extension SchemaType {
     /// - Parameter all: A list of expressions to select.
     ///
     /// - Returns: A query with the given `SELECT` clause applied.
-    public func select(column: Expressible, _ more: Expressible...) -> Self {
-        return select(false, [column] + more)
+    public func select(column1: Expressible, _ column2: Expressible, _ more: Expressible...) -> Self {
+        return select(false, [column1, column2] + more)
     }
 
     /// Builds a copy of the query with the `SELECT DISTINCT` clause applied.
@@ -65,8 +65,8 @@ extension SchemaType {
     /// - Parameter columns: A list of expressions to select.
     ///
     /// - Returns: A query with the given `SELECT DISTINCT` clause applied.
-    public func select(distinct column: Expressible, _ more: Expressible...) -> Self {
-        return select(true, [column] + more)
+    public func select(distinct column1: Expressible, _ column2: Expressible, _ more: Expressible...) -> Self {
+        return select(true, [column1, column2] + more)
     }
 
     /// Builds a copy of the query with the `SELECT` clause applied.
@@ -111,7 +111,7 @@ extension SchemaType {
     ///
     /// - Returns: A query with the given `SELECT *` clause applied.
     public func select(star: Star) -> Self {
-        return select(star(nil, nil))
+        return select([star(nil, nil)])
     }
 
     /// Builds a copy of the query with the `SELECT DISTINCT *` clause applied.
@@ -125,7 +125,7 @@ extension SchemaType {
     ///
     /// - Returns: A query with the given `SELECT DISTINCT *` clause applied.
     public func select(distinct star: Star) -> Self {
-        return select(distinct: star(nil, nil))
+        return select(distinct: [star(nil, nil)])
     }
 
     /// Builds a scalar copy of the query with the `SELECT` clause applied.
@@ -642,7 +642,7 @@ extension QueryType {
 
     public var exists: Select<Bool> {
         return Select(" ".join([
-            Expression<Void>(literal: "EXISTS"),
+            Expression<Void>(literal: "SELECT EXISTS"),
             "".wrap(expression) as Expression<Void>
         ]).expression)
     }
@@ -911,6 +911,23 @@ extension Connection {
     public func scalar<V : Value>(query: ScalarQuery<V>) -> V {
         let expression = query.expression
         return value(scalar(expression.template, expression.bindings))
+    }
+
+    public func scalar<V : Value>(query: ScalarQuery<V?>) -> V.ValueType? {
+        let expression = query.expression
+        guard let value = scalar(expression.template, expression.bindings) as? V.Datatype else { return nil }
+        return V.fromDatatypeValue(value)
+    }
+
+    public func scalar<V : Value>(query: Select<V>) -> V {
+        let expression = query.expression
+        return value(scalar(expression.template, expression.bindings))
+    }
+
+    public func scalar<V : Value>(query: Select<V?>) ->  V.ValueType? {
+        let expression = query.expression
+        guard let value = scalar(expression.template, expression.bindings) as? V.Datatype else { return nil }
+        return V.fromDatatypeValue(value)
     }
 
     public func pluck(query: QueryType) -> Row? {

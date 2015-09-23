@@ -154,7 +154,7 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
             emptyCell = nil
         }
         let cell = myTodoList_tableView.dequeueReusableCellWithIdentifier("myTodoCell_identifier") as! MyTodoCell
-        cell.todoThingName_myTodoCellTextView.text = todoThings[indexPath.row].thing
+//        cell.todoThingName_myTodoCellTextView.text = todoThings[indexPath.row].thing
         cell.todoThingName_myTodoCellTextView.id = todoThings[indexPath.row].id
         if cell.todoThingName_myTodoCellTextView.text.isEmpty {
             emptyCell = cell

@@ -15,4 +15,7 @@ class TodoThingDomain {
     var listID : Int64 = 0
     
     var thing : String = ""
+    
+    var isComplete : Bool = false
+    
 }
