@@ -9,7 +9,7 @@
 import UIKit
 import SQLite
 
-class MyTodoPage: UITableViewController, UITextViewDelegate {
+class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelegate {
 
     var listID : Int64 = -1;
     var todoThings : [TodoThingDomain] = []
@@ -49,6 +49,8 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
         loadData();
         self.addHeadView()
         
+        myTodoList_tableView.separatorStyle = .None
+        myTodoList_tableView.rowHeight = 70
 //        var nipName=UINib(nibName: "CustomCell", bundle:nil)
 //        self.myTodoList_tableView.registerNib(nipName, forCellReuseIdentifier: "CustomCell")
 //        self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -161,6 +163,7 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
             emptyCell?.todoThingName_myTodoCellTextView.becomeFirstResponder()
         }
         cell.todoThingName_myTodoCellTextView.delegate = self
+        cell.selectionStyle = .None
         
         //background of cell
         let count = todoThings.count > 5 ? todoThings.count : 5
@@ -173,36 +176,48 @@ class MyTodoPage: UITableViewController, UITextViewDelegate {
             alpha: 1.0)
         
         themes[index].startColor.getRed()
+        
+        //delte 
+        cell.delegate = self
+        cell.toDoItem = todoThings[indexPath.item]
         return cell
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 70
+        return myTodoList_tableView.rowHeight;
     }
     
-    //delete
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func toDoItemDeleted(toDoItem: TodoThingDomain) {
+        let index = (todoThings as NSArray).indexOfObject(toDoItem)
+        if index == NSNotFound { return }
         
-    }
-    
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let deleteAciont = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: nil, handler: {action, indexpath in
-            do {
-                try self.db.run(GlobalVariables.todoThingTable.filter(GlobalVariables.TodoThing.id == self.todoThings[indexPath.item].id).delete())
-            } catch let error {
-                print(error)
-            }
-            
-            self.todoThings.removeAtIndex(indexPath.item)
-            self.myTodoList_tableView.reloadData()
-        });
-        deleteAciont.backgroundColor = UIColor(patternImage: UIImage(named: "delete")!)
+        // could removeAtIndex in the loop but keep it here for when indexOfObject works
+        do {
+            try db.run(GlobalVariables.todoThingTable.filter(GlobalVariables.TodoThing.id == self.todoThings[index].id).delete())
+        } catch let error {
+            print(error)
+        }
+        todoThings.removeAtIndex(index)
         
-        return [deleteAciont];
+        // use the UITableView to animate the removal of this row
+        myTodoList_tableView.beginUpdates()
+        let indexPathForRow = NSIndexPath(forRow: index, inSection: 0)
+        myTodoList_tableView.deleteRowsAtIndexPaths([indexPathForRow], withRowAnimation: .Fade)
+        myTodoList_tableView.endUpdates()
     }
-
+    
+//    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+//        let deleteAciont = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: nil, handler: {action, indexpath in
+//            do {
+//                try self.db.run(GlobalVariables.todoThingTable.filter(GlobalVariables.TodoThing.id == self.todoThings[indexPath.item].id).delete())
+//                self.todoThings.removeAtIndex(indexPath.item)
+//                self.myTodoList_tableView.reloadData()
+//            } catch let error {
+//                print(error)
+//            }
+//            
+//        });
+//        deleteAciont.backgroundColor = UIColor(patternImage: UIImage(named: "delete")!)
+//        return [deleteAciont];
+//    }
 }

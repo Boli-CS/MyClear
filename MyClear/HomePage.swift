@@ -120,6 +120,7 @@ class HomePage: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.homePageTableView.dequeueReusableCellWithIdentifier("homepagecell") as! HomePageCell
         cell.homePageCell_textFied.text = self.homePageCell_textField[indexPath.item]
+        cell.homePageCell_textFied.enabled = false
         if indexPath.item == 0 {
             if let count : Int = listDomains?.count {
                 cell.homePageCell_todoNum_label.text = "\(count)"
