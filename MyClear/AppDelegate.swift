@@ -61,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     t.column(GlobalVariables.TodoThing.listID)
                     t.column(GlobalVariables.TodoThing.thing, unique : true)
                     t.column(GlobalVariables.TodoThing.deadLine)
+                    t.column(GlobalVariables.TodoThing.isComplete)
                 })
             } catch let error {
                 print(error)

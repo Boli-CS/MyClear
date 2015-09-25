@@ -31,7 +31,7 @@ func loadDataFromDataBase () {
         todoThingDomain.deadLine = todoThing[GlobalVariables.TodoThing.deadLine]
         todoThingDomain.listID = todoThing[GlobalVariables.TodoThing.listID]
         todoThingDomain.thing = todoThing[GlobalVariables.TodoThing.thing]
-        
+        todoThingDomain.isComplete = todoThing[GlobalVariables.TodoThing.isComplete]
         for(var listindex = 0; listindex < listDomains.count; listindex++) {
             if listDomains[listindex].id == todoThingDomain.listID {
                 listDomains[listindex].todoThingDomains?.append(todoThingDomain)

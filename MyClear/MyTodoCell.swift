@@ -5,7 +5,7 @@
 //  Created by boli on 2/1/15.
 //  Copyright (c) 2015 boli. All rights reserved.
 //
-
+import SQLite
 import UIKit
 
 // A protocol that the TableViewCell uses to inform its delegate of state change
@@ -14,7 +14,7 @@ protocol TableViewCellDelegate {
     func toDoItemDeleted(myTodoCell : TodoThingDomain)
 }
 
-class MyTodoCell: UITableViewCell, UITextFieldDelegate {
+class MyTodoCell: UITableViewCell {
 
     @IBOutlet weak var todoThingName_myTodoCellTextView: MyTodoCellTextView!
     
@@ -114,6 +114,12 @@ class MyTodoCell: UITableViewCell, UITextFieldDelegate {
             } else if completeOnDragRelease {
                 if toDoItem != nil {
                     toDoItem!.isComplete = !toDoItem!.isComplete
+                    
+                    do{
+                        try GlobalVariables.db.run(GlobalVariables.todoThingTable.filter(GlobalVariables.TodoThing.id == toDoItem!.id).update(GlobalVariables.TodoThing.isComplete <- toDoItem!.isComplete))
+                    } catch let error {
+                        print(error)
+                    }
                 }
                 todoThingName_myTodoCellTextView.strikeThrough = toDoItem!.isComplete
                 itemCompleteLayer.hidden = !toDoItem!.isComplete
@@ -141,24 +147,5 @@ class MyTodoCell: UITableViewCell, UITextFieldDelegate {
         // ensure the gradient layer occupies the full bounds
         itemCompleteLayer.frame = bounds
     }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return false
-    }
-    
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        if toDoItem != nil {
-            return !toDoItem!.isComplete
-        }
-        return false
-    }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        if toDoItem != nil {
-            toDoItem!.thing = textField.text!
-        }
-    }
-    
     
 }

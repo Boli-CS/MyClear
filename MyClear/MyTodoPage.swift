@@ -19,7 +19,6 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
     var thingColorRed : CGFloat = 217;
     var thingColorGreed : CGFloat = 0;
     var thingColorBlue : CGFloat = 22;
-    let db = try! Connection(GlobalVariables.dbPath);
     
     @IBOutlet var myTodoList_tableView: UITableView!
     
@@ -72,7 +71,7 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
         let thisTextField = textView as! MyTodoCellTextView
         
         var index : Int64 = 0
-        for todoThing in db.prepare(GlobalVariables.todoThingTable) {
+        for todoThing in GlobalVariables.db.prepare(GlobalVariables.todoThingTable) {
             if todoThing[GlobalVariables.TodoThing.id] == thisTextField.id {
                 isNewItem = false
                 matchedIndex = index
@@ -88,11 +87,12 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
             }
             else {
                 do {
-                    try db.run(GlobalVariables.todoThingTable.insert(
+                    try GlobalVariables.db.run(GlobalVariables.todoThingTable.insert(
                         GlobalVariables.TodoThing.id <- thisTextField.id,
                         GlobalVariables.TodoThing.listID <- listID,
                         GlobalVariables.TodoThing.thing <- thisTextField.text,
-                        GlobalVariables.TodoThing.deadLine <- 1))
+                        GlobalVariables.TodoThing.deadLine <- 1,
+                        GlobalVariables.TodoThing.isComplete <- false))
                 }catch let error {
                     print(error)
                 }
@@ -105,7 +105,7 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
         else {
             //database
             do {
-                try db.run(GlobalVariables.todoThingTable.filter(GlobalVariables.TodoThing.id == matchedIndex).update(GlobalVariables.TodoThing.thing <- (textView as! MyTodoCellTextView).text))
+                try GlobalVariables.db.run(GlobalVariables.todoThingTable.filter(GlobalVariables.TodoThing.id == matchedIndex).update(GlobalVariables.TodoThing.thing <- (textView as! MyTodoCellTextView).text))
             }catch let error {
                 print(error)
             }
@@ -128,7 +128,7 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
 
         let typedContent = (textView.text as NSString).substringToIndex(textView.selectedRange.location) as String
         
-        for todoThing in db.prepare(GlobalVariables.todoThingTable) {
+        for todoThing in GlobalVariables.db.prepare(GlobalVariables.todoThingTable) {
             
             let string = todoThing[GlobalVariables.TodoThing.thing]
             
@@ -192,7 +192,7 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
         
         // could removeAtIndex in the loop but keep it here for when indexOfObject works
         do {
-            try db.run(GlobalVariables.todoThingTable.filter(GlobalVariables.TodoThing.id == self.todoThings[index].id).delete())
+            try GlobalVariables.db.run(GlobalVariables.todoThingTable.filter(GlobalVariables.TodoThing.id == self.todoThings[index].id).delete())
         } catch let error {
             print(error)
         }
@@ -230,6 +230,11 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
         myTodoList_tableView.deleteRowsAtIndexPaths([indexPathForRow], withRowAnimation: .Fade)
         myTodoList_tableView.endUpdates()
     }
+    
+//    func textViewShouldEndEditing(textView: UITextView) -> Bool {
+//        textView.resignFirstResponder()
+//        return false
+//    }
     
 //    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
 //        let deleteAciont = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: nil, handler: {action, indexpath in

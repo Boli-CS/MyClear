@@ -15,6 +15,7 @@ public class GlobalVariables {
     static var currentTheme : Int64 = 0;
     
     static let dbPath = NSHomeDirectory() + "/Documents/db.sqlite3";
+    static let db  = try! Connection(dbPath);;
     
     static let listTable = Table("List")
     public struct List {
@@ -33,6 +34,7 @@ public class GlobalVariables {
         static let deadLine = Expression<Int64>("DeadLine")
         static let listID = Expression<Int64>("ListID")
         static let thing = Expression<String>("Thing")
+        static let isComplete = Expression<Bool>("IsComplete")
         
     }
 }
