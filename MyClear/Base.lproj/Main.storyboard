@@ -88,17 +88,17 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="miv-vq-QCE" customClass="MyTodoCellTextView" customModule="MyClear" customModuleProvider="target">
-                                            <rect key="frame" x="34" y="16" width="262" height="35"/>
+                                            <rect key="frame" x="8" y="8" width="304" height="54"/>
                                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="miv-vq-QCE" firstAttribute="top" secondItem="90P-hq-Lg8" secondAttribute="topMargin" constant="8" id="80a-JO-ArM"/>
-                                        <constraint firstItem="miv-vq-QCE" firstAttribute="leading" secondItem="90P-hq-Lg8" secondAttribute="leadingMargin" constant="26" id="QR0-TN-73y"/>
-                                        <constraint firstItem="miv-vq-QCE" firstAttribute="bottom" secondItem="90P-hq-Lg8" secondAttribute="bottomMargin" constant="-11" id="tFD-1z-Hvm"/>
-                                        <constraint firstItem="miv-vq-QCE" firstAttribute="trailing" secondItem="90P-hq-Lg8" secondAttribute="trailingMargin" constant="-16" id="wJ0-8i-eld"/>
+                                        <constraint firstItem="miv-vq-QCE" firstAttribute="top" secondItem="90P-hq-Lg8" secondAttribute="topMargin" id="80a-JO-ArM"/>
+                                        <constraint firstItem="miv-vq-QCE" firstAttribute="leading" secondItem="90P-hq-Lg8" secondAttribute="leadingMargin" id="QR0-TN-73y"/>
+                                        <constraint firstItem="miv-vq-QCE" firstAttribute="bottom" secondItem="90P-hq-Lg8" secondAttribute="bottomMargin" id="tFD-1z-Hvm"/>
+                                        <constraint firstItem="miv-vq-QCE" firstAttribute="trailing" secondItem="90P-hq-Lg8" secondAttribute="trailingMargin" id="wJ0-8i-eld"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

@@ -82,14 +82,6 @@ class HomePage: UITableViewController {
         
         self.homePageTableView.dataSource = self
         
-        //隐藏空白item
-//        var tblView =  UIView(frame: CGRectZero)
-//        homePageTableView.tableFooterView = tblView
-//        homePageTableView.tableFooterView?.hidden = true
-//        homePageTableView.backgroundColor = UIColor.clearColor()
-//        var tblView =  UIView(frame: CGRect(x: 0,y: 0,width: 0,height: 0))
-//        tblView.backgroundColor = UIColor.clearColor()
-//        homePageTableView.tableFooterView = tblView
         let nipName=UINib(nibName: "CustomCell", bundle:nil)
         self.homePageTableView.registerNib(nipName, forCellReuseIdentifier: "CustomCell")
         self.navigationController?.setNavigationBarHidden(true, animated: false)

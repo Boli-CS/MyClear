@@ -154,7 +154,6 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
             emptyCell = nil
         }
         let cell = myTodoList_tableView.dequeueReusableCellWithIdentifier("myTodoCell_identifier") as! MyTodoCell
-//        cell.todoThingName_myTodoCellTextView.text = todoThings[indexPath.row].thing
         cell.todoThingName_myTodoCellTextView.id = todoThings[indexPath.row].id
         if cell.todoThingName_myTodoCellTextView.text.isEmpty {
             emptyCell = cell
@@ -198,6 +197,32 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
             print(error)
         }
         todoThings.removeAtIndex(index)
+        
+        // loop over the visible cells to animate delete
+        let visibleCells = myTodoList_tableView.visibleCells as! [MyTodoCell]
+        let lastView = visibleCells[visibleCells.count - 1] as MyTodoCell
+        var delay = 0.0
+        var startAnimating = false
+        for i in 0..<visibleCells.count {
+            let cell = visibleCells[i]
+            if startAnimating {
+                UIView.animateWithDuration(0.3, delay: delay, options: .CurveEaseInOut,
+                    animations: {() in
+                        cell.frame = CGRectOffset(cell.frame, 0.0,
+                            -cell.frame.size.height)},
+                    completion: {(finished: Bool) in
+                        if (cell == lastView) {
+                            self.tableView.reloadData()
+                        }
+                    }
+                )
+                delay += 0.03
+            }
+            if cell.toDoItem === toDoItem {
+                startAnimating = true
+                cell.hidden = true
+            }
+        }
         
         // use the UITableView to animate the removal of this row
         myTodoList_tableView.beginUpdates()

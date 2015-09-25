@@ -26,7 +26,6 @@
 		E8A455AB1BAAD92800C4D66D /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A455A91BAAD92800C4D66D /* ThemeCell.swift */; };
 		E8A455AC1BAAD92800C4D66D /* ThemePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A455AA1BAAD92800C4D66D /* ThemePage.swift */; };
 		E8A455BA1BAAEF9C00C4D66D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E8A455BC1BAAEF9C00C4D66D /* Localizable.strings */; };
-		E8CF89A61BB253A9000A9F69 /* StrikeThroughText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CF89A51BB253A9000A9F69 /* StrikeThroughText.swift */; settings = {ASSET_TAGS = (); }; };
 		E8DACCB41BA4132500A8A75C /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DACCB31BA4132500A8A75C /* GlobalVariables.swift */; };
 		E8F7897B1A6CDCC400E7FBE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7897A1A6CDCC400E7FBE0 /* AppDelegate.swift */; };
 		E8F789801A6CDCC400E7FBE0 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7897F1A6CDCC400E7FBE0 /* HomePage.swift */; };
@@ -91,7 +90,6 @@
 		E8A455B61BAAEEC900C4D66D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		E8A455BB1BAAEF9C00C4D66D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E8A455BD1BAAEFA800C4D66D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		E8CF89A51BB253A9000A9F69 /* StrikeThroughText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrikeThroughText.swift; sourceTree = "<group>"; };
 		E8DACCB31BA4132500A8A75C /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		E8F789751A6CDCC400E7FBE0 /* MyClear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyClear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8F789791A6CDCC400E7FBE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 				E806A2181A7DBDD300BB4E0E /* MyTodoPage.swift */,
 				E806A21A1A7DBE2B00BB4E0E /* MyTodoCellTextView.swift */,
 				E806A21C1A7DBE5500BB4E0E /* MyTodoCell.swift */,
-				E8CF89A51BB253A9000A9F69 /* StrikeThroughText.swift */,
 			);
 			name = MyTodo;
 			sourceTree = "<group>";
@@ -462,7 +459,6 @@
 			files = (
 				E8406A9B1A6FF2E100CBDEFD /* MyListCell.swift in Sources */,
 				E8F789BD1A6F965F00E7FBE0 /* SoundPage.swift in Sources */,
-				E8CF89A61BB253A9000A9F69 /* StrikeThroughText.swift in Sources */,
 				E8F789BB1A6F962E00E7FBE0 /* MyListPage.swift in Sources */,
 				E8406AB51A7118CF00CBDEFD /* RefreshConst.swift in Sources */,
 				E8F789801A6CDCC400E7FBE0 /* HomePage.swift in Sources */,

@@ -14,7 +14,7 @@ protocol TableViewCellDelegate {
     func toDoItemDeleted(myTodoCell : TodoThingDomain)
 }
 
-class MyTodoCell: UITableViewCell {
+class MyTodoCell: UITableViewCell, UITextFieldDelegate {
 
     @IBOutlet weak var todoThingName_myTodoCellTextView: MyTodoCellTextView!
     
@@ -22,30 +22,49 @@ class MyTodoCell: UITableViewCell {
     var deleteOnDragRelease = false
     var completeOnDragRelease = false
     
-    let label: StrikeThroughText
+//    let label: StrikeThroughText
     var itemCompleteLayer = CALayer()
+    
+    var tickLabel : UILabel
+    var crossLabel : UILabel
     
     // The object that acts as delegate for this cell.
     var delegate: TableViewCellDelegate?
     // The item that this cell renders.
     var toDoItem: TodoThingDomain? {
         didSet {
-            label.text = toDoItem!.thing
-            label.strikeThrough = toDoItem!.isComplete
-            itemCompleteLayer.hidden = !label.strikeThrough
+            todoThingName_myTodoCellTextView.text = toDoItem!.thing
+            todoThingName_myTodoCellTextView.strikeThrough = toDoItem!.isComplete
+            itemCompleteLayer.hidden = !todoThingName_myTodoCellTextView.strikeThrough
         }
     }
 
     required init?(coder aDecoder: NSCoder) {
-        // create a label that renders the to-do item text
-        label = StrikeThroughText(frame: CGRect.null)
-        label.textColor = UIColor.whiteColor()
-        label.font = UIFont.boldSystemFontOfSize(30)
-        label.backgroundColor = UIColor.clearColor()
+        
+        // utility method for creating the contextual cues
+        func createCueLabel() -> UILabel {
+            let label = UILabel(frame: CGRect.null)
+            label.textColor = UIColor.whiteColor()
+            label.font = UIFont.boldSystemFontOfSize(32.0)
+            label.backgroundColor = UIColor.clearColor()
+            return label
+        }
+        
+        // tick and cross labels for context cues
+        tickLabel = createCueLabel()
+        tickLabel.text = "\u{2713}"
+        tickLabel.textAlignment = .Right
+        
+        crossLabel = createCueLabel()
+        crossLabel.text = "\u{2717}"
+        crossLabel.textAlignment = .Left
         
         super.init(coder: aDecoder)
+        tickLabel.frame = CGRect(x: -bounds.size.height, y: 0, width: bounds.size.height, height: bounds.size.height)
+        crossLabel.frame = CGRect(x: bounds.size.width + bounds.size.height, y: 0, width: bounds.size.height, height: bounds.size.height)
         
-        addSubview(label)
+        addSubview(tickLabel)
+        addSubview(crossLabel)
         // remove the default blue highlight for selected cells
         selectionStyle = .None
         // add a layer that renders a green background when an item is complete
@@ -74,6 +93,13 @@ class MyTodoCell: UITableViewCell {
             // has the user dragged the item far enough to initiate a delete/complete?
             deleteOnDragRelease = frame.origin.x < -frame.size.width / 2.0
             completeOnDragRelease = frame.origin.x > frame.size.width / 2.0
+            //set tick and cross's alpha and color
+            let cueAlpha = fabs(frame.origin.x) / (frame.size.width / 2.0)
+            tickLabel.alpha = cueAlpha
+            tickLabel.textColor = completeOnDragRelease ? UIColor.greenColor() : UIColor.whiteColor()
+            crossLabel.alpha = cueAlpha
+            crossLabel.textColor = deleteOnDragRelease ? UIColor.redColor() : UIColor.whiteColor()
+            
         }
         // 3
         if recognizer.state == .Ended {
@@ -89,7 +115,7 @@ class MyTodoCell: UITableViewCell {
                 if toDoItem != nil {
                     toDoItem!.isComplete = !toDoItem!.isComplete
                 }
-                label.strikeThrough = toDoItem!.isComplete
+                todoThingName_myTodoCellTextView.strikeThrough = toDoItem!.isComplete
                 itemCompleteLayer.hidden = !toDoItem!.isComplete
                 UIView.animateWithDuration(0.2, animations: {self.frame = originalFrame})
             } else {
@@ -114,8 +140,25 @@ class MyTodoCell: UITableViewCell {
         super.layoutSubviews()
         // ensure the gradient layer occupies the full bounds
         itemCompleteLayer.frame = bounds
-        label.frame = CGRect(x: kLabelLeftMargin, y: 0,
-            width: bounds.size.width - kLabelLeftMargin,
-            height: bounds.size.height)
     }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        if toDoItem != nil {
+            return !toDoItem!.isComplete
+        }
+        return false
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        if toDoItem != nil {
+            toDoItem!.thing = textField.text!
+        }
+    }
+    
+    
 }
