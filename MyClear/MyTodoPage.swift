@@ -20,6 +20,12 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
     var thingColorGreed : CGFloat = 0;
     var thingColorBlue : CGFloat = 22;
     
+    var editingCell : MyTodoCell?
+    
+    //Pinch to add Gesture
+    var placeHolderCell : MyTodoCell?
+    let pinchToAdd_UIPinchGestureRecognizer = UIPinchGestureRecognizer()
+    
     @IBOutlet var myTodoList_tableView: UITableView!
     
     func addHeadView() {
@@ -28,17 +34,7 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             if RefreshState.addNewItem == state {
-                var maxID : Int64 = -1
-                let newItem : TodoThingDomain = TodoThingDomain()
-                newItem.deadLine = 1
-                newItem.listID = self.listID
-                newItem.thing = ""
-                for(var index = 0; index < self.todoThings.count; index++) {
-                    maxID = self.todoThings[index].id > maxID ? self.todoThings[index].id : maxID
-                }
-                newItem.id = maxID + 1
-                self.todoThings.insert(newItem, atIndex: 0)
-                self.myTodoList_tableView.reloadData()
+                self.addCellAtIndex(0)
             }
         }
     }
@@ -50,10 +46,9 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
         
         myTodoList_tableView.separatorStyle = .None
         myTodoList_tableView.rowHeight = 70
-//        var nipName=UINib(nibName: "CustomCell", bundle:nil)
-//        self.myTodoList_tableView.registerNib(nipName, forCellReuseIdentifier: "CustomCell")
-//        self.navigationController?.setNavigationBarHidden(true, animated: false)
-
+        
+        pinchToAdd_UIPinchGestureRecognizer.addTarget(self, action: "pinchToAddHandler:")
+        myTodoList_tableView.addGestureRecognizer(pinchToAdd_UIPinchGestureRecognizer)
     }
     
     func loadData() {
@@ -65,7 +60,30 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
         }
     }
     
+    func textViewDidBeginEditing(textView: UITextView) {
+        //对非编辑cell添加透明
+        let visibleCells = myTodoList_tableView.visibleCells as! [MyTodoCell]
+        for cell in visibleCells {
+            UIView.animateWithDuration(0.3, animations: {() in
+                if cell.todoThingName_myTodoCellTextView !== textView as! MyTodoCellTextView {
+                    cell.alpha = 0.3
+                }
+            })
+        }
+    }
+    
+    
     func textViewDidEndEditing(textView: UITextView) {
+        //对非编辑cell添加透明
+        let visibleCells = myTodoList_tableView.visibleCells as! [MyTodoCell]
+        for cell in visibleCells {
+            UIView.animateWithDuration(0.3, animations: {() in
+                if cell.todoThingName_myTodoCellTextView !== textView as! MyTodoCellTextView {
+                    cell.alpha = 1
+                }
+            })
+        }
+        
         var isNewItem = true
         var matchedIndex : Int64 = -1
         let thisTextField = textView as! MyTodoCellTextView
@@ -158,9 +176,6 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
         if cell.todoThingName_myTodoCellTextView.text.isEmpty {
             emptyCell = cell
         }
-        if indexPath.item == todoThings.count - 1 && emptyCell != nil {
-            emptyCell?.todoThingName_myTodoCellTextView.becomeFirstResponder()
-        }
         cell.todoThingName_myTodoCellTextView.delegate = self
         cell.selectionStyle = .None
         
@@ -179,6 +194,9 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
         //delte 
         cell.delegate = self
         cell.toDoItem = todoThings[indexPath.item]
+        if indexPath == 0 {
+//            cell.todoThingName_myTodoCellTextView.becomeFirstResponder()
+        }
         return cell
     }
     
@@ -231,23 +249,146 @@ class MyTodoPage: UITableViewController, UITextViewDelegate, TableViewCellDelega
         myTodoList_tableView.endUpdates()
     }
     
-//    func textViewShouldEndEditing(textView: UITextView) -> Bool {
-//        textView.resignFirstResponder()
-//        return false
-//    }
+    // MARK: - pinch-to-add methods
     
-//    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-//        let deleteAciont = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: nil, handler: {action, indexpath in
-//            do {
-//                try self.db.run(GlobalVariables.todoThingTable.filter(GlobalVariables.TodoThing.id == self.todoThings[indexPath.item].id).delete())
-//                self.todoThings.removeAtIndex(indexPath.item)
-//                self.myTodoList_tableView.reloadData()
-//            } catch let error {
-//                print(error)
-//            }
-//            
-//        });
-//        deleteAciont.backgroundColor = UIColor(patternImage: UIImage(named: "delete")!)
-//        return [deleteAciont];
-//    }
+    // indicates that the pinch is in progress
+    var pinchInProgress = false
+    struct PinchToAddTouchPoints {
+        var upPoint : CGPoint
+        var lowPoint : CGPoint
+    }
+    var upTableViewCellIndex = -100;
+    var lowTableViewCellIndex = -100
+    var initialTouchPoints : PinchToAddTouchPoints!
+    var pinchExceededRequiredDistance = false
+    //添加cell时的上面一个cell
+    var precedingCell : MyTodoCell!
+    
+    func pinchToAddHandler(recognizer : UIPinchGestureRecognizer) {
+        if recognizer.state == .Began {
+            pinchStarted(recognizer)
+        }
+        if recognizer.state == .Changed && pinchInProgress && pinchToAdd_UIPinchGestureRecognizer.numberOfTouches() == 2 {
+            pinchChanged(recognizer)
+        }
+        if recognizer.state == .Ended {
+            pinchEnded(recognizer)
+        }
+    }
+    
+    func pinchStarted(recognizer: UIPinchGestureRecognizer) {
+        initialTouchPoints = getNormalizedTouchPoints(recognizer)
+        upTableViewCellIndex = -1
+        lowTableViewCellIndex = -1
+        let myTodoListVisibleCells = myTodoList_tableView.visibleCells as! [MyTodoCell]
+        for i in 0..<myTodoListVisibleCells.count {
+            if isViewContainsPoint(myTodoListVisibleCells[i], point: initialTouchPoints.upPoint) {
+                upTableViewCellIndex = i
+            }
+            if isViewContainsPoint(myTodoListVisibleCells[i], point: initialTouchPoints.lowPoint) {
+                lowTableViewCellIndex = i
+            }
+        }
+        if((lowTableViewCellIndex - upTableViewCellIndex) == 1) {
+            pinchInProgress = true
+            precedingCell = myTodoListVisibleCells[upTableViewCellIndex]
+            placeHolderCell = myTodoList_tableView.dequeueReusableCellWithIdentifier("myTodoCell_identifier") as? MyTodoCell
+            placeHolderCell!.frame = CGRectOffset(myTodoListVisibleCells[upTableViewCellIndex].frame, 0, myTodoList_tableView.rowHeight / 2)
+            placeHolderCell!.backgroundColor = UIColor.redColor()
+            myTodoList_tableView.insertSubview(placeHolderCell!, atIndex: 0)
+        }
+        
+    }
+    
+    func pinchChanged(recognizer: UIPinchGestureRecognizer) {
+        let currentTouchPoints = getNormalizedTouchPoints(recognizer)
+        let upperDelat = initialTouchPoints.upPoint.y - currentTouchPoints.upPoint.y
+        let lowerDelta = currentTouchPoints.lowPoint.y - initialTouchPoints.lowPoint.y
+        let delta = max(upperDelat, lowerDelta)
+        //移动cells
+        let visiableCells = myTodoList_tableView.visibleCells as! [MyTodoCell]
+        for i in 0..<visiableCells.count {
+            if i <= upTableViewCellIndex {
+                visiableCells[i].transform = CGAffineTransformMakeTranslation(0, -delta)
+            }
+            if i >= lowTableViewCellIndex {
+                visiableCells[i].transform = CGAffineTransformMakeTranslation(0, delta)
+            }
+        }
+        
+        //添加新增cell的动画效果
+        let gapSize = delta * 2
+        let cappedGapSize = min(gapSize, myTodoList_tableView.rowHeight)
+        placeHolderCell?.transform = CGAffineTransformMakeTranslation(1.0, cappedGapSize / myTodoList_tableView.rowHeight)
+        placeHolderCell?.todoThingName_myTodoCellTextView.text = cappedGapSize > myTodoList_tableView.rowHeight ? "release to add item" : "pull up to release item"
+        placeHolderCell?.alpha = min(1.0, cappedGapSize / myTodoList_tableView.rowHeight)
+        pinchExceededRequiredDistance = gapSize > myTodoList_tableView.rowHeight
+        placeHolderCell?.backgroundColor = precedingCell.backgroundColor
+    }
+    
+    func pinchEnded(recognizer: UIPinchGestureRecognizer) {
+        pinchInProgress = false
+        
+        placeHolderCell?.transform = CGAffineTransformIdentity
+        placeHolderCell?.removeFromSuperview()
+        
+        if pinchExceededRequiredDistance {
+            pinchExceededRequiredDistance = false
+            
+            let visiableCells = myTodoList_tableView.visibleCells as! [MyTodoCell]
+            for i in 0..<visiableCells.count {
+                visiableCells[i].transform = CGAffineTransformIdentity
+            }
+            print(upTableViewCellIndex)
+            addCellAtIndex(upTableViewCellIndex + 1)
+        }
+        else {
+            UIView.animateWithDuration(00.2, delay: 0.0, options: .CurveEaseInOut, animations: {
+                () in
+                let visiableCells = self.myTodoList_tableView.visibleCells as! [MyTodoCell]
+                for cell in visiableCells {
+                    cell.transform = CGAffineTransformIdentity
+                }
+                }, completion: nil)
+        }
+    }
+    
+    func getNormalizedTouchPoints(recognizer : UIGestureRecognizer) -> PinchToAddTouchPoints {
+        var point1 = recognizer.locationOfTouch(0, inView: myTodoList_tableView)
+        var point2 = recognizer.locationOfTouch(1, inView: myTodoList_tableView)
+        if point1.y > point2.y {
+            let temp = point1
+            point1 = point2
+            point2 = temp
+        }
+        return PinchToAddTouchPoints(upPoint: point1, lowPoint: point2)
+    }
+    
+    func isViewContainsPoint(view : UIView, point : CGPoint) -> Bool{
+        let frame = view.frame
+        return (frame.origin.y < point.y) && (frame.origin.y + (frame.size.height) > point.y)
+    }
+    
+    func addCellAtIndex(index : Int) {
+        var maxID : Int64 = -1
+        let newItem : TodoThingDomain = TodoThingDomain()
+        newItem.deadLine = 1
+        newItem.listID = self.listID
+        newItem.thing = ""
+        for(var index = 0; index < self.todoThings.count; index++) {
+            maxID = self.todoThings[index].id > maxID ? self.todoThings[index].id : maxID
+        }
+        newItem.id = maxID + 1
+        self.todoThings.insert(newItem, atIndex: index)
+        self.myTodoList_tableView.reloadData()
+        
+        let visiableCells = myTodoList_tableView.visibleCells as! [MyTodoCell]
+        for i in 0..<visiableCells.count {
+            if visiableCells[i].todoThingName_myTodoCellTextView.id == newItem.id {
+                editingCell = visiableCells[i]
+                editingCell?.todoThingName_myTodoCellTextView.becomeFirstResponder()
+                break
+            }
+        }
+    }
 }

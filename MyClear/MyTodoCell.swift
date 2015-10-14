@@ -38,7 +38,7 @@ class MyTodoCell: UITableViewCell {
             itemCompleteLayer.hidden = !todoThingName_myTodoCellTextView.strikeThrough
         }
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         
         // utility method for creating the contextual cues
@@ -147,5 +147,7 @@ class MyTodoCell: UITableViewCell {
         // ensure the gradient layer occupies the full bounds
         itemCompleteLayer.frame = bounds
     }
+    
+    
     
 }

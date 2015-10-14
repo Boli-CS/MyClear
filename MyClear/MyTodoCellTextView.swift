@@ -45,4 +45,5 @@ class MyTodoCellTextView: UITextView {
         strikeThroughLayer.frame = CGRect(x: 0, y: bounds.size.height/2,
             width: textSize.width, height: kStrikeOutThickness)
     }
+
 }
